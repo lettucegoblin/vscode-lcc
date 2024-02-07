@@ -3,28 +3,32 @@ const fs = require("fs");
 const path = require("path");
 
 function checkIfLineIsInLanguageRegex(languageDict, document, position) {
-	const line = document.lineAt(position);
-	const text = line.text;
-	for (const patternName in languageDict) {
-		let regexCheck = text.match(languageDict[patternName].regexParsed);
-		if (regexCheck) {
-			return true;
-		}
-	}
-	return false;
+  const line = document.lineAt(position);
+  const text = line.text;
+  for (const patternName in languageDict) {
+    let regexCheck = text.match(languageDict[patternName].regexParsed);
+    if (regexCheck) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function checkForInLanguageRegexJson(languageDict, document, position) {
   const line = document.lineAt(position);
   const text = line.text;
-	const firstSemiColon = text.indexOf(";") - 1;
-	if (firstSemiColon !== -1 && firstSemiColon < position.e) {
-		return null;
-	}
-	if(text[position.e] == ' ')
-	  return null;
+  const firstSemiColon = text.indexOf(";") - 1;
+  if (firstSemiColon !== -1 && firstSemiColon < position.e) {
+    return null;
+  }
+  if (text[position.e] == " ") return null;
   for (const patternName in languageDict) {
-    let regexCheck = text.match(languageDict[patternName].regexParsed);
+    // if the following match is 16 then there's no spaces in the binary number. assume binary.
+    let binaryNumberReg = text.match(/^ *([10]*)/)
+    if(binaryNumberReg && binaryNumberReg[1].length == 16) {
+      if(patternName != "constant.numeric.binary.lcc") continue;
+    }
+    let regexCheck = text.replace(/ /g, "").match(languageDict[patternName].regexParsed);
     if (regexCheck) {
       let matchObj = languageDict[patternName];
       let header = "";
@@ -46,47 +50,66 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
       let explaination = matchObj.explaination
         ? `\n${matchObj.explaination}\n`
         : "";
-			let whatIsCalculated = matchObj.binary_format.indexOf("offset") > -1 ? "Offset" : "Value";
-			
+      let whatIsCalculated =
+        matchObj.binary_format.indexOf("offset") > -1 ? "Offset" : "Value";
+
       let calculatedOffset = "";
-			if(regexCheck && regexCheck[1]){
-				let decimalNumber = binaryStringToDecimal(regexCheck[1]);
-				let lineText = "";
-				if(whatIsCalculated === "Offset"){
-					let validLines = 0;
-					let i = 0;
-					for(i = position.line; i < document.lineCount; i++){
-						if(checkIfLineIsInLanguageRegex(languageDict, document, new vscode.Position(i, 0))){
-							validLines++;
-							if(validLines == decimalNumber){
-								break;
-							}
-						}
-					}
-					let vscodeLineNumber = position.line + i;
-					let line = document.lineAt(vscodeLineNumber - 1);
-					lineText = `Offset pointing to vscode line ${vscodeLineNumber}: \n${line.text.trim()}\n`;
-				}
-				// if the decimal number is a printable character, convert it to a char
-				let decimalToChar = decimalNumber >= 32 && decimalNumber <= 126 ? String.fromCharCode(decimalNumber) : null;
-				let decimalToCharStr = decimalToChar ? ` = '${decimalToChar}' =` : "";
-				calculatedOffset = `${whatIsCalculated}: ${regexCheck[1].trim()} = ${decimalNumber}${decimalToCharStr} 0x${decimalNumber.toString(16)}\n${lineText}`;
-			}
+      if (regexCheck && regexCheck[1]) {
+        let decimalNumber = binaryStringToDecimal(regexCheck[1]);
+        let lineText = "";
+        if (whatIsCalculated === "Offset") {
+          let validLines = 0;
+          let i = 0;
+          for (i = position.line; i < document.lineCount - position.line; i++) {
+            if (
+              checkIfLineIsInLanguageRegex(
+                languageDict,
+                document,
+                new vscode.Position(i, 0)
+              )
+            ) {
+              validLines++;
+              if (validLines == decimalNumber) {
+                break;
+              }
+            }
+          }
+          let vscodeLineNumber = position.line + i;
+          if (vscodeLineNumber > document.lineCount) {
+            // invalid line number
+            lineText = `Offset pointing to vscode line ${vscodeLineNumber} is out of bounds\n`;
+          } else {
+            let line = document.lineAt(vscodeLineNumber - 1);
+            lineText = `Offset pointing to vscode line ${vscodeLineNumber}: \n${line.text.trim()}\n`;
+          }
+        }
+        // if the decimal number is a printable character, convert it to a char
+        let decimalToChar =
+          decimalNumber >= 32 && decimalNumber <= 126
+            ? String.fromCharCode(decimalNumber)
+            : null;
+        let decimalToCharStr = decimalToChar ? ` = '${decimalToChar}' =` : "";
+        calculatedOffset = `${whatIsCalculated}: ${regexCheck[1].trim()} = ${decimalNumber}${decimalToCharStr} 0x${decimalNumber.toString(
+          16
+        )}\n${lineText}`;
+      }
       return `${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}`;
     }
   }
   return null;
 }
 
-
 function binaryStringToDecimal(binaryString) {
   let binaryNumber = binaryString.replace(/\s/g, "");
-  let isNegative = binaryNumber[0] === '1';
+  let isNegative = binaryNumber[0] === "1";
   let decimalNumber;
 
   if (isNegative) {
     // Flip the bits
-    binaryNumber = binaryNumber.split('').map(bit => bit === '1' ? '0' : '1').join('');
+    binaryNumber = binaryNumber
+      .split("")
+      .map((bit) => (bit === "1" ? "0" : "1"))
+      .join("");
     // Add 1
     decimalNumber = parseInt(binaryNumber, 2) + 1;
     // Make the number negative
@@ -108,8 +131,18 @@ function loadRegexJson(languageDict, context, jsonFilePathStr) {
   for (const pattern of binaryRegex) {
     // iterate over array
     languageDict[pattern.name] = pattern;
+    let firstSpace = false;
+    let str = languageDict[pattern.name].match; // ignoreSpacesInBinaryRegexString
+    str = str.replace(/ /g, function (match) {
+      if (!firstSpace) {
+        firstSpace = true;
+        return match;
+      } else {
+        return "";
+      }
+    });
     languageDict[pattern.name].regexParsed = new RegExp(
-      languageDict[pattern.name].match
+      str //languageDict[pattern.name].match
     ); // cache the regex
   }
 }
