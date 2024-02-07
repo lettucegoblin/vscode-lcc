@@ -14,15 +14,17 @@ function checkIfLineIsInLanguageRegex(languageDict, document, position) {
   return false;
 }
 
-function checkForInLanguageRegexJson(languageDict, document, position) {
+function checkForInLanguageRegexJson(languageDict, document, position, simpleCheck = false) {
   const line = document.lineAt(position);
   
   const text = line.text;
-  const firstSemiColon = text.indexOf(";") - 1;
-  if (firstSemiColon !== -1 && firstSemiColon < position.e) {
-    return null;
+  if(!simpleCheck) {
+    const firstSemiColon = text.indexOf(";") - 1;
+    if (firstSemiColon !== -1 && firstSemiColon < position.e) {
+      return null;
+    }
+    if (text[position.e] == " ") return null;
   }
-  if (text[position.e] == " ") return null;
   for (const patternName in languageDict) {
     // if the following match is 16 then there's no spaces in the binary number. assume binary.
     let binaryNumberReg = text.match(/^ *([10]*)/)
@@ -31,6 +33,7 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
     }
     let regexCheck = text.replace(/ /g, "").match(languageDict[patternName].regexParsed);
     if (regexCheck) {
+      if(simpleCheck) return true;
       let matchObj = languageDict[patternName];
       let header = "";
       if (matchObj.descriptive_name) {
@@ -63,10 +66,11 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
           let i = 0;
           for (i = position.line; i < document.lineCount - position.line; i++) {
             if (
-              checkIfLineIsInLanguageRegex(
+              checkForInLanguageRegexJson(
                 languageDict,
                 document,
-                new vscode.Position(i, 0)
+                new vscode.Position(i, 0),
+                true
               )
             ) {
               validLines++;
@@ -97,7 +101,7 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
       return `${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}`;
     }
   }
-  return null;
+  return false;
 }
 
 function binaryStringToDecimal(binaryString) {
