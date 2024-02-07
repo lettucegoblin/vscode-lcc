@@ -2,9 +2,13 @@
   "name": "lcc-tools",
   "publisher": "lettucegoblin",
   "displayName": "LCC-Tools",
-  "description": "",
-  "version": "0.0.1",
+  "description": "LCC syntax highlighting (Dos Reis version of LCC)",
+  "version": "1.0.0",
   "icon": "images/golden.png",
+  "keywords":[
+    "lcc",
+    "lcc-tools",
+    "syntax highlighting"],
   "repository": {
     "type": "git",
     "url": "https://github.com/lettucegoblin/vscode-lcc.git"
