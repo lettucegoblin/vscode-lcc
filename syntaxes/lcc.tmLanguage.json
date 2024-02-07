@@ -478,7 +478,7 @@
 				},
 				{
 					"name": "constant.numeric.binary.lcc",
-					"match": "^[ ]+[01]{4} ([01]{4} [01]{4} [01]{4})",
+					"match": "^[ ]+([01]{4} [01]{4} [01]{4} [01]{4})",
 					"descriptive_name": "Binary Number",
 					"explaination": "This is a 4 byte binary number. 2s complement",
 					"binary_format": "(4) (4) (4) (4)"

@@ -10,3 +10,6 @@ The Low Cost Computer is made by Anthony J. Dos Reis for his [textbook](https://
 - **Hover Information**
 - **Calculate pcoffset line number w/ preview**
 - **Calculate binary value to decimal & hex**
+
+# Contributing
+Feel free to contribute to this project here [On Github](https://github.com/lettucegoblin/vscode-lcc). Also feel free to fork and make your own version of this extension. Have a good day. 
