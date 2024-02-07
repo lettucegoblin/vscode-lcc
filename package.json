@@ -4,6 +4,7 @@
   "displayName": "LCC-Tools",
   "description": "",
   "version": "0.0.1",
+  "icon": "images/golden.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/lettucegoblin/vscode-lcc.git"
