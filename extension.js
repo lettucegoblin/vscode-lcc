@@ -69,8 +69,8 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
 				}
 				// if the decimal number is a printable character, convert it to a char
 				let decimalToChar = decimalNumber >= 32 && decimalNumber <= 126 ? String.fromCharCode(decimalNumber) : null;
-				let decimalToCharStr = decimalToChar ? ` = ${decimalToChar}` : "";
-				calculatedOffset = `${whatIsCalculated}: ${regexCheck[1].trim()} = ${decimalNumber}${decimalToCharStr} = 0x${decimalNumber.toString(16)}\n${lineText}`;
+				let decimalToCharStr = decimalToChar ? ` = '${decimalToChar}' =` : "";
+				calculatedOffset = `${whatIsCalculated}: ${regexCheck[1].trim()} = ${decimalNumber}${decimalToCharStr} 0x${decimalNumber.toString(16)}\n${lineText}`;
 			}
       return `${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}`;
     }

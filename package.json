@@ -1,6 +1,7 @@
 {
-  "name": "lcc-hover",
-  "displayName": "LCC-Hover",
+  "name": "lcc-tools",
+  "publisher": "Lettuce",
+  "displayName": "LCC-Tools",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -12,10 +13,6 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "lcc-hover.helloWorld",
-      "title": "Hello World"
-    }],
     "languages": [{
       "id": "lcc",
       "aliases": ["LCC", "lcc"],
