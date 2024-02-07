@@ -1,0 +1,59 @@
+{
+  "lea":{
+    "Mnemonic": "lea",
+    "match": "^[ ]+1110 [01]{3} ([01]{1} [01]{4} [01]{4})",
+    "description": "dr = pc + pcoffset9",
+    "explaination": "The LEA instruction is used to load the effective address of a memory location into a register. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The effective address is then stored in the destination register.",
+    "flags_set": "",
+    "binary_format": "1110 dr(3) pcoffset9"
+  },
+  "add register":{
+    "Mnemonic": "add",
+    "match": "^[ ]+0001 [01]{3} [01]{3} 000 [01]{3}",
+    "description": "dr = sr1 + sr2",
+    "flags_set": "nzcv",
+    "binary_format": "0001 dr(3) sr1(3) 000 sr2"
+  },
+  "add immediate":{
+    "Mnemonic": "add",
+    "match": "^[ ]+0001 [01]{3} [01]{3} 1 [01]{5}",
+    "description": "dr = sr1 + imm5",
+    "flags_set": "nzcv",
+    "binary_format": "0001 dr(3) sr1(3) 1 imm5"
+  },
+  "ld":{
+    "Mnemonic": "ld",
+    "match": "^[ ]+0010 [01]{3} ([01]{1} [01]{8})",
+    "description": "dr = mem[pc + pcoffset9]",
+    "flags_set": "",
+    "binary_format": "0010 dr(3) pcoffset9"
+  },
+  "st":{
+    "Mnemonic": "st",
+    "match": "^[ ]+0011 [01]{3} ([01]{1} [01]{8})",
+    "description": "mem[pc + pcoffset9] = sr",
+    "flags_set": "",
+    "binary_format": "0011 sr(3) pcoffset9"
+  },
+  "and register":{
+    "Mnemonic": "and",
+    "match": "^[ ]+0101 [01]{3} [01]{3} 000 [01]{3}",
+    "description": "dr = sr1 & sr2",
+    "flags_set": "nz",
+    "binary_format": "0101 dr(3) sr1(3) 000 sr2"
+  },
+  "and immediate":{
+    "Mnemonic": "and",
+    "match": "^[ ]+0101 [01]{3} [01]{3} 1 [01]{5}",
+    "description": "dr = sr1 & imm5",
+    "flags_set": "nz",
+    "binary_format": "0101 dr(3) sr1(3) 1 imm5"
+  },
+  "binary":{
+    "Mnemonic": "",
+    "match": "^[ ]+[01]{4} ([01]{4} [01]{4} [01]{4})",
+    "description": "This is a 4 byte binary number. 2s complement",
+    "flags_set": "",
+    "binary_format": "0000 0000 0000 0000 to 1111 1111 1111 1111"
+  }
+}
