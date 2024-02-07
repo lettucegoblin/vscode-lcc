@@ -4,6 +4,10 @@
   "displayName": "LCC-Tools",
   "description": "",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lettucegoblin/vscode-lcc.git"
+  },
   "engines": {
     "vscode": "^1.86.0"
   },
