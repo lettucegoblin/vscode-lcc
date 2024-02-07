@@ -119,7 +119,7 @@
 				{
 					"name": "keyword.control.ldr.lcc",
 					"Mnemonic": "ldr",
-					"match": "^[ ]+0110 [01]{3} [01]{3} [01]{6}",
+					"match": "^[ ]+0110 [01]{3} [01]{3} ([01]{6})",
 					"descriptive_name": "Load",
 					"description": "dr = mem[baser + offset6]",
 					"explaination": "The LDR instruction is used to load a value from memory into a register. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of memory at the effective address are then loaded into the destination register.",
@@ -129,7 +129,7 @@
 				{
 					"name": "keyword.control.str.lcc",
 					"Mnemonic": "str",
-					"match": "^[ ]+0111 [01]{3} [01]{3} [01]{6}",
+					"match": "^[ ]+0111 [01]{3} [01]{3} ([01]{6})",
 					"descriptive_name": "Store",
 					"description": "mem[baser + offset6] = sr",
 					"explaination": "The STR instruction is used to store the contents of a register into memory. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of the source register are then stored in memory at the effective address.",
@@ -329,7 +329,7 @@
 				{
 					"name": "keyword.control.jmp.lcc",
 					"Mnemonic": "jmp",
-					"match": "^[ ]+1100 000 [01]{3} [01]{6}",
+					"match": "^[ ]+1100 000 [01]{3} ([01]{6})",
 					"descriptive_name": "Jump",
 					"description": "pc = baser + offset6",
 					"explaination": "The JMP instruction is used to jump to a new location in the program. The new location is calculated by adding the value in the baser register to the 6-bit offset field. The result is stored in the program counter (PC), causing the program to continue execution from the new location.",
@@ -339,7 +339,7 @@
 				{
 					"name": "keyword.control.ret.lcc",
 					"Mnemonic": "ret",
-					"match": "^[ ]+1100 000 111 [01]{6}",
+					"match": "^[ ]+1100 000 111 ([01]{6})",
 					"descriptive_name": "Return",
 					"description": "pc = lr + offset6",
 					"explaination": "The RET instruction is used to return from a subroutine. The new location is calculated by adding the value in the link register (LR) to the 6-bit offset field. The result is stored in the program counter (PC), causing the program to continue execution from the new location.",
@@ -347,7 +347,7 @@
 					"binary_format": "1100 000 111 offset6(6)"
 				},
 				{
-					"name": "keyword.control.mvi.lcc",
+					"name": "keyword.control.mvi.immediate.lcc",
 					"Mnemonic": "mvi",
 					"match": "^[ ]+1101 [01]{3} ([01]{1} [01]{4} [01]{4})",
 					"descriptive_name": "Move Immediate",
@@ -478,9 +478,10 @@
 				},
 				{
 					"name": "constant.numeric.binary.lcc",
-					"match": "\\b[01]+\\b",
+					"match": "^[ ]+[01]{4} ([01]{4} [01]{4} [01]{4})",
 					"descriptive_name": "Binary Number",
-					"explaination": "This is a 4 byte binary number. 2s complement"
+					"explaination": "This is a 4 byte binary number. 2s complement",
+					"binary_format": "(4) (4) (4) (4)"
 				}
 			]
 		},
