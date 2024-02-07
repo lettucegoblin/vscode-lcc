@@ -3,7 +3,7 @@
   "publisher": "lettucegoblin",
   "displayName": "LCC-Tools",
   "description": "LCC syntax highlighting (Dos Reis version of LCC)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icon": "images/golden.png",
   "keywords":[
     "lcc",
