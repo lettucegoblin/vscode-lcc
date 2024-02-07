@@ -28,16 +28,6 @@ function checkForInLanguageRegexJson(languageDict, document, position) {
 	return null;
 }
 
-function loadRegexJsonOld(languageDict, context, jsonFilePathStr) {
-	const jsonFilePath = path.join(context.extensionPath, jsonFilePathStr);
-
-	// Load the JSON file
-	const regexData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
-	for (const patternName in regexData) {
-		languageDict[patternName] = regexData[patternName];
-		languageDict[patternName].regexParsed = new RegExp(languageDict[patternName].regex);
-	}
-}
 function loadRegexJson(languageDict, context, jsonFilePathStr) {
 	const jsonFilePath = path.join(context.extensionPath, jsonFilePathStr);
 
