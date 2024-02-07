@@ -16,6 +16,7 @@ function checkIfLineIsInLanguageRegex(languageDict, document, position) {
 
 function checkForInLanguageRegexJson(languageDict, document, position) {
   const line = document.lineAt(position);
+  
   const text = line.text;
   const firstSemiColon = text.indexOf(";") - 1;
   if (firstSemiColon !== -1 && firstSemiColon < position.e) {
@@ -149,7 +150,7 @@ function loadRegexJson(languageDict, context, jsonFilePathStr) {
 
 function activate(context) {
   const languageDict = {};
-  loadRegexJson(languageDict, context, "syntaxes\\lcc.tmLanguage.json");
+  loadRegexJson(languageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'));
 
   context.subscriptions.push(
     vscode.languages.registerHoverProvider("lcc", {
