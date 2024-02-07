@@ -349,7 +349,7 @@
 				{
 					"name": "keyword.control.mvi.lcc",
 					"Mnemonic": "mvi",
-					"match": "^[ ]+1101 [01]{3} [01]{9}",
+					"match": "^[ ]+1101 [01]{3} ([01]{1} [01]{4} [01]{4})",
 					"descriptive_name": "Move Immediate",
 					"description": "dr = imm9",
 					"explaination": "The MVI instruction is used to move an immediate value (imm9) into the destination register (DR). The immediate value is stored directly in the destination register. The MVI instruction does not affect the condition codes.",
@@ -369,26 +369,113 @@
 				{
 					"name": "keyword.control.halt.lcc",
 					"Mnemonic": "halt",
-					"match": "^[ ]+1111 000 0 00000000",
+					"match": "^[ ]+1111 000 0000 00000",
 					"descriptive_name": "Halt",
 					"description": "Stop execution, return to OS",
 					"explaination": "The HALT instruction is used to stop the execution of the program and return control to the operating system.",
 					"flags_set": "none",
-					"binary_format": "1111 000 0 00000000"
+					"binary_format": "1111 000 0000 00000"
 				},
 				{
 					"name": "keyword.control.nl.lcc",
 					"Mnemonic": "nl",
-					"match": "^[ ]+1111 000 0 00000001",
+					"match": "^[ ]+1111 000 0000 00001",
 					"descriptive_name": "Output newline",
 					"description": "Output a newline character",
 					"explaination": "The NL instruction is used to output a newline character. It can be used to add a line break in the output.",
 					"flags_set": "none",
-					"binary_format": "1111 000 0 00000001"
+					"binary_format": "1111 000 0000 00001"
 				},
-				
-
-
+				{
+					"name": "keyword.control.dout.lcc",
+					"Mnemonic": "dout",
+					"match": "^[ ]+1111 [01]{3} 0000 00010",
+					"descriptive_name": "Display signed number in sr in decimal",
+					"description": "Display the signed number in the source register (SR) in decimal format",
+					"explaination": "The DOUT instruction is used to display the signed number in the source register (SR) in decimal format.",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 00010"
+				},
+				{
+					"name": "keyword.control.udout.lcc",
+					"Mnemonic": "udout",
+					"match": "^[ ]+1111 [01]{3} 0000 00011",
+					"descriptive_name": "Display unsigned number in sr in decimal",
+					"description": "Display the unsigned number in the source register (SR) in decimal format",
+					"explaination": "The UDOUT instruction is used to display the unsigned number in the source register (SR) in decimal format.",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 00011"
+				},
+				{
+					"name": "keyword.control.hout.lcc",
+					"Mnemonic": "hout",
+					"match": "^[ ]+1111 [01]{3} 0000 00100",
+					"descriptive_name": "Display number in sr in hex",
+					"description": "Display the number in the source register (SR) in hexadecimal format",
+					"explaination": "The HOUT instruction is used to display the number in the source register (SR) in hexadecimal format.",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 00100"
+				},
+				{
+					"name": "keyword.control.aout.lcc",
+					"Mnemonic": "aout",
+					"match": "^[ ]+1111 [01]{3} 0000 00101",
+					"descriptive_name": "Display ASCII character in sr",
+					"description": "Display the ASCII character in the source register (SR)",
+					"explaination": "The AOUT instruction is used to display the ASCII character in the source register (SR).",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 00101"
+				},
+				{
+					"name": "keyword.control.sout.lcc",
+					"Mnemonic": "sout",
+					"match": "^[ ]+1111 [01]{3} 0000 00110",
+					"descriptive_name": "Display string sr points to",
+					"description": "Display the string that the source register (SR) points to",
+					"explaination": "The SOUT instruction is used to display the string that the source register (SR) points to.",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 00110"
+				},
+				{
+					"name": "keyword.control.din.lcc",
+					"Mnemonic": "din",
+					"match": "^[ ]+1111 [01]{3} 0000 00111",
+					"descriptive_name": "Read decimal number from keyboard into dr",
+					"description": "Read a decimal number from the keyboard and store it in the destination register (DR)",
+					"explaination": "The DIN instruction is used to read a decimal number from the keyboard and store it in the destination register (DR).",
+					"flags_set": "none",
+					"binary_format": "1111 dr(3) 0000 00111"
+				},
+				{
+					"name": "keyword.control.hin.lcc",
+					"Mnemonic": "hin",
+					"match": "^[ ]+1111 [01]{3} 0000 01000",
+					"descriptive_name": "Read hex number from keyboard into dr",
+					"description": "Read a hexadecimal number from the keyboard and store it in the destination register (DR)",
+					"explaination": "The HIN instruction is used to read a hexadecimal number from the keyboard and store it in the destination register (DR).",
+					"flags_set": "none",
+					"binary_format": "1111 dr(3) 0000 01000"
+				},
+				{
+					"name": "keyword.control.ain.lcc",
+					"Mnemonic": "ain",
+					"match": "^[ ]+1111 [01]{3} 00000 1001",
+					"descriptive_name": "Read ASCII character from keyboard into dr",
+					"description": "Read an ASCII character from the keyboard and store it in the destination register (DR)",
+					"explaination": "The AIN instruction is used to read an ASCII character from the keyboard and store it in the destination register (DR).",
+					"flags_set": "none",
+					"binary_format": "1111 dr(3) 0000 01001"
+				},
+				{
+					"name": "keyword.control.sin.lcc",
+					"Mnemonic": "sin",
+					"match": "^[ ]+1111 [01]{3} 0000 01010",
+					"descriptive_name": "Input string into buffer sr points to",
+					"description": "Read a string from the keyboard and store it in the buffer that the source register (SR) points to",
+					"explaination": "The SIN instruction is used to read a string from the keyboard and store it in the buffer that the source register (SR) points to.",
+					"flags_set": "none",
+					"binary_format": "1111 sr(3) 0000 01010"
+				},
 				{
 					"name": "constant.numeric.binary.lcc",
 					"match": "\\b[01]+\\b",
