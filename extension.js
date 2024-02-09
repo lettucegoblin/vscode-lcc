@@ -18,6 +18,8 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
   const line = document.lineAt(position);
   
   const text = line.text;
+  if(simpleCheck)
+   console.log(text, position.e)
   if(!simpleCheck) {
     const firstSemiColon = text.indexOf(";") - 1;
     if (firstSemiColon !== -1 && firstSemiColon < position.e) {
@@ -28,12 +30,17 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
   for (const patternName in languageDict) {
     // if the following match is 16 then there's no spaces in the binary number. assume binary.
     let binaryNumberReg = text.match(/^ *([10]*)/)
-    if(binaryNumberReg && binaryNumberReg[1].length == 16) {
+    let binaryNumberReg4Group = text.match(/^ *([10]{4} [10]{4} [10]{4} [10]{4})/)
+
+    if(binaryNumberReg4Group || (binaryNumberReg && binaryNumberReg[1].length == 16)) {
       if(patternName != "constant.numeric.binary.lcc") continue;
     }
     let regexCheck = text.replace(/ /g, "").match(languageDict[patternName].regexParsed);
     if (regexCheck) {
-      if(simpleCheck) return true;
+      if(simpleCheck){
+        console.log("valid")
+        return true;
+      }
       let matchObj = languageDict[patternName];
       let header = "";
       if (matchObj.descriptive_name) {
@@ -64,7 +71,7 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
         if (whatIsCalculated === "Offset") {
           let validLines = 0;
           let i = 0;
-          for (i = position.line; i < document.lineCount - position.line; i++) {
+          for (i = position.line; i < document.lineCount; i++) {
             if (
               checkForInLanguageRegexJson(
                 languageDict,
@@ -74,18 +81,18 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
               )
             ) {
               validLines++;
-              if (validLines == decimalNumber) {
+              if (validLines == decimalNumber + 2) {
                 break;
               }
             }
           }
-          let vscodeLineNumber = position.line + i;
-          if (vscodeLineNumber > document.lineCount) {
+          let vscodeLineNumber =i;
+          if (vscodeLineNumber >= document.lineCount) {
             // invalid line number
-            lineText = `Offset pointing to vscode line ${vscodeLineNumber} is out of bounds\n`;
+            lineText = `Offset pointing to vscode line ${vscodeLineNumber + 1} is out of bounds\n`;
           } else {
-            let line = document.lineAt(vscodeLineNumber - 1);
-            lineText = `Offset pointing to vscode line ${vscodeLineNumber}: \n${line.text.trim()}\n`;
+            let line = document.lineAt(vscodeLineNumber);
+            lineText = `Offset pointing to vscode line ${vscodeLineNumber + 1}: \n${line.text.trim()}\n`;
           }
         }
         // if the decimal number is a printable character, convert it to a char
