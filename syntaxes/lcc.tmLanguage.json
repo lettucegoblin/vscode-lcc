@@ -489,7 +489,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.lcc",
-					"match": "\\b(if|while|for|return)\\b"
+					"match": "\\b(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)\\b"
 				}
 			]
 		},
