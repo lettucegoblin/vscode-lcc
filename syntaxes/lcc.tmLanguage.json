@@ -13,6 +13,9 @@
 		},
 		{
 			"include": "#binary"
+		},
+		{
+			"include": "#assembly"
 		}
 	],
 	"repository": {
@@ -21,6 +24,35 @@
 				{
 					"name": "comment.line.lcc",
 					"match": ";.*"
+				}
+			]
+		},
+		"assembly": {
+			"patterns": [
+				{
+					"name": "keyword.control.assembly.lcc",
+					"match": "^[ ]*(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)[^\\d]",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"2": {
+							"name": "variable.register.assembly.lcc"
+						},
+						"3": {
+							"name": "variable.register.assembly.lcc"
+						},
+						"4": {
+							"name": "constant.numeric.assembly.lcc"
+						}
+					},
+					"_match_comment": "start w/ 1 or more spaces, followed by add, followed by 1 or more spaces, followed by r0-r7, followed by 1 or more spaces or commas, followed by r0-r7, followed by 1 or more spaces or commas, followed by a number ranging from -16 to 15",
+					"descriptive_name": "Add (Immediate)",
+					"description": "dr = sr1 + imm5",
+					"syntax": "add dr, sr, imm5",
+					"explaination": "The ADD instruction performs an addition operation on the source register and the sign-extended 5-bit immediate value and stores the result in the destination register. The ADD instruction does not affect the condition codes.",
+					"flags_set": "nzcv",
+					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
 				}
 			]
 		},
@@ -488,8 +520,7 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name": "keyword.control.lcc",
-					"match": "\\b(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)\\b"
+	
 				}
 			]
 		},
