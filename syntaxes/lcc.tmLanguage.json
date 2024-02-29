@@ -532,7 +532,7 @@
 				},
 				{
 					"name": "keyword.control.directive.word.assembly.lcc",
-					"TODOS": "implement .start",
+					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
@@ -619,6 +619,49 @@
 					"description": "output the string value pointed at by the source register",
 					"syntax": "sout sr",
 					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "keyword.control.in.decimal.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(din)[ ]+(r[0-7])",
+					"captures": {
+						"1": {
+							"name": "variable.name.assembly.lcc"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "constant.numeric.assembly.lcc"
+						}
+					},
+					"descriptive_name": "Decimal In",
+					"description": "input a decimal value into the source register",
+					"syntax": "din sr",
+					"explaination": "The DIN instruction is used to input a decimal value into the source register. The value is read from the input device and stored in the source register.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "keyword.control.in.string.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sin)[ ]+(r[0-7])",
+					"captures": {
+						"1": {
+							"name": "variable.name.assembly.lcc"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "constant.numeric.assembly.lcc"
+						}
+					},
+					"descriptive_name": "String In",
+					"description": "input a string value into the source register",
+					"syntax": "sin sr",
+					"explaination": "The SIN instruction is used to input a string value into the source register. The value is read from the input device and stored in the source register.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
