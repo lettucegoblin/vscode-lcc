@@ -534,7 +534,7 @@
 					"name": "keyword.control.directive.word.assembly.lcc",
 					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(-?\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "entity.name.section.assembly.lcc"
