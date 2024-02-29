@@ -566,7 +566,7 @@
 							"name": "entity.name.tag.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.character.assembly.lcc"
+							"name": "string"
 						}
 					},
 					"descriptive_name": "String Directive",
@@ -664,6 +664,34 @@
 					"explaination": "The SIN instruction is used to input a string value into the source register. The value is read from the input device and stored in the source register.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "keyword.control.load.relative.assembly.lcc",
+					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "variable.name.assembly.lcc"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "variable.register.assembly.lcc"
+						},
+						"4": {
+							"name": "variable.register.assembly.lcc"
+						},
+						"5": {
+							"name": "variable.register.assembly.lcc"
+						}
+					},
+					"descriptive_name": "Load Relative",
+					"description": "",
+					"syntax": "ldr dr, sr",
+					"explaination": "The LDR instruction is used to load a value from memory into a register. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of memory at the effective address are then loaded into the destination register.",
+					"flags_set": "",
+					"binary_format": "0110 dr(3) baser(3) offset6(6)"
 				},
 				{
 					"name": "color test",
