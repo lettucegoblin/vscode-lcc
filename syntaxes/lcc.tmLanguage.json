@@ -30,7 +30,7 @@
 		"assembly": {
 			"patterns": [
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.add.immediate.assembly.lcc",
 					"_TODOS": "modify match so that it accomodates for labels, modify comments so that they are grayed out immediately following the last character/non-comment token of the instruction",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -59,7 +59,7 @@
 					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.add.register.assembly.lcc",
 					"_TODO": "fix syntax highlighting for add register",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
@@ -87,7 +87,7 @@
 					"binary_format": "0001 dr(3) sr1(3) 000 sr2"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.and.register.assembly.lcc",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -114,7 +114,7 @@
 					"binary_format": "0101 dr(3) sr1(3) 000 sr2"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.and.immediate.assembly.lcc",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
@@ -141,7 +141,7 @@
 					"binary_format": "0101 dr(3) sr1(3) 1 imm5"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.branch.assembly.lcc",
 					"match": "^[ ]*(br)[ ]+([nzp]{1,3})[, ]+([a-zA-Z_][a-zA-Z0-9_]*)",
 					"captures": {
 						"1": {
@@ -165,7 +165,7 @@
 
 
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.decimal.out.assembly.lcc",
 					"match": "^[ ]*(dout)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -175,15 +175,15 @@
 							"name": "variable.register.assembly.lcc"
 						}
 					},
-					"descriptive_name": "Display Output",
-					"description": "display the value in the source register",
+					"descriptive_name": "Decimal Out",
+					"description": "display the decimal value in the source register",
 					"syntax": "dout sr",
-					"explaination": "The DOUT instruction is used to display the value in the source register. The value in the source register is displayed on the output device.",
+					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.halt.assembly.lcc",
 					"match": "^[ ]*(halt)",
 					"captures": {
 						"1": {
@@ -198,7 +198,8 @@
 					"binary_format": "1111 111 000000000"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.jump.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(jmp)[ ]+([a-zA-Z_][a-zA-Z0-9_]*)",
 					"captures": {
 						"1": {
@@ -216,7 +217,8 @@
 					"binary_format": "1100 000 baser(3) offset6(6)"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.load.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(ld)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
@@ -237,8 +239,9 @@
 					"binary_format": "0010 dr(3) pcoffset9[(1) (4) (4)]"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
-					"match": "^[ ]*(ld)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
+					"name": "keyword.control.load.relative.assembly.lcc",
+					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, etc., add leading label support",
+					"match": "^[ ]*(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
 							"name": "entity.name.function.assembly.lcc"
@@ -261,7 +264,8 @@
 					"binary_format": "0110 dr(3) baser(3) offset6(6)"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.newline.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(nl)",
 					"captures": {
 						"1": {
@@ -276,7 +280,8 @@
 					"binary_format": "1111 000 000000001"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.not.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(not)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -297,7 +302,8 @@
 					"binary_format": "1001 dr(3) sr1(3) 000000"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.pop.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(pop)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -315,7 +321,8 @@
 					"binary_format": "1010 dr(3) 0000 00001"
 				}, 
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.push.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(push)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -333,7 +340,8 @@
 					"binary_format": "1010 sr(3) 0000 00000"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.remainder.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(rem)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -354,7 +362,8 @@
 					"binary_format": "1010 dr(3) sr(3) 0 01001"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.rotate.left.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"_QUESTION": "Does rotate left support negative number inputs, or does it only take unsigned 5 bit numbers?",
 					"match": "^[ ]*(rol)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -376,8 +385,8 @@
 					"binary_format": "1010 sr(3) ct(4) 00101"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
-					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range",
+					"name": "keyword.control.move.immediate.assembly.lcc",
+					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, implement leading label support",
 					"match": "^[ ]*(mov)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
@@ -398,7 +407,8 @@
 					"binary_format": "1101 dr(3) imm9(9)"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.move.relative.assembly.lcc",
+					"_TODOS": "add leading label support, modify 4th capture group to instead take in an offset6 number, confirm that this is the correct syntax for move relative",
 					"match": "^[ ]*(mov)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -422,7 +432,8 @@
 					"binary_format": "0110 dr(3) baser(3) offset6(6)"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.shift.right.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(sra)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
@@ -443,7 +454,7 @@
 					"binary_format": "1010 sr(3) ct(4) 00010"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.directive.label.assembly.lcc",
 					"_COMMENT": "labels followed by directives, such as .word, .zero, .string, etc.",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)[ ]+(.word|.string|.zero)[ ]+(\\d+|\"[^\"]*\")",
 					"captures": {
@@ -462,10 +473,10 @@
 					"syntax": "label: .directive_name value",
 					"explaination": "Labels are used to mark locations in the program. Directives are used to specify data to be stored in memory. The .WORD directive is used to store a 16-bit value in memory. The .STRING directive is used to store a string in memory. The .ZERO directive is used to store a sequence of zero bytes in memory.",
 					"flags_set": "",
-					"binary_format": "0000 0000 000000000"
+					"binary_format": "0000 0000 0000 0000"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.load.effective.address.assembly.lcc",
 					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_][a-zA-Z0-9_]+)",
 					"captures": {
 						"1": {
@@ -489,7 +500,8 @@
 					"binary_format": "1110 dr(3) pcoffset9[(1) (4) (4)]"
 				},
 				{
-					"name": "keyword.control.assembly.lcc",
+					"name": "keyword.control.out.string.assembly.lcc",
+					"_TODOS": "add leading label support",
 					"match": "^[ ]*(sout)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -499,8 +511,8 @@
 							"name": "variable.register.assembly.lcc"
 						}
 					},
-					"descriptive_name": "Store Output",
-					"description": "output the value in the source register",
+					"descriptive_name": "String Out",
+					"description": "output the string value pointed at by the source register",
 					"syntax": "sout sr",
 					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
 					"flags_set": "",
