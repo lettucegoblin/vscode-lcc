@@ -505,7 +505,38 @@
 					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
-				}
+				},
+				{
+					"name": "color test",
+					"match": "([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]*",
+					"captures": {
+						"1": {
+							"name": "entity"
+						},
+						"2": {
+							"name": "entity.name"
+						},
+						"3": {
+							"name": "entity.name.class"
+						},
+						"4": {
+							"name": "entity.name.function"
+						},
+						"5": {
+							"name": "entity.name.method"
+						},
+						"6": {
+							"name": "entity.name.section"
+						},
+						"7": {
+							"name": "entity.name.selector"
+						},
+						"8": {
+							"name": "entity.name.tag"
+						}
+					}
+				}					
+
 			]
 		},
 		"binary": {
