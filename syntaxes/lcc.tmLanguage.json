@@ -23,7 +23,22 @@
 			"patterns": [
 				{
 					"name": "comment.line.lcc",
-					"match": ";.*"
+					"match": ";.*",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.todo",
+									"match": "(TODO)",
+									"captures": {
+										"1": {
+											"name": "storage.type"
+										}
+									}
+								}
+							]
+						}
+					}
 				}
 			]
 		},
