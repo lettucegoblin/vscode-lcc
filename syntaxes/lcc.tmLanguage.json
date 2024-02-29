@@ -32,19 +32,22 @@
 				{
 					"name": "keyword.control.assembly.lcc",
 					"_TODOS": "modify match so that it accomodates for labels, modify comments so that they are grayed out immediately following the last character/non-comment token of the instruction",
-					"match": "^[ ]*(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "variable.name.assembly.lcc"
 						},
 						"2": {
-							"name": "variable.register.assembly.lcc"
+							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
 						},
 						"4": {
 							"name": "constant.numeric.assembly.lcc"
+						},
+						"5": {
+							"name": "constant.character.assembly.lcc"
 						}
 					},
 					"_match_comment": "start w/ 1 or more spaces, followed by add, followed by 1 or more spaces, followed by r0-r7, followed by 1 or more spaces or commas, followed by r0-r7, followed by 1 or more spaces or commas, followed by a number ranging from -16 to 15",
@@ -57,19 +60,23 @@
 				},
 				{
 					"name": "keyword.control.assembly.lcc",
-					"match": "^[ ]*(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
+					"_TODO": "fix syntax highlighting for add register",
+					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "variable.name.assembly.lcc"
 						},
 						"2": {
-							"name": "variable.register.assembly.lcc"
+							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
+						},
+						"5": {
+							"name": "constant.numeric.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Add (Register)",
@@ -81,19 +88,22 @@
 				},
 				{
 					"name": "keyword.control.assembly.lcc",
-					"match": "^[ ]*(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
+					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "variable.name.assembly.lcc"
 						},
 						"2": {
-							"name": "variable.register.assembly.lcc"
+							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
+						},
+						"5": {
+							"name": "constant.numeric.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Bitwise AND (Register)",
@@ -105,19 +115,22 @@
 				},
 				{
 					"name": "keyword.control.assembly.lcc",
-					"match": "^[ ]*(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_][a-zA-Z0-9_]*:?|[a-zA-Z_][a-zA-Z0-9_]*:)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "variable.name.assembly.lcc"
 						},
 						"2": {
-							"name": "variable.register.assembly.lcc"
+							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
 						},
 						"4": {
 							"name": "constant.numeric.assembly.lcc"
+						},
+						"5": {
+							"name": "constant.character.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Bitwise AND (Immediate)",
@@ -374,7 +387,7 @@
 							"name": "variable.register.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "constant.character.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Move Immediate",
@@ -441,7 +454,7 @@
 							"name": "entity.name.tag.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "constant.character.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Directive",
