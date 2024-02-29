@@ -435,7 +435,7 @@
 				{
 					"name": "keyword.control.move.immediate.assembly.lcc",
 					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, implement leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0|'.')",
 					"captures": {
 						"1": {
 							"name": "variable.name.assembly.lcc"
