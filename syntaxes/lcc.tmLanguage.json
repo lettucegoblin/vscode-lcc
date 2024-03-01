@@ -50,19 +50,19 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "constant.character.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"_match_comment": "start w/ 1 or more spaces, followed by add, followed by 1 or more spaces, followed by r0-r7, followed by 1 or more spaces or commas, followed by r0-r7, followed by 1 or more spaces or commas, followed by a number ranging from -16 to 15",
@@ -79,19 +79,19 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Add (Register)",
@@ -106,19 +106,19 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Bitwise AND (Register)",
@@ -133,19 +133,19 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "constant.character.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Bitwise AND (Immediate)",
@@ -160,13 +160,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(br)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "entity.name.section"
 						}
 					},
 					"descriptive_name": "Branch Always",
@@ -184,13 +184,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Decimal Out",
@@ -205,10 +205,10 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(halt)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "entity.name.function"
 						}
 					},
 					"descriptive_name": "Halt",
@@ -224,7 +224,7 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(jmp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
@@ -246,16 +246,16 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Load",
@@ -268,22 +268,22 @@
 				{
 					"name": "keyword.control.load.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Load Relative",
@@ -299,10 +299,10 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(nl)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
-							"name": "entity.name.function.assembly.lcc"
+							"name": "entity.name.function"
 						}
 					},
 					"descriptive_name": "Newline",
@@ -314,20 +314,20 @@
 				},
 				{
 					"name": "keyword.control.not.assembly.lcc",
-					"_TODOS": "add leading label support",
+					"_TODOS": "",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(not)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Bitwise NOT",
@@ -343,13 +343,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(pop)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Pop",
@@ -365,13 +365,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(push)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Push",
@@ -387,16 +387,16 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rem)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Remainder",
@@ -413,16 +413,16 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rol)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					}, 
 					"descriptive_name": "Rotate Left",
@@ -434,20 +434,27 @@
 				},
 				{
 					"name": "keyword.control.move.immediate.assembly.lcc",
-					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, implement leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0|'.')",
+					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, confirm correct styling with separate capture groups for numbers versus ascii characters",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+((-16|-?1[0-5]|-?[1-9]|0)|('.'))",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.character.assembly.lcc"
+							"name": "",
+							"_COMMENT": "This is intentionally left blank"
+						},
+						"5": {
+							"name": "constant.numeric"
+						},
+						"6": {
+							"name": "constant.character"
 						}
 					},
 					"descriptive_name": "Move Immediate",
@@ -463,16 +470,16 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Move Relative",
@@ -484,20 +491,20 @@
 				},
 				{
 					"name": "keyword.control.shift.right.assembly.lcc",
-					"_TODOS": "add leading label support",
+					"_TODOS": "confirm that this is correct",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sra)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Shift Right Arithmetic",
@@ -514,10 +521,10 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.zero)[ ]+(\\d+)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
-							"name": "entity.name.tag.assembly.lcc"
+							"name": "meta.preprocessor"
 						},
 						"3": {
 							"name": "constant.character.assembly.lcc"
@@ -537,10 +544,10 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(-?\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
-							"name": "entity.name.section.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
-							"name": "entity.name.tag.assembly.lcc"
+							"name": "meta.preprocessor"
 						},
 						"3": {
 							"name": "constant.character.assembly.lcc"
@@ -560,10 +567,10 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.string)[ ]+(\"[^\"]*\")",
 					"captures": {
 						"1": {
-							"name": "entity.name.section.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
-							"name": "entity.name.tag.assembly.lcc"
+							"name": "meta.preprocessor"
 						},
 						"3": {
 							"name": "string"
@@ -581,16 +588,16 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]+)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.assembly.lcc"
+							"name": "entity.name.section"
 						}
 					},
 					"descriptive_name": "Load Effective Address",
@@ -606,13 +613,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "String Out",
@@ -627,13 +634,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(din)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "Decimal In",
@@ -649,13 +656,13 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sin)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "constant.numeric.assembly.lcc"
+							"name": "variable"
 						}
 					},
 					"descriptive_name": "String In",
@@ -671,19 +678,19 @@
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-?\\d+)",
 					"captures": {
 						"1": {
-							"name": "variable.name.assembly.lcc"
+							"name": "entity.name.section"
 						},
 						"2": {
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"4": {
-							"name": "variable.register.assembly.lcc"
+							"name": "variable"
 						},
 						"5": {
-							"name": "variable.register.assembly.lcc"
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Load Relative",
@@ -701,7 +708,8 @@
 					"match": "",
 					"captures": {
 						"1": {
-							"name": "variable.name"
+							"name": "variable.name",
+							"_COMMENT": "this was replaced by entity.name.section"
 						},
 						"2": {
 							"name": "variable.other"
