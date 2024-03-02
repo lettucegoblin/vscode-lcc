@@ -201,6 +201,72 @@
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
+					"name": "entity.out.decimal.unsigned.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]+(r[0-7])",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Unsigned Decimal Out",
+					"description": "display the unsigned decimal value in the source register",
+					"syntax": "udout sr",
+					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. The value in the source register is displayed on the output device.",
+					"flags_set": "",
+					"binary_format": "1111 sr(3) 0 0000 0011",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name":"entity.out.hexadecimal.assembly.lcc",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]+(r[0-7])",
+					"captures":{
+						"1":{
+							"name":"meta.preprocessor"
+						},
+						"2":{
+							"name":"entity.name.function.assembly.lcc"
+						},
+						"3":{
+							"name":"keyword"
+						}
+					},
+					"descriptive_name":"Hexadecimal Out",
+					"description":"display the hexadecimal value in the source register",
+					"syntax":"hout sr",
+					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. The value in the source register is displayed on the output device.",
+					"flags_set":"",
+					"binary_format":"1111 sr(3) 0 0000 0100",
+					"_COMMENT":"the above binary format is confirmed correct"
+				},
+				{
+					"name":"entity.out.ascii.assembly.lcc",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]+(r[0-7])",
+					"captures":{
+						"1":{
+							"name":"meta.preprocessor"
+						},
+						"2":{
+							"name":"entity.name.function.assembly.lcc"
+						},
+						"3":{
+							"name":"keyword"
+						}
+					},
+					"descriptive_name":"ASCII Out",
+					"description":"display the ASCII character in the source register",
+					"syntax":"aout sr",
+					"explaination":"The AOUT instruction is used to display the ASCII character in the source register. The ASCII character is displayed on the output device.",
+					"flags_set":"",
+					"binary_format":"1111 sr(3) 0 0000 0101",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
 					"name": "entity.halt.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(halt)",
 					"captures": {
@@ -515,6 +581,24 @@
 					"binary_format": "1010 sr(3) ct(4) 00010"
 				},
 				{
+					"name": "entity.directive.start.assembly.lcc",
+					"match": "^[ ]+(.start)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "entity.other.inherited-class"
+						},
+						"2": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Start Directive",
+					"description": "specify the starting address of the program",
+					"syntax": ".start label",
+					"explaination": "The .START directive is used to specify the starting address of the program. The starting address is the address where the program will begin execution.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
 					"name": "entity.directive.zero.assembly.lcc",
 					"TODOS": "implement label offsets for both label arguments and label directive declarations (?) see pg 65 in textbook for more info on label offsets",
 					"_COMMENT": "directive .zero, preceded by a label, and followed by a numerical value",
@@ -527,7 +611,7 @@
 							"name": "entity.other.inherited-class"
 						},
 						"3": {
-							"name": "constant.character.assembly.lcc"
+							"name": "constant.numeric.assembly.lcc"
 						}
 					},
 					"descriptive_name": "Zero Directive",
@@ -541,7 +625,7 @@
 					"name": "entity.directive.word.assembly.lcc",
 					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(-?\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -550,7 +634,16 @@
 							"name": "entity.other.inherited-class"
 						},
 						"3": {
-							"name": "constant.character.assembly.lcc"
+							"name": ""
+						}, 
+						"4":{
+							"name":"constant.numeric.assembly.lcc"
+						},
+						"5":{
+							"name":"constant.character.assembly.lcc"
+						},
+						"6":{
+							"name":"meta.preprocessor"
 						}
 					},
 					"descriptive_name": "Word Directive",
@@ -922,7 +1015,7 @@
 					"_COMMENT": "the above binary format is correct"
 				},
 				{
-					"name": "label.assembly.lcc",
+					"name": "entity.label.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)",
 					"captures": {
 						"1": {
@@ -937,7 +1030,7 @@
 					"binary_format": "n/a"
 				},
 				{
-					"name": "color test",
+					"name": "test.color",
 					"_COMMENT": "this is a helper to quickly test/inspect different textmate names and colors under different themes. _OLD_MATCH holds the previously used match field regex to test 10 word captures at a time (not for actual use)",
 					"_OLD_MATCH": "",
 					"_TEST_STRING": "One two three four five six seven eight nine ten",
