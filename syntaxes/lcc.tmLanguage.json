@@ -45,7 +45,7 @@
 		"assembly": {
 			"patterns": [
 				{
-					"name": "keyword.control.add.immediate.assembly.lcc",
+					"name": "add.immediate.assembly.lcc",
 					"_TODOS": "modify match so that it accomodates for labels, modify comments so that they are grayed out immediately following the last character/non-comment token of the instruction",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -56,10 +56,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
 							"name": "constant.numeric"
@@ -74,7 +74,7 @@
 					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
 				},
 				{
-					"name": "keyword.control.add.register.assembly.lcc",
+					"name": "add.register.assembly.lcc",
 					"_TODO": "fix syntax highlighting for add register",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
@@ -85,13 +85,13 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Add (Register)",
@@ -102,7 +102,7 @@
 					"binary_format": "0001 dr(3) sr1(3) 000 sr2"
 				},
 				{
-					"name": "keyword.control.and.register.assembly.lcc",
+					"name": "entityand.register.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -112,13 +112,13 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Bitwise AND (Register)",
@@ -129,7 +129,7 @@
 					"binary_format": "0101 dr(3) sr1(3) 000 sr2"
 				},
 				{
-					"name": "keyword.control.and.immediate.assembly.lcc",
+					"name": "entityand.immediate.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
@@ -139,10 +139,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
 							"name": "constant.numeric"
@@ -156,8 +156,8 @@
 					"binary_format": "0101 dr(3) sr1(3) 1 imm5"
 				},
 				{
-					"name": "keyword.control.branch.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(br)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"name": "entitybranch.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(br|bral)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -180,7 +180,7 @@
 
 
 				{
-					"name": "keyword.control.out.decimal.assembly.lcc",
+					"name": "entityout.decimal.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -190,7 +190,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Decimal Out",
@@ -201,7 +201,7 @@
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
-					"name": "keyword.control.halt.assembly.lcc",
+					"name": "entityhalt.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(halt)",
 					"captures": {
 						"1": {
@@ -219,7 +219,7 @@
 					"binary_format": "1111 111 000000000"
 				},
 				{
-					"name": "keyword.control.jump.assembly.lcc",
+					"name": "entityjump.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(jmp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
@@ -241,7 +241,7 @@
 					"binary_format": "1100 000 baser(3) offset6(6)"
 				},
 				{
-					"name": "keyword.control.load.assembly.lcc",
+					"name": "entityload.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -252,7 +252,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
 							"name": "constant.numeric"
@@ -266,7 +266,7 @@
 					"binary_format": "0010 dr(3) pcoffset9[(1) (4) (4)]"
 				},
 				{
-					"name": "keyword.control.load.relative.assembly.lcc",
+					"name": "entityload.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -277,10 +277,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
 							"name": "constant.numeric"
@@ -294,7 +294,7 @@
 					"binary_format": "0110 dr(3) baser(3) offset6(6)"
 				},
 				{
-					"name": "keyword.control.newline.assembly.lcc",
+					"name": "entitynewline.assembly.lcc",
 					"_TODOS": "add leading label styling",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(nl)",
 					"captures": {
@@ -313,7 +313,7 @@
 					"binary_format": "1111 000 000000001"
 				},
 				{
-					"name": "keyword.control.not.assembly.lcc",
+					"name": "entitynot.assembly.lcc",
 					"_TODOS": "",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(not)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
@@ -324,10 +324,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Bitwise NOT",
@@ -338,7 +338,7 @@
 					"binary_format": "1001 dr(3) sr1(3) 000000"
 				},
 				{
-					"name": "keyword.control.pop.assembly.lcc",
+					"name": "entitypop.assembly.lcc",
 					"_TODOS": "",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(pop)[ ]+(r[0-7])",
 					"captures": {
@@ -349,7 +349,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Pop",
@@ -360,7 +360,7 @@
 					"binary_format": "1010 dr(3) 0000 00001"
 				}, 
 				{
-					"name": "keyword.control.push.assembly.lcc",
+					"name": "entitypush.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(push)[ ]+(r[0-7])",
 					"captures": {
@@ -371,7 +371,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Push",
@@ -382,7 +382,7 @@
 					"binary_format": "1010 sr(3) 0000 00000"
 				},
 				{
-					"name": "keyword.control.remainder.assembly.lcc",
+					"name": "entityremainder.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rem)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
@@ -393,10 +393,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Remainder",
@@ -407,7 +407,7 @@
 					"binary_format": "1010 dr(3) sr(3) 0 01001"
 				},
 				{
-					"name": "keyword.control.rotate.left.assembly.lcc",
+					"name": "entityrotate.left.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"_QUESTION": "Does rotate left support negative number inputs, or does it only take unsigned 5 bit numbers?",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rol)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
@@ -419,7 +419,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
 							"name": "constant.numeric"
@@ -433,7 +433,7 @@
 					"binary_format": "1010 sr(3) ct(4) 00101"
 				},
 				{
-					"name": "keyword.control.move.immediate.assembly.lcc",
+					"name": "entitymove.immediate.assembly.lcc",
 					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, confirm correct styling with separate capture groups for numbers versus ascii characters",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+((-16|-?1[0-5]|-?[1-9]|0)|('.'))",
 					"captures": {
@@ -444,7 +444,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
 							"name": "",
@@ -465,7 +465,7 @@
 					"binary_format": "1101 dr(3) imm9(9)"
 				},
 				{
-					"name": "keyword.control.move.relative.assembly.lcc",
+					"name": "entitymove.relative.assembly.lcc",
 					"_TODOS": "add leading label support, modify 4th capture group to instead take in an offset6 number, confirm that this is the correct syntax for move relative",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7])[, ]+(r[0-7])",
 					"captures": {
@@ -476,10 +476,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Move Relative",
@@ -490,7 +490,7 @@
 					"binary_format": "1010 dr(3) sr(3) 0 01100"
 				},
 				{
-					"name": "keyword.control.shift.right.assembly.lcc",
+					"name": "entityshift.right.assembly.lcc",
 					"_TODOS": "confirm that this is correct",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sra)[ ]+(r[0-7])[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -501,7 +501,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
 							"name": "constant.numeric"
@@ -515,7 +515,7 @@
 					"binary_format": "1010 sr(3) ct(4) 00010"
 				},
 				{
-					"name": "keyword.control.directive.zero.assembly.lcc",
+					"name": "entitydirective.zero.assembly.lcc",
 					"TODOS": "implement label offsets for both label arguments and label directive declarations (?) see pg 65 in textbook for more info on label offsets",
 					"_COMMENT": "directive .zero, preceded by a label, and followed by a numerical value",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.zero)[ ]+(\\d+)",
@@ -538,7 +538,7 @@
 					"binary_format": "0000 0000 0000 0000"
 				},
 				{
-					"name": "keyword.control.directive.word.assembly.lcc",
+					"name": "entitydirective.word.assembly.lcc",
 					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+(-?\\d+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*)",
@@ -561,7 +561,7 @@
 					"binary_format": "0000 0000 0000 0000"
 				},
 				{
-					"name": "keyword.control.directive.string.assembly.lcc",
+					"name": "entitydirective.string.assembly.lcc",
 					"TODOS": "split directive into separate capture patterns, because .word alone needs to be able to handle numbers, chars, and labels, .string needs to be able to handle strings, and .zero needs to be able to handle numbers, implement .start",
 					"_COMMENT": "directives, such as .word, .zero, .string, etc., preceded by a label, and followed by a value",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.string)[ ]+(\"[^\"]*\")",
@@ -584,7 +584,7 @@
 					"binary_format": "0000 0000 0000 0000"
 				},
 				{
-					"name": "keyword.control.load.effective.address.assembly.lcc",
+					"name": "entityload.effective.address.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]+)",
 					"captures": {
 						"1": {
@@ -594,7 +594,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
 							"name": "meta.preprocessor"
@@ -608,7 +608,7 @@
 					"binary_format": "1110 dr(3) pcoffset9[(1) (4) (4)]"
 				},
 				{
-					"name": "keyword.control.out.string.assembly.lcc",
+					"name": "entityout.string.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]+(r[0-7])",
 					"captures": {
@@ -619,7 +619,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "String Out",
@@ -630,7 +630,7 @@
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
-					"name": "keyword.control.in.decimal.assembly.lcc",
+					"name": "entityin.decimal.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(din)[ ]+(r[0-7])",
 					"captures": {
 						"1": {
@@ -640,7 +640,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "Decimal In",
@@ -651,7 +651,7 @@
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
-					"name": "keyword.control.in.string.assembly.lcc",
+					"name": "entityin.string.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sin)[ ]+(r[0-7])",
 					"captures": {
@@ -662,7 +662,7 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						}
 					},
 					"descriptive_name": "String In",
@@ -673,7 +673,7 @@
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
-					"name": "keyword.control.load.relative.assembly.lcc",
+					"name": "entityload.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7])[, ]+(r[0-7])[, ]+(-?\\d+)",
 					"captures": {
@@ -684,10 +684,10 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"4": {
-							"name": "variable"
+							"name": "keyword"
 						},
 						"5": {
 							"name": "constant.numeric"
@@ -701,11 +701,94 @@
 					"binary_format": "0110 dr(3) baser(3) offset6(6)"
 				},
 				{
+					"name": "compare.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(cmp)[ ]+(r[0-7])[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Compare",
+					"description": "compare the value in the source register with the immediate value",
+					"syntax": "cmp sr, imm9",
+					"explaination": "The CMP instruction is used to compare the value in the source register with the immediate value. The comparison is performed by subtracting the immediate value from the value in the source register. The condition codes are set based on the result of the subtraction.",
+					"flags_set": "nz",
+					"binary_format": "1010 sr(3) 000 imm9(9)",
+					"_TODO":"confirm that this binary_format value is correct for compare"
+				},
+				{
+					"name": "branch.not.zero.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brnz|brne)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Not Zero",
+					"description": "if z=0, pc = pc + pcoffset9",
+					"syntax": "brnz label",
+					"explaination": "The BRNZ instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRNZ instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 001 pcoffset9(9)"
+				},
+				{
+					"name": "branch.zero.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brz|bre)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Zero",
+					"description": "if z=1, pc = pc + pcoffset9",
+					"syntax": "brz label",
+					"explaination": "The BRZ instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRZ instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 000 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "label.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Label",
+					"description": "a label by itself on a line",
+					"syntax": "label:",
+					"explaination": "A label can be written on a line by itself. Labels are used to mark locations in the program. It must either be followed by a colon, or have no white space preceding it on the line it appears.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
 					"name": "color test",
-					"_COMMENT": "this is a helper to quickly test/inspect different textmate names and colors under different themes. _OLD_MATCH holds the previously used match field regex to test eight word captures at a time (not for actual use)",
-					"_OLD_MATCH": "([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]*",
-					"_TEST_STRING": "One two three four five six seven eight",
-					"match": "",
+					"_COMMENT": "this is a helper to quickly test/inspect different textmate names and colors under different themes. _OLD_MATCH holds the previously used match field regex to test 10 word captures at a time (not for actual use)",
+					"_OLD_MATCH": "",
+					"_TEST_STRING": "One two three four five six seven eight nine ten",
+					"match": "([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]*([A-Za-z]+)[ ]*([A-Za-z]+)[ ]*",
 					"captures": {
 						"1": {
 							"name": "variable.name",
@@ -716,22 +799,49 @@
 							"_COMMENT": "this was formerly used for labels"
 						},
 						"3": {
-							"name": "variable.parameter"
+							"name": "support.type",
+							"_COLORS":"yellow in solarized, light blue in monokai"
 						},
 						"4": {
-							"name": ""
+							"name": "constant.language"
 						},
 						"5": {
-							"name": "support.type.property-name"
+							"name": "entity.other.inherited-class"
 						},
 						"6": {
-							"name": "support.variable"
+							"name": "entity.name.type"
 						},
 						"7": {
-							"name": "variable"
+							"name": "entity.name.class",
+							"_COLORS":""
 						},
 						"8": {
-							"name": "variable.language"
+							"name": "variable.name",
+							"_COMMENT": ""
+						},
+						"9": {
+							"name": "constant.other",
+							"_COLORS":""
+						},
+						"10": {
+							"name": "variable.other",
+							"_COLORS":""
+						},
+						"11": {
+							"name": "support.class",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						},
+						"12": {
+							"name": "variable",
+							"_COMMENT": "This was replaced by keyword"
+						},
+						"13": {
+							"name": "support.type",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						},
+						"14": {
+							"name": "support.type.property-name",
+							"_COLORS":"yellow in solarized, light blue in monokai"
 						}
 					}
 				}					
