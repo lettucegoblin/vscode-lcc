@@ -170,11 +170,11 @@
 						}
 					},
 					"descriptive_name": "Branch Always",
-					"description": "if cc, pc = pc + pcoffset9",
-					"syntax": "br label",
+					"description": "pc = pc + pcoffset9",
+					"syntax": "'br label' or 'bral label'",
 					"explaination": "The Branch Always instruction is used to unconditionally branch to a new location in the program, where the destination location is indicated by the label. The Program Counter (PC) is updated to the new location.",
 					"flags_set": "",
-					"binary_format": "0000 cc(3) pcoffset9[(1) (4) (4)]"
+					"binary_format": "0000 111 pcoffset9(9)"
 				},
 				
 
@@ -741,8 +741,8 @@
 					},
 					"descriptive_name": "Branch on Not Zero",
 					"description": "if z=0, pc = pc + pcoffset9",
-					"syntax": "brnz label",
-					"explaination": "The BRNZ instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRNZ instruction is executed.",
+					"syntax": "'brnz label' or 'brne label'",
+					"explaination": "The BRNZ/BRNE instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRNZ instruction is executed.",
 					"flags_set": "",
 					"binary_format": "0000 001 pcoffset9(9)"
 				},
@@ -762,10 +762,120 @@
 					},
 					"descriptive_name": "Branch on Zero",
 					"description": "if z=1, pc = pc + pcoffset9",
-					"syntax": "brz label",
-					"explaination": "The BRZ instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRZ instruction is executed.",
+					"syntax": "'brz label' or 'bre label'",
+					"explaination": "The BRZ/BRE instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRZ instruction is executed.",
 					"flags_set": "",
 					"binary_format": "0000 000 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "branch.negative.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brn)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Negative",
+					"description": "if n=1, pc = pc + pcoffset9",
+					"syntax": "brn label",
+					"explaination": "The BRN instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRN instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 010 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "branch.positive.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Positive",
+					"description": "if n=z, pc = pc + pcoffset9",
+					"syntax": "brp label",
+					"explaination": "The BRP instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRP instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 011 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "branch.less.than.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brlt)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Less Than in Signed Comparison",
+					"description": "if n!=v, pc = pc + pcoffset9",
+					"syntax": "brlt label",
+					"explaination": "The BRLT instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRLT instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 100 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "branch.greater.than.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brgt)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Greater Than in Signed Comparison",
+					"description": "if n=v and z=0, pc = pc + pcoffset9",
+					"syntax": "brgt label",
+					"explaination": "The BRGT instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRGT instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 101 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "branch.on.carry.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brc|brb)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Carry or Branch on Below",
+					"description": "if c=1, pc = pc + pcoffset9",
+					"syntax": "'brc label' or 'brb label'",
+					"explaination": "The BRC/BRB instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRC instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 110 pcoffset9(9)",
 					"_COMMENT": "the above binary format is correct"
 				},
 				{
