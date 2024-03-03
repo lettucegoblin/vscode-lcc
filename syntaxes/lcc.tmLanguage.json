@@ -13,6 +13,9 @@
 		},
 		{
 			"include": "#binary"
+		},
+		{
+			"include": "#assembly"
 		}
 	],
 	"repository": {
@@ -20,8 +23,1414 @@
 			"patterns": [
 				{
 					"name": "comment.line.lcc",
-					"match": ";.*"
+					"match": ";.*",
+					"captures": {
+						"0": {
+							"patterns": [
+								{
+									"name": "keyword.todo",
+									"match": "(TODO)",
+									"captures": {
+										"1": {
+											"name": "storage.type"
+										}
+									}
+								}
+							]
+						}
+					}
 				}
+			]
+		},
+		"assembly": {
+			"patterns": [
+				{
+					"name": "entity.return.assembly.lcc",
+					"_QUESTION": "Can ret take in a numerical offset as an argument? Can it take in a label as an argument?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ret)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						}
+					},
+					"descriptive_name": "Return",
+					"description": "return from subroutine, pc = lr + offset6",
+					"syntax": "ret",
+					"explaination": "The RET instruction is used to return from a subroutine. The return address is taken from the stack and loaded into the program counter (PC), causing the program to continue execution from the return address.",
+					"flags_set": "",
+					"binary_format": "1100 111 111 offset6(6)"
+				},
+				{
+					"name": "add.immediate.assembly.lcc",
+					"_TODOS": "",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"_match_comment": "start w/ 1 or more spaces, followed by add, followed by 1 or more spaces, followed by r0-r7, followed by 1 or more spaces or commas, followed by r0-r7, followed by 1 or more spaces or commas, followed by a number ranging from -16 to 15",
+					"descriptive_name": "Add (Immediate)",
+					"description": "dr = sr1 + imm5",
+					"syntax": "add dr, sr, imm5",
+					"explaination": "The ADD instruction performs an addition operation on the source register and the sign-extended 5-bit immediate value and stores the result in the destination register. The ADD instruction does not affect the condition codes.",
+					"flags_set": "nzcv",
+					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
+				},
+				{
+					"name": "entity.subtract.immediate.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(sub)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Subtract (Immediate)",
+					"description": "dr = sr1 - imm5",
+					"syntax": "sub dr, sr, imm5",
+					"explaination": "The SUB instruction performs a subtraction operation on the source register and the sign-extended 5-bit immediate value and stores the result in the destination register. The SUB instruction does not affect the condition codes.",
+					"flags_set": "nzcv",
+					"binary_format": "1011 dr(3) sr1(3) 1 imm5",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.add.register.assembly.lcc",
+					"_TODO": "fix syntax highlighting for add register",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(add)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Add (Register)",
+					"description": "dr = sr1 + sr2",
+					"syntax": "add dr, sr1, sr2",
+					"explaination": "The ADD instruction performs an addition operation on the two source registers and stores the result in the destination register. The ADD instruction does not affect the condition codes.",
+					"flags_set": "nzcv",
+					"binary_format": "0001 dr(3) sr1(3) 000 sr2"
+				},
+				{
+					"name": "entity.subtract.register.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(sub)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Subtract (Register)",
+					"description": "dr = sr1 - sr2",
+					"syntax": "sub dr, sr1, sr2",
+					"explaination": "The SUB instruction performs a subtraction operation on the two source registers and stores the result in the destination register. The SUB instruction does not affect the condition codes.",
+					"flags_set": "nzcv",
+					"binary_format": "1011 dr(3) sr1(3) 000 sr2(3)",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.and.register.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Bitwise AND (Register)",
+					"description": "dr = sr1 & sr2",
+					"syntax": "and dr, sr1, sr2",
+					"explaination": "The AND instruction performs a bitwise AND operation on the two source registers and stores the result in the destination register. The AND instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "0101 dr(3) sr1(3) 000 sr2"
+				},
+				{
+					"name": "entity.and.immediate.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(and)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Bitwise AND (Immediate)",
+					"description": "dr = sr1 & imm5",
+					"syntax": "and dr, sr, imm5",
+					"explaination": "The AND instruction performs a bitwise AND operation on the source register and the sign-extended 5-bit immediate value and stores the result in the destination register. The AND instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "0101 dr(3) sr1(3) 1 imm5"
+				},
+				{
+					"name": "entity.or.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(or)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Bitwise OR",
+					"description": "dr = dr | sr",
+					"syntax": "or dr, sr",
+					"explaination": "The OR instruction performs a bitwise OR operation on the two source registers and stores the result in the destination register. The OR instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 01010",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.exlusive.or.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(xor)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Bitwise Exclusive OR",
+					"description": "dr = dr ^ sr",
+					"syntax": "xor dr, sr",
+					"explaination": "The XOR instruction performs a bitwise exclusive OR operation on the two source registers and stores the result in the destination register. The XOR instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 01011",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.branch.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(br|bral)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch Always",
+					"description": "pc = pc + pcoffset9",
+					"syntax": "'br label' or 'bral label'",
+					"explaination": "The Branch Always instruction is used to unconditionally branch to a new location in the program, where the destination location is indicated by the label. The Program Counter (PC) is updated to the new location.",
+					"flags_set": "",
+					"binary_format": "0000 111 pcoffset9(9)"
+				},
+				
+
+
+				{
+					"name": "entity.out.decimal.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Decimal Out",
+					"description": "display the decimal value in the source register",
+					"syntax": "dout sr",
+					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. The value in the source register is displayed on the output device.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "entity.out.decimal.unsigned.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Unsigned Decimal Out",
+					"description": "display the unsigned decimal value in the source register",
+					"syntax": "udout sr",
+					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. The value in the source register is displayed on the output device.",
+					"flags_set": "",
+					"binary_format": "1111 sr(3) 0 0000 0011",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name":"entity.out.hexadecimal.assembly.lcc",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures":{
+						"1":{
+							"name":"meta.preprocessor"
+						},
+						"2":{
+							"name":"entity.name.function.assembly.lcc"
+						},
+						"3":{
+							"name":"keyword"
+						}
+					},
+					"descriptive_name":"Hexadecimal Out",
+					"description":"display the hexadecimal value in the source register",
+					"syntax":"hout sr",
+					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. The value in the source register is displayed on the output device.",
+					"flags_set":"",
+					"binary_format":"1111 sr(3) 0 0000 0100",
+					"_COMMENT":"the above binary format is confirmed correct"
+				},
+				{
+					"name":"entity.out.ascii.assembly.lcc",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures":{
+						"1":{
+							"name":"meta.preprocessor"
+						},
+						"2":{
+							"name":"entity.name.function.assembly.lcc"
+						},
+						"3":{
+							"name":"keyword"
+						}
+					},
+					"descriptive_name":"ASCII Out",
+					"description":"display the ASCII character in the source register",
+					"syntax":"aout sr",
+					"explaination":"The AOUT instruction is used to display the ASCII character in the source register. The ASCII character is displayed on the output device.",
+					"flags_set":"",
+					"binary_format":"1111 sr(3) 0 0000 0101",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.halt.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(halt)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function"
+						}
+					},
+					"descriptive_name": "Halt",
+					"description": "stop the program",
+					"syntax": "halt",
+					"explaination": "The HALT instruction is used to stop the program. The program stops executing and the processor halts.",
+					"flags_set": "",
+					"binary_format": "1111 111 000000000"
+				},
+				{
+					"name": "entity.jump.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(jmp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Jump",
+					"description": "pc = baser + offset6",
+					"syntax": "jmp label",
+					"explaination": "The JMP instruction is used to jump to a new location in the program. The new location is calculated by adding the value in the baser register to the 6-bit offset field. The result is stored in the program counter (PC), causing the program to continue execution from the new location.",
+					"flags_set": "",
+					"binary_format": "1100 000 baser(3) offset6(6)"
+				},
+				{
+					"name": "entity.load.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						},
+						"6": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Load",
+					"description": "dr = mem[pc + pcoffset9]",
+					"syntax": "ld dr, imm9",
+					"explaination": "The LD instruction is used to load a value from memory into a register. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The contents of memory at the effective address are then loaded into the destination register.",
+					"flags_set": "",
+					"binary_format": "0010 dr(3) pcoffset9[(1) (4) (4)]"
+				},
+				{
+					"name": "entity.store.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						},
+						"6": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Store",
+					"description": "mem[pc + pcoffset9] = sr",
+					"syntax": "st sr, imm9",
+					"explaination": "The ST instruction is used to store a value from a register into memory. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The value in the source register is then stored in memory at the effective address.",
+					"flags_set": "",
+					"binary_format": "0011 sr(3) pcoffset9[(9)]"
+				},
+				{
+					"name": "entity.store.relative.assembly.lcc",
+					"_QUESTIONS": "Is the offset6 an optional argument for str? Can str take in a label as an argument?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Store Relative",
+					"description": "mem[baser + offset6] = sr",
+					"syntax": "str sr, baser, offset6",
+					"explaination": "The STR instruction is used to store a value from a register into memory. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of the source register (SR) are then stored in memory at the effective address.",
+					"flags_set": "",
+					"binary_format": "0111 sr(3) baser(3) offset6(6)",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.load.relative.assembly.lcc",
+					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Load Relative",
+					"description": "dr = mem[baser + offset6]",
+					"syntax": "ldr dr, baser, offset6",
+					"explaination": "The LDR instruction is used to load a value from memory into a register. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of memory at the effective address are then loaded into the destination register.",
+					"flags_set": "",
+					"binary_format": "0110 dr(3) baser(3) offset6(6)"
+				},
+				{
+					"name": "entity.newline.assembly.lcc",
+					"_TODOS": "add leading label styling",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(nl)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function"
+						}
+					},
+					"descriptive_name": "Newline",
+					"description": "print a newline",
+					"syntax": "nl",
+					"explaination": "The NL instruction is used to print a newline character to the output device.",
+					"flags_set": "",
+					"binary_format": "1111 000 000000001"
+				},
+				{
+					"name": "entity.not.assembly.lcc",
+					"_TODOS": "",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(not)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Bitwise NOT",
+					"description": "dr = ~sr1",
+					"syntax": "not dr, sr",
+					"explaination": "The NOT instruction performs a bitwise NOT operation on the source register and stores the result in the destination register. The NOT instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1001 dr(3) sr1(3) 000000"
+				},
+				{
+					"name": "entity.pop.assembly.lcc",
+					"_TODOS": "",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(pop)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Pop",
+					"description": "dr = mem[sp++];",
+					"syntax": "pop dr",
+					"explaination": "The POP instruction is used to pop a value from the stack into a register. The value at the memory location pointed to by the stack pointer (SP) is loaded into the destination register (DR), and then the stack pointer is incremented by 1.",
+					"flags_set": "",
+					"binary_format": "1010 dr(3) 0000 00001"
+				}, 
+				{
+					"name": "entity.push.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(push)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Push",
+					"description": "mem[--sp] = sr",
+					"syntax": "push sr",
+					"explaination": "The PUSH instruction is used to push the value of the source register onto the stack. The stack pointer (SP) is decremented by 1 and the value of the source register (SR) is stored in memory at the address pointed to by the stack pointer.",
+					"flags_set": "",
+					"binary_format": "1010 sr(3) 0000 00000"
+				},
+				{
+					"name": "entity.remainder.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rem)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Remainder",
+					"description": "dr = dr % sr",
+					"syntax": "rem dr, sr",
+					"explaination": "The REM instruction is used to calculate the remainder of the division operation between the value in the destination register (DR) and the value in the source register (SR). The result is stored in the destination register. The REM instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 01001"
+				},
+				{
+					"name": "entity.multiply.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mul)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Multiply",
+					"description": "dr = dr * sr",
+					"syntax": "mul dr, sr",
+					"explaination": "The MUL instruction is used to multiply the value in the destination register (DR) by the value in the source register (SR). The result is stored in the destination register. The MUL instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 00111"
+				},
+				{
+					"name": "entity.divide.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(div)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Divide",
+					"description": "dr = dr / sr",
+					"syntax": "div dr, sr",
+					"explaination": "The DIV instruction is used to divide the value in the destination register (DR) by the value in the source register (SR). The result is stored in the destination register. The DIV instruction does not affect the condition codes.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 01000",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.rotate.left.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"_QUESTION": "Does rotate left support negative number inputs, or does it only take unsigned 5 bit numbers?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rol)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					}, 
+					"descriptive_name": "Rotate Left",
+					"description": "sr << ct (rotate: bit 15 → bit 0, c=last out)",
+					"syntax": "rol sr, ct",
+					"explaination": "The ROL instruction performs a left rotation operation on the source register and stores the result in the destination register. The number of rotations is specified by the 5-bit count field. The ROL instruction rotates the bits to the left, with the leftmost bit becoming the rightmost bit, and the last bit rotated out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00101"
+				},
+				{
+					"name": "entity.move.immediate.assembly.lcc",
+					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, confirm correct styling with separate capture groups for numbers versus ascii characters",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|('.'))",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "This is intentionally left blank"
+						},
+						"5": {
+							"name": "constant.numeric"
+						},
+						"6": {
+							"name": "constant.character"
+						}
+					},
+					"descriptive_name": "Move Immediate",
+					"description": "dr = imm9",
+					"syntax": "mov dr, imm9",
+					"explaination": "The MVI instruction is used to move a 9-bit immediate value into a register. The 9-bit immediate value is stored in the destination register.",
+					"flags_set": "",
+					"binary_format": "1101 dr(3) imm9(9)"
+				},
+				{
+					"name": "entity.move.relative.assembly.lcc",
+					"_TODOS": "add leading label support, modify 4th capture group to instead take in an offset6 number, confirm that this is the correct syntax for move relative",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Move Relative",
+					"description": "dr = sr",
+					"syntax": "mov dr, sr",
+					"explaination": "The MVR instruction is used to move a value from memory into a register.",
+					"flags_set": "",
+					"binary_format": "1010 dr(3) sr(3) 0 01100"
+				},
+				{
+					"name": "entity.shift.right.assembly.lcc",
+					"_TODOS": "confirm that this is correct",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sra)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Shift Right Arithmetic",
+					"description": "sr >> ct (sign bit replicated, c=last out)",
+					"syntax": "sra sr, ct",
+					"explaination": "The SRA instruction performs an arithmetic right shift operation on the source register and stores the result in the destination register. The number of shifts is specified by the 4-bit count field. The SRA instruction replicates the sign bit on the left side of the shifted value, and the last bit shifted out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00010"
+				},
+				{
+					"name": "entity.shift.right.logical.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(srl)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Shift Right Logical",
+					"description": "sr >> ct (0's shifted in, c=last out)",
+					"syntax": "srl sr, ct",
+					"explaination": "The SRL instruction performs a logical right shift operation on the source register and stores the result in the destination register. The number of shifts is specified by the 4-bit count field. The SRL instruction shifts in zeros on the left side of the shifted value, and the last bit shifted out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00010",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.directive.start.assembly.lcc",
+					"match": "^[ ]+(.start)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "entity.other.inherited-class"
+						},
+						"2": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Start Directive",
+					"description": "specify the starting address of the program",
+					"syntax": ".start label",
+					"explaination": "The .START directive is used to specify the starting address of the program. The starting address is the address where the program will begin execution.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
+					"name": "entity.directive.zero.assembly.lcc",
+					"TODOS": "implement label offsets for both label arguments and label directive declarations (?) see pg 65 in textbook for more info on label offsets",
+					"_COMMENT": "directive .zero, preceded by a label, and followed by a numerical value",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.zero)[ ]+(\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "constant.numeric.assembly.lcc"
+						}
+					},
+					"descriptive_name": "Zero Directive",
+					"description": "store a 16-bit value in memory",
+					"syntax": "label: .zero numerical_value",
+					"explaination": "Labels are used to mark locations in the program. Directives are used to specify data to be stored in memory. The .ZERO directive is used to store a sequence of zero bytes in memory.",
+					"flags_set": "",
+					"binary_format": "0000 0000 0000 0000"
+				},
+				{
+					"name": "entity.directive.word.assembly.lcc",
+					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
+					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": ""
+						}, 
+						"4":{
+							"name":"constant.numeric.assembly.lcc"
+						},
+						"5":{
+							"name":"constant.character.assembly.lcc"
+						},
+						"6":{
+							"name":"meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Word Directive",
+					"description": "store a 16-bit value in memory",
+					"syntax": "label: .directive_name value",
+					"explaination": "Labels are used to mark locations in the program. Directives are used to specify data to be stored in memory. The .WORD directive is used to store a 16-bit value in memory.",
+					"flags_set": "",
+					"binary_format": "0000 0000 0000 0000"
+				},
+				{
+					"name": "entity.directive.string.assembly.lcc",
+					"TODOS": "split directive into separate capture patterns, because .word alone needs to be able to handle numbers, chars, and labels, .string needs to be able to handle strings, and .zero needs to be able to handle numbers, implement .start",
+					"_COMMENT": "directives, such as .word, .zero, .string, etc., preceded by a label, and followed by a value",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.string)[ ]+(\"[^\"]*\")",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "string"
+						}
+					},
+					"descriptive_name": "String Directive",
+					"description": "store a 16-bit value in memory",
+					"syntax": "label: .directive_name value",
+					"explaination": "Labels are used to mark locations in the program. Directives are used to specify data to be stored in memory. The .STRING directive is used to store a string in memory.",
+					"flags_set": "",
+					"binary_format": "0000 0000 0000 0000"
+				},
+				{
+					"name": "entity.load.effective.address.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Load Effective Address",
+					"description": "dr = pc + pcoffset9",
+					"syntax": "lea dr, label",
+					"explaination": "The LEA instruction is used to load the effective address of a label into a register. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The effective address is then loaded into the destination register.",
+					"flags_set": "",
+					"binary_format": "1110 dr(3) pcoffset9[(1) (4) (4)]"
+				},
+				{
+					"name": "entity.out.string.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "String Out",
+					"description": "output the string value pointed at by the source register",
+					"syntax": "sout sr",
+					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "entity.in.decimal.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(din)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Decimal In",
+					"description": "input a decimal value into the source register",
+					"syntax": "din sr",
+					"explaination": "The DIN instruction is used to input a decimal value into the source register. The value is read from the input device and stored in the source register.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "entity.in.hexademical.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hin)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Hexademical In",
+					"description": "input a hexademical value into the destination register",
+					"syntax": "hin sr",
+					"explaination": "The HIN instruction is used to input a hexademical value into the destination register. The value is read from the input device and stored in the destination register.",
+					"flags_set": "",
+					"binary_format": "1111 dr 0 00001000"
+				},
+				{
+					"name":"entity.in.ascii.assembly.lcc",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ain)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures":{
+						"1":{
+							"name":"meta.preprocessor"
+						},
+						"2":{
+							"name":"entity.name.function.assembly.lcc"
+						},
+						"3":{
+							"name":"keyword"
+						}
+					},
+					"descriptive_name":"Ascii In",
+					"description":"input an ascii value into the destination register",
+					"syntax":"ain dr",
+					"explaination":"The AIN instruction is used to input an ascii value into the destination register. The value is read from the input device and stored in the destination register.",
+					"flags_set":"",
+					"binary_format":"1111 dr 0 00001001",
+					"_COMMENT": "the above binary format has been confirmed correct"
+				},
+				{
+					"name": "entity.in.string.assembly.lcc",
+					"_TODOS": "add leading label support",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sin)[ ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "String In",
+					"description": "input a string value into the source register",
+					"syntax": "sin sr",
+					"explaination": "The SIN instruction is used to input a string value into the source register. The value is read from the input device and stored in the source register.",
+					"flags_set": "",
+					"binary_format": "1111 000 sr(3) 000000"
+				},
+				{
+					"name": "entity.load.relative.assembly.lcc",
+					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Load Relative",
+					"description": "",
+					"syntax": "ldr dr, sr",
+					"explaination": "The LDR instruction is used to load a value from memory into a register. The effective address is calculated by adding the contents of the base register (baser) to the 6-bit offset field. The contents of memory at the effective address are then loaded into the destination register.",
+					"flags_set": "",
+					"binary_format": "0110 dr(3) baser(3) offset6(6)"
+				},
+				{
+					"name": "entity.compare.immediate.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(cmp)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Compare Immediate",
+					"description": "compare the value in the source register with the immediate value",
+					"syntax": "cmp sr, imm9",
+					"explaination": "The CMP instruction is used to compare the value in the source register with the immediate value. The comparison is performed by subtracting the immediate value from the value in the source register. The condition codes are set based on the result of the subtraction.",
+					"flags_set": "nz",
+					"binary_format": "1000 000 sr(3) 1 imm5(5)",
+					"_TODO":"confirm that this binary_format value is correct for compare"
+				},
+				{
+					"name": "entity.compare.register.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(cmp)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Compare Register",
+					"description": "compare the value in the first register with the value in the second register",
+					"syntax": "cmp sr1, sr2",
+					"explaination": "The CMP instruction is used to compare the value in the source register with the value in the destination register. The comparison is performed by subtracting the value in the second register from the value in the first register. The condition codes are set based on the result of the subtraction.",
+					"flags_set": "nz",
+					"binary_format": "1000 000 sr1(3) 000 sr2(3)",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.branch.and.link.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(bl|call|jsr)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch and Link",
+					"_QUESTIONS": "What do call and jsr stand for / mean exactly?",
+					"description": "lr = pc, pc = pc + pcoffset11",
+					"syntax": "bl label",
+					"explaination": "The BL instruction is used to perform a subroutine call. The address of the instruction following the BL instruction is stored in the link register (LR), and the Program Counter (PC) is updated to the new location specified by the label.",
+					"flags_set": "",
+					"binary_format": "0100 1 pcoffset11(11)"
+				},
+				{
+					"name": "entity.branch.and.link.relative.assembly.lcc",
+					"_QUESTIONS": "Can blr/jsrr take in a value or label as an argument for the pcoffset6? Is the pcoffset6 optional?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)?",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Branch and Link Relative",
+					"description": "lr = pc, pc = baser + pcoffset6",
+					"syntax": "blr baser",
+					"_TODO": "confirm that the above syntax is correct",
+					"explaination": "The BLR instruction is used to perform a subroutine call. The address of the instruction following the BLR instruction is stored in the link register (LR), and the Program Counter (PC) is updated to the new location specified by the base register (baser) plus the 6-bit offset field.",
+					"flags_set": "",
+					"binary_format": "0100 000 baser(3) pcoffset6(6)"
+				},
+				{
+					"name": "entity.branch.not.zero.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brnz|brne)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Not Zero",
+					"description": "if z=0, pc = pc + pcoffset9",
+					"syntax": "'brnz label' or 'brne label'",
+					"explaination": "The BRNZ/BRNE instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRNZ instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 001 pcoffset9(9)"
+				},
+				{
+					"name": "entity.branch.zero.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brz|bre)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Zero",
+					"description": "if z=1, pc = pc + pcoffset9",
+					"syntax": "'brz label' or 'bre label'",
+					"explaination": "The BRZ/BRE instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRZ instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 000 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.branch.negative.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brn)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Negative",
+					"description": "if n=1, pc = pc + pcoffset9",
+					"syntax": "brn label",
+					"explaination": "The BRN instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRN instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 010 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.branch.positive.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Positive",
+					"description": "if n=z, pc = pc + pcoffset9",
+					"syntax": "brp label",
+					"explaination": "The BRP instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRP instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 011 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.branch.less.than.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brlt)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Less Than in Signed Comparison",
+					"description": "if n!=v, pc = pc + pcoffset9",
+					"syntax": "brlt label",
+					"explaination": "The BRLT instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRLT instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 100 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.branch.greater.than.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brgt)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Greater Than in Signed Comparison",
+					"description": "if n=v and z=0, pc = pc + pcoffset9",
+					"syntax": "brgt label",
+					"explaination": "The BRGT instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRGT instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 101 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.branch.on.carry.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(brc|brb)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Branch on Carry or Branch on Below",
+					"description": "if c=1, pc = pc + pcoffset9",
+					"syntax": "'brc label' or 'brb label'",
+					"explaination": "The BRC/BRB instruction is used to conditionally branch to a new location in the program. The condition codes are checked to determine if the branch should be taken. If the condition codes indicate that the branch should be taken, the Program Counter (PC) is updated to the new location. If the condition codes indicate that the branch should not be taken, the PC is not modified and the instruction following the BRC instruction is executed.",
+					"flags_set": "",
+					"binary_format": "0000 110 pcoffset9(9)",
+					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.label.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Label",
+					"description": "a label by itself on a line",
+					"syntax": "label:",
+					"explaination": "A label can be written on a line by itself. Labels are used to mark locations in the program. It must either be followed by a colon, or have no white space preceding it on the line it appears.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
+					"name": "test.color",
+					"_COMMENT": "this is a helper to quickly test/inspect different textmate names and colors under different themes. _OLD_MATCH holds the previously used match field regex to test 10 word captures at a time (not for actual use)",
+					"_OLD_MATCH": "",
+					"_TEST_STRING": "One two three four five six seven eight nine ten",
+					"match": "([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]+([A-Za-z]+)[ ]*([A-Za-z]+)[ ]*([A-Za-z]+)[ ]*",
+					"captures": {
+						"1": {
+							"name": "variable.name",
+							"_COMMENT": "this was replaced by meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.section",
+							"_COMMENT": "this was formerly used for labels"
+						},
+						"3": {
+							"name": "support.type",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						},
+						"4": {
+							"name": "constant.language"
+						},
+						"5": {
+							"name": "entity.other.inherited-class"
+						},
+						"6": {
+							"name": "entity.name.type"
+						},
+						"7": {
+							"name": "entity.name.class",
+							"_COLORS":""
+						},
+						"8": {
+							"name": "variable.name",
+							"_COMMENT": ""
+						},
+						"9": {
+							"name": "constant.other",
+							"_COLORS":""
+						},
+						"10": {
+							"name": "variable.other",
+							"_COLORS":""
+						},
+						"11": {
+							"name": "support.class",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						},
+						"12": {
+							"name": "variable",
+							"_COMMENT": "This was replaced by keyword"
+						},
+						"13": {
+							"name": "support.type",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						},
+						"14": {
+							"name": "support.type.property-name",
+							"_COLORS":"yellow in solarized, light blue in monokai"
+						}
+					}
+				}					
+
 			]
 		},
 		"binary": {
@@ -488,8 +1897,7 @@
 		"keywords": {
 			"patterns": [
 				{
-					"name": "keyword.control.lcc",
-					"match": "\\b(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)\\b"
+	
 				}
 			]
 		},

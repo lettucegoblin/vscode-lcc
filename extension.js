@@ -14,7 +14,7 @@ function checkIfLineIsInLanguageRegex(languageDict, document, position) {
   return false;
 }
 
-function checkForInLanguageRegexJson(languageDict, document, position, simpleCheck = false) {
+function checkForInLanguageRegexJson(binLanguageDict, assemblyLanguageDict, document, position, simpleCheck = false) {
   const line = document.lineAt(position);
   
   const text = line.text;
@@ -22,12 +22,15 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
    console.log(text, position.e)
   if(!simpleCheck) {
     const firstSemiColon = text.indexOf(";") - 1;
-    if (firstSemiColon !== -1 && firstSemiColon < position.e) {
+    if (firstSemiColon > -1 && firstSemiColon < position.e) {
       return null;
     }
     if (text[position.e] == " ") return null;
   }
-  for (const patternName in languageDict) {
+  let markdownString = new vscode.MarkdownString();
+  markdownString.isTrusted = true;
+
+  for (const patternName in binLanguageDict) {
     // if the following match is 16 then there's no spaces in the binary number. assume binary.
     let binaryNumberReg = text.match(/^ *([10]*)/)
     let binaryNumberReg4Group = text.match(/^ *([10]{4} [10]{4} [10]{4} [10]{4})/)
@@ -35,13 +38,15 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
     if(binaryNumberReg4Group || (binaryNumberReg && binaryNumberReg[1].length == 16)) {
       if(patternName != "constant.numeric.binary.lcc") continue;
     }
-    let regexCheck = text.replace(/ /g, "").match(languageDict[patternName].regexParsed);
+
+    let regexCheck = text.replace(/ /g, "").match(binLanguageDict[patternName].regexParsed);
+    
     if (regexCheck) {
       if(simpleCheck){
         console.log("valid")
         return true;
       }
-      let matchObj = languageDict[patternName];
+      let matchObj = binLanguageDict[patternName];
       let header = "";
       if (matchObj.descriptive_name) {
         if (matchObj.Mnemonic) {
@@ -74,7 +79,8 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
           for (i = position.line; i < document.lineCount; i++) {
             if (
               checkForInLanguageRegexJson(
-                languageDict,
+                binLanguageDict,
+                assemblyLanguageDict,
                 document,
                 new vscode.Position(i, 0),
                 true
@@ -105,9 +111,29 @@ function checkForInLanguageRegexJson(languageDict, document, position, simpleChe
           16
         )}\n${lineText}`;
       }
-      return `${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}`;
+      markdownString.appendMarkdown(`\`\`\`lcc\n${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}\n\`\`\``);
+      return markdownString;
+      //return `${header}${description}${binaryFormat}${calculatedOffset}${flags}${explaination}`;
+    } 
+    
+  }
+  for (const patternName in assemblyLanguageDict) {
+    let regexCheck = text.match(assemblyLanguageDict[patternName].regexParsed);
+    if (regexCheck) {
+      if(simpleCheck){
+        console.log("valid")
+        return true;
+      }
+      let matchObj = assemblyLanguageDict[patternName];
+      markdownString.appendMarkdown(`### ${matchObj.descriptive_name}\n\n`);
+      markdownString.appendMarkdown(`  \n${matchObj.explaination}`);
+      markdownString.appendMarkdown(`  \n**Binary info:**`);
+      markdownString.appendCodeblock(`${matchObj.binary_format}\n${matchObj.description}`, "javascript");
+      markdownString.appendMarkdown(`  \nflags set: ${matchObj.flags_set}`);
+      return markdownString;
     }
   }
+
   return false;
 }
 
@@ -133,47 +159,83 @@ function binaryStringToDecimal(binaryString) {
   return decimalNumber;
 }
 
-function loadRegexJson(languageDict, context, jsonFilePathStr) {
+function loadRegexJson(languageDict, context, jsonFilePathStr, isBinaryData = true) {
   const jsonFilePath = path.join(context.extensionPath, jsonFilePathStr);
 
   // Load the JSON file
   const fullRegexData = JSON.parse(fs.readFileSync(jsonFilePath, "utf8"));
-  const binaryRegex = fullRegexData["repository"]["binary"]["patterns"];
 
-  for (const pattern of binaryRegex) {
-    // iterate over array
-    languageDict[pattern.name] = pattern;
-    let firstSpace = false;
-    let str = languageDict[pattern.name].match; // ignoreSpacesInBinaryRegexString
-    str = str.replace(/ /g, function (match) {
-      if (!firstSpace) {
-        firstSpace = true;
-        return match;
-      } else {
-        return "";
-      }
-    });
-    languageDict[pattern.name].regexParsed = new RegExp(
-      str //languageDict[pattern.name].match
-    ); // cache the regex
+  if(!isBinaryData){
+    const assemblyRegex = fullRegexData["repository"]["assembly"]["patterns"];
+    for (const pattern of assemblyRegex) {
+      // iterate over array
+      languageDict[pattern.name] = pattern;
+      languageDict[pattern.name].regexParsed = new RegExp(
+        languageDict[pattern.name].match
+      ); // cache the regex
+      languageDict[pattern.name].isAssembly = true;
+    }
+  } else {
+    const binaryRegex = fullRegexData["repository"]["binary"]["patterns"];
+    for (const pattern of binaryRegex) {
+      // iterate over array
+      languageDict[pattern.name] = pattern;
+      let firstSpace = false;
+      let str = languageDict[pattern.name].match; // ignoreSpacesInBinaryRegexString 
+      str = str.replace(/ /g, function (match) {
+        if (!firstSpace) {
+          firstSpace = true;
+          return match;
+        } else {
+          return "";
+        }
+      });
+      languageDict[pattern.name].regexParsed = new RegExp(
+        str //languageDict[pattern.name].match
+      ); // cache the regex
+      languageDict[pattern.name].isAssembly = false;
+    }
   }
+
+  
 }
 
 function activate(context) {
-  const languageDict = {};
-  loadRegexJson(languageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'));
+  const binLanguageDict = {};
+  const assemblyLanguageDict = {};
+  loadRegexJson(binLanguageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'));
+  loadRegexJson(assemblyLanguageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'), false);
 
   context.subscriptions.push(
     vscode.languages.registerHoverProvider("lcc", {
       provideHover(document, position, token) {
-        const info = checkForInLanguageRegexJson(
-          languageDict,
-          document,
-          position
-        );
-        if (info) {
+        let markdown = undefined;
+        // quite possible the dumbest way to do this
+        if(path.extname(document.uri.fsPath) == '.a') { 
+           markdown = checkForInLanguageRegexJson(
+            {},
+            assemblyLanguageDict,
+            document,
+            position
+          );
+        } else if(path.extname(document.uri.fsPath) == '.bin') {
+          markdown = checkForInLanguageRegexJson(
+            binLanguageDict,
+            {},
+            document,
+            position
+          );
+        } else {
+          markdown = checkForInLanguageRegexJson(
+            binLanguageDict,
+            assemblyLanguageDict,
+            document,
+            position
+          );
+        }
+        if (markdown) {
           return new vscode.Hover(
-            new vscode.MarkdownString("```lcc\n" + info + "\n```")
+            markdown//new vscode.MarkdownString("```lcc\n" + info + "\n```")
           );
         }
       },
