@@ -306,7 +306,7 @@
 
 				{
 					"name": "entity.out.decimal.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -327,7 +327,7 @@
 				},
 				{
 					"name": "entity.out.decimal.unsigned.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -349,7 +349,7 @@
 				},
 				{
 					"name":"entity.out.hexadecimal.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -371,7 +371,7 @@
 				},
 				{
 					"name":"entity.out.ascii.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -969,7 +969,7 @@
 				{
 					"name": "entity.out.string.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
