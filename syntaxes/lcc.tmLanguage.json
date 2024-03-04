@@ -321,7 +321,7 @@
 					"descriptive_name": "Decimal Out",
 					"description": "display the decimal value in the source register",
 					"syntax": "dout sr",
-					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. The value in the source register is displayed on the output device.",
+					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
@@ -342,7 +342,7 @@
 					"descriptive_name": "Unsigned Decimal Out",
 					"description": "display the unsigned decimal value in the source register",
 					"syntax": "udout sr",
-					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. The value in the source register is displayed on the output device.",
+					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 sr(3) 0 0000 0011",
 					"_COMMENT": "the above binary format is confirmed correct"
@@ -364,7 +364,7 @@
 					"descriptive_name":"Hexadecimal Out",
 					"description":"display the hexadecimal value in the source register",
 					"syntax":"hout sr",
-					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. The value in the source register is displayed on the output device.",
+					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set":"",
 					"binary_format":"1111 sr(3) 0 0000 0100",
 					"_COMMENT":"the above binary format is confirmed correct"
@@ -984,7 +984,7 @@
 					"descriptive_name": "String Out",
 					"description": "output the string value pointed at by the source register",
 					"syntax": "sout sr",
-					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
+					"explaination": "The SOUT instruction is used to output the string value pointed at by the source register. If no register is specified then the address r0 points to is displayed. The string pointed at by the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
