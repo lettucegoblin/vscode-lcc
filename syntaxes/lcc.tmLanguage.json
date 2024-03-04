@@ -942,7 +942,7 @@
 				},
 				{
 					"name": "entity.load.effective.address.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
