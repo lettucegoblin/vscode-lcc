@@ -432,7 +432,7 @@
 				},
 				{
 					"name": "entity.load.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -452,6 +452,12 @@
 						},
 						"6": {
 							"name": "meta.preprocessor"
+						},
+						"7": {
+							"name": "keyword.operator"
+						},
+						"8": {
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Load",
@@ -463,7 +469,7 @@
 				},
 				{
 					"name": "entity.store.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -483,6 +489,12 @@
 						},
 						"6": {
 							"name": "meta.preprocessor"
+						},
+						"7": {
+							"name": "keyword.operator"
+						},
+						"8": {
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Store",
@@ -889,7 +901,7 @@
 					"name": "entity.directive.word.assembly.lcc",
 					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -901,13 +913,19 @@
 							"name": ""
 						}, 
 						"4":{
-							"name":"constant.numeric.assembly.lcc"
+							"name":"constant.numeric"
 						},
 						"5":{
-							"name":"constant.character.assembly.lcc"
+							"name":"constant.character"
 						},
 						"6":{
 							"name":"meta.preprocessor"
+						},
+						"7":{
+							"name":"keyword.operator"
+						},
+						"8":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Word Directive",
@@ -1174,8 +1192,8 @@
 				},
 				{
 					"name": "entity.branch.and.link.relative.assembly.lcc",
-					"_QUESTIONS": "Can blr/jsrr take in a value or label as an argument for the pcoffset6? Is the pcoffset6 optional?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)?",
+					"_QUESTIONS": "(q1) Can blr/jsrr take in a value or label as an argument for the pcoffset6? (q2) Is the pcoffset6 optional? (a2) It appears to be optional as per textbook code ex0703.a",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1187,6 +1205,10 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "",
+							"_COMMENT": "This is intentionally left blank"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					},
