@@ -411,7 +411,6 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(jmp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
@@ -433,7 +432,6 @@
 				},
 				{
 					"name": "entity.load.assembly.lcc",
-					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
 					"captures": {
 						"1": {
@@ -1355,7 +1353,7 @@
 				},
 				{
 					"name": "entity.label.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
