@@ -306,7 +306,7 @@
 
 				{
 					"name": "entity.out.decimal.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(dout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -321,13 +321,13 @@
 					"descriptive_name": "Decimal Out",
 					"description": "display the decimal value in the source register",
 					"syntax": "dout sr",
-					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. The value in the source register is displayed on the output device.",
+					"explaination": "The DOUT instruction is used to display the value in the source register as a signed decimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
 				{
 					"name": "entity.out.decimal.unsigned.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(udout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -342,14 +342,14 @@
 					"descriptive_name": "Unsigned Decimal Out",
 					"description": "display the unsigned decimal value in the source register",
 					"syntax": "udout sr",
-					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. The value in the source register is displayed on the output device.",
+					"explaination": "The UDOUT instruction is used to display the value in the source register as an unsigned decimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 sr(3) 0 0000 0011",
 					"_COMMENT": "the above binary format is confirmed correct"
 				},
 				{
 					"name":"entity.out.hexadecimal.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(hout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -364,14 +364,14 @@
 					"descriptive_name":"Hexadecimal Out",
 					"description":"display the hexadecimal value in the source register",
 					"syntax":"hout sr",
-					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. The value in the source register is displayed on the output device.",
+					"explaination":"The HOUT instruction is used to display the value in the source register as a hexadecimal number. If no register is specified then the value in r0 is displayed. The value in the source register is displayed on the output device.",
 					"flags_set":"",
 					"binary_format":"1111 sr(3) 0 0000 0100",
 					"_COMMENT":"the above binary format is confirmed correct"
 				},
 				{
 					"name":"entity.out.ascii.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(aout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -411,7 +411,6 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"_TODOS": "add leading label support",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(jmp)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
@@ -433,8 +432,7 @@
 				},
 				{
 					"name": "entity.load.assembly.lcc",
-					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -454,6 +452,12 @@
 						},
 						"6": {
 							"name": "meta.preprocessor"
+						},
+						"7": {
+							"name": "keyword.operator"
+						},
+						"8": {
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Load",
@@ -465,7 +469,7 @@
 				},
 				{
 					"name": "entity.store.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -485,6 +489,12 @@
 						},
 						"6": {
 							"name": "meta.preprocessor"
+						},
+						"7": {
+							"name": "keyword.operator"
+						},
+						"8": {
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Store",
@@ -741,8 +751,7 @@
 				},
 				{
 					"name": "entity.move.immediate.assembly.lcc",
-					"_TODOS": "modify move immediate's number regex so it matches for 9 bit signed numbers ranging from -256 to 255, TODO: doublecheck and confirm that this is the correct number range, confirm correct styling with separate capture groups for numbers versus ascii characters",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|('.'))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -761,6 +770,12 @@
 							"name": "constant.numeric"
 						},
 						"6": {
+							"name": ""
+						},
+						"7": {
+							"name": ""
+						},
+						"8": {
 							"name": "constant.character"
 						}
 					},
@@ -891,7 +906,7 @@
 					"name": "entity.directive.word.assembly.lcc",
 					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -903,13 +918,19 @@
 							"name": ""
 						}, 
 						"4":{
-							"name":"constant.numeric.assembly.lcc"
+							"name":"constant.numeric"
 						},
 						"5":{
-							"name":"constant.character.assembly.lcc"
+							"name":"constant.character"
 						},
 						"6":{
 							"name":"meta.preprocessor"
+						},
+						"7":{
+							"name":"keyword.operator"
+						},
+						"8":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Word Directive",
@@ -944,7 +965,7 @@
 				},
 				{
 					"name": "entity.load.effective.address.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)?[ ]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -969,7 +990,7 @@
 				{
 					"name": "entity.out.string.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sout)[ ]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -984,7 +1005,7 @@
 					"descriptive_name": "String Out",
 					"description": "output the string value pointed at by the source register",
 					"syntax": "sout sr",
-					"explaination": "The SOUT instruction is used to output the value in the source register. The value in the source register is displayed on the output device.",
+					"explaination": "The SOUT instruction is used to output the string value pointed at by the source register. If no register is specified then the address r0 points to is displayed. The string pointed at by the source register is displayed on the output device.",
 					"flags_set": "",
 					"binary_format": "1111 000 sr(3) 000000"
 				},
@@ -1176,8 +1197,8 @@
 				},
 				{
 					"name": "entity.branch.and.link.relative.assembly.lcc",
-					"_QUESTIONS": "Can blr/jsrr take in a value or label as an argument for the pcoffset6? Is the pcoffset6 optional?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)?",
+					"_QUESTIONS": "(q1) Can blr/jsrr take in a value or label as an argument for the pcoffset6? (q2) Is the pcoffset6 optional? (a2) It appears to be optional as per textbook code ex0703.a",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1189,6 +1210,10 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "",
+							"_COMMENT": "This is intentionally left blank"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					},
@@ -1355,7 +1380,7 @@
 				},
 				{
 					"name": "entity.label.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
