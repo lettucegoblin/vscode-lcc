@@ -754,6 +754,35 @@
 					"binary_format": "1010 sr(3) ct(4) 00101"
 				},
 				{
+					"name": "entity.rotate.right.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ror)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Rotate Right",
+					"description": "sr << ct (rotate: bit 0 → bit 15, c=last out)",
+					"syntax": "ror sr, ct",
+					"explaination": "The ROR instruction performs a right rotation operation on the source register and stores the result in the destination register. The number of rotations is specified by the 5-bit count field. The ROR instruction rotates the bits to the right, with the rightmost bit becoming the leftmost bit, and the last bit rotated out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00110",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
 					"name": "entity.move.immediate.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov|mvi)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
 					"captures": {
