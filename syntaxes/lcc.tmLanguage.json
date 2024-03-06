@@ -867,6 +867,35 @@
 					"flags_set": "nzc",
 					"binary_format": "1010 sr(3) ct(4) 00010",
 					"_COMMENT": "the above binary format is confirmed correct"
+				},	
+				{
+					"name": "entity.shift.left.logical.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sll)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Shift Left Logical",
+					"description": "sr << ct (0's shifted in, c=last out)",
+					"syntax": "sll sr, ct",
+					"explaination": "The SLL instruction performs a logical left shift operation on the source register and stores the result in the destination register. The number of shifts is specified by the 4-bit count field. The SLL instruction shifts in zeros on the right side of the shifted value, and the last bit shifted out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00100",
+					"_COMMENT": "the above binary format is confirmed correct"
 				},
 				{
 					"name": "entity.directive.start.assembly.lcc",
