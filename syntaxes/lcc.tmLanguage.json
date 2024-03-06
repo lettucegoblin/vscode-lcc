@@ -507,7 +507,7 @@
 				{
 					"name": "entity.store.relative.assembly.lcc",
 					"_QUESTIONS": "Is the offset6 an optional argument for str? Can str take in a label as an argument?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -522,6 +522,10 @@
 							"name": "keyword"
 						},
 						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6": {
 							"name": "constant.numeric"
 						}
 					},
@@ -1213,7 +1217,7 @@
 				{
 					"name": "entity.load.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1228,6 +1232,10 @@
 							"name": "keyword"
 						},
 						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6": {
 							"name": "constant.numeric"
 						}
 					},
