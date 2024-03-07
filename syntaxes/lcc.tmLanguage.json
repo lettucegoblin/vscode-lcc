@@ -507,7 +507,7 @@
 				{
 					"name": "entity.store.relative.assembly.lcc",
 					"_QUESTIONS": "Is the offset6 an optional argument for str? Can str take in a label as an argument?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -522,6 +522,10 @@
 							"name": "keyword"
 						},
 						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6": {
 							"name": "constant.numeric"
 						}
 					},
@@ -727,7 +731,7 @@
 					"name": "entity.rotate.left.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"_QUESTION": "Does rotate left support negative number inputs, or does it only take unsigned 5 bit numbers?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rol)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(rol)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -739,6 +743,10 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					}, 
@@ -750,8 +758,62 @@
 					"binary_format": "1010 sr(3) ct(4) 00101"
 				},
 				{
+					"name": "entity.rotate.right.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ror)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Rotate Right",
+					"description": "sr << ct (rotate: bit 0 → bit 15, c=last out)",
+					"syntax": "ror sr, ct",
+					"explaination": "The ROR instruction performs a right rotation operation on the source register and stores the result in the destination register. The number of rotations is specified by the 5-bit count field. The ROR instruction rotates the bits to the right, with the rightmost bit becoming the leftmost bit, and the last bit rotated out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00110",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
+					"name": "entity.sign.extend.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sext)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "keyword"
+						}
+					},
+					"descriptive_name": "Sign Extend",
+					"description": "dr = sext(sr)",
+					"syntax": "sext dr, sr",
+					"explaination": "The SEXT instruction is used to sign-extend the value in the source register and store the result in the destination register. The SEXT instruction sign-extends the value in the source register to 16 bits and stores the result in the destination register.",
+					"flags_set": "nz",
+					"binary_format": "1010 dr(3) sr(3) 0 01101",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},
+				{
 					"name": "entity.move.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov|mvi)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -787,9 +849,8 @@
 					"binary_format": "1101 dr(3) imm9(9)"
 				},
 				{
-					"name": "entity.move.relative.assembly.lcc",
-					"_TODOS": "add leading label support, modify 4th capture group to instead take in an offset6 number, confirm that this is the correct syntax for move relative",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"name": "entity.move.register.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(mov|mvr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -804,7 +865,7 @@
 							"name": "keyword"
 						}
 					},
-					"descriptive_name": "Move Relative",
+					"descriptive_name": "Move Register",
 					"description": "dr = sr",
 					"syntax": "mov dr, sr",
 					"explaination": "The MVR instruction is used to move a value from memory into a register.",
@@ -814,7 +875,7 @@
 				{
 					"name": "entity.shift.right.assembly.lcc",
 					"_TODOS": "confirm that this is correct",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sra)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sra)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -826,6 +887,10 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					},
@@ -838,7 +903,7 @@
 				},
 				{
 					"name": "entity.shift.right.logical.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(srl)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(srl)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -850,6 +915,10 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					},
@@ -859,6 +928,35 @@
 					"explaination": "The SRL instruction performs a logical right shift operation on the source register and stores the result in the destination register. The number of shifts is specified by the 4-bit count field. The SRL instruction shifts in zeros on the left side of the shifted value, and the last bit shifted out is stored in the carry flag.",
 					"flags_set": "nzc",
 					"binary_format": "1010 sr(3) ct(4) 00010",
+					"_COMMENT": "the above binary format is confirmed correct"
+				},	
+				{
+					"name": "entity.shift.left.logical.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(sll)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Shift Left Logical",
+					"description": "sr << ct (0's shifted in, c=last out)",
+					"syntax": "sll sr, ct",
+					"explaination": "The SLL instruction performs a logical left shift operation on the source register and stores the result in the destination register. The number of shifts is specified by the 4-bit count field. The SLL instruction shifts in zeros on the right side of the shifted value, and the last bit shifted out is stored in the carry flag.",
+					"flags_set": "nzc",
+					"binary_format": "1010 sr(3) ct(4) 00100",
 					"_COMMENT": "the above binary format is confirmed correct"
 				},
 				{
@@ -903,10 +1001,31 @@
 					"binary_format": "0000 0000 0000 0000"
 				},
 				{
+					"name": "entity.directive.org.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.org)[ ]+(\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Origin Directive",
+					"description": "change the location counter by an offset",
+					"syntax": ".org offset",
+					"explaination": "The .ORG directive is used to change the location counter by an offset. The location counter is used to keep track of the current memory address being assigned to the program.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
 					"name": "entity.directive.word.assembly.lcc",
-					"TODOS": "implement .start, find out whether or not negative numbers can be used as arguments for .word",
+					"TODOS": "validate whether label args to .word directives can be followed by offsets",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((-?\\d+)|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(.word)[ ]+((6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1098,7 +1217,7 @@
 				{
 					"name": "entity.load.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1113,6 +1232,10 @@
 							"name": "keyword"
 						},
 						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6": {
 							"name": "constant.numeric"
 						}
 					},
@@ -1377,6 +1500,24 @@
 					"flags_set": "",
 					"binary_format": "0000 110 pcoffset9(9)",
 					"_COMMENT": "the above binary format is correct"
+				},
+				{
+					"name": "entity.debugger.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[ ]*)[ ]+(m|r|s|bp)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						}
+					},
+					"descriptive_name": "Debugger",
+					"description": "debugging instructions m, r, s, and bp",
+					"syntax": "m",
+					"explaination": "There are several useful debugging instructions available within LCC assembly. The 'm' instruction displays the contents of memory. The 'r' instruction displays the contents of the registers. The 's' instruction displays the contents of the stack. The 'bp' instruction sets a breakpoint.",
+					"flags_set": "",
+					"binary_format": "see appendix B in textbook for debugger binary formats"
 				},
 				{
 					"name": "entity.label.assembly.lcc",
