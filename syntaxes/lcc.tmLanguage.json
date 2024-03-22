@@ -981,7 +981,7 @@
 					"name": "entity.directive.zero.assembly.lcc",
 					"TODOS": "implement label offsets for both label arguments and label directive declarations (?) see pg 65 in textbook for more info on label offsets",
 					"_COMMENT": "directive .zero, preceded by a label, and followed by a numerical value",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.zero)[ ]+(\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.zero|.blkw|.space)[ ]+(\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1045,7 +1045,7 @@
 				{
 					"name": "entity.directive.word.assembly.lcc",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label, followed by optional offsets",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.word)[ ]+((6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.word|.fill)[ ]+((6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1523,13 +1523,17 @@
 				},
 				{
 					"name": "entity.debugger.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(m|r|s|bp)[; ]*",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*[:]?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]+|^[ ]+)(m|r|s|bp)(?=[ ;]|$)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
 						},
 						"2": {
 							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "",
+							"_COMMENT": "this is intentionally left blank"
 						}
 					},
 					"descriptive_name": "Debugger",
@@ -1541,7 +1545,7 @@
 				},
 				{
 					"name": "entity.label.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
