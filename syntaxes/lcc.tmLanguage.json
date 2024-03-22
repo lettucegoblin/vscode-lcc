@@ -1043,6 +1043,27 @@
 					"binary_format": "n/a"
 				},
 				{
+					"name": "entity.directive.extern.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.extern)[ ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Extern Directive",
+					"description": "declare a label as external",
+					"syntax": ".extern label",
+					"explaination": "The .EXTERN directive is used to declare a label as external. External labels are defined in other files and can be accessed from the current file.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
 					"name": "entity.directive.word.assembly.lcc",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label, followed by optional offsets",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(.word|.fill)[ ]+((6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
