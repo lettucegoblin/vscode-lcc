@@ -1524,7 +1524,7 @@
 				},
 				{
 					"name": "entity.debugger.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(m|r|s|bp)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*|^[ ]*)(m|r|s|bp)[; ]*",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
