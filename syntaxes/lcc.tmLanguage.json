@@ -47,7 +47,7 @@
 				{
 					"name": "entity.return.assembly.lcc",
 					"_QUESTION": "Can ret take in a numerical offset as an argument? Can it take in a label as an argument?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ret)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ret)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -282,7 +282,7 @@
 				},
 				{
 					"name": "entity.branch.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(br|bral)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(br|bral)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -306,7 +306,7 @@
 
 				{
 					"name": "entity.out.decimal.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(dout)[\\s]*(r[0-7]|fp|sp|lr)?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(dout)[\\s]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -327,7 +327,7 @@
 				},
 				{
 					"name": "entity.out.decimal.unsigned.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(udout)[\\s]*(r[0-7]|fp|sp|lr)?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(udout)[\\s]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -349,7 +349,7 @@
 				},
 				{
 					"name":"entity.out.hexadecimal.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(hout)[\\s]*(r[0-7]|fp|sp|lr)?",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(hout)[\\s]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -371,7 +371,7 @@
 				},
 				{
 					"name":"entity.out.ascii.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(aout)[\\s]*(r[0-7]|fp|sp|lr)?",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(aout)[\\s]*(r[0-7]|fp|sp|lr)?",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -393,7 +393,7 @@
 				},
 				{
 					"name": "entity.halt.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(halt)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(halt)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -411,7 +411,7 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(jmp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(jmp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -432,7 +432,7 @@
 				},
 				{
 					"name": "entity.load.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ld)[\\s]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ld)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -469,7 +469,7 @@
 				},
 				{
 					"name": "entity.store.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(st)[\\s]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(st)[ ]+(r[0-7]|fp|sp|lr)[, ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -507,7 +507,7 @@
 				{
 					"name": "entity.store.relative.assembly.lcc",
 					"_QUESTIONS": "Is the offset6 an optional argument for str? Can str take in a label as an argument?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(str)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(str)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -540,7 +540,7 @@
 				{
 					"name": "entity.load.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ldr)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -568,7 +568,7 @@
 				{
 					"name": "entity.newline.assembly.lcc",
 					"_TODOS": "add leading label styling",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(nl)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(nl)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -587,7 +587,7 @@
 				{
 					"name": "entity.not.assembly.lcc",
 					"_TODOS": "",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(not)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(not)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -612,7 +612,7 @@
 				{
 					"name": "entity.pop.assembly.lcc",
 					"_TODOS": "",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(pop)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(pop)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -634,7 +634,7 @@
 				{
 					"name": "entity.push.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(push)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(push)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -656,7 +656,7 @@
 				{
 					"name": "entity.remainder.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(rem)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(rem)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -680,7 +680,7 @@
 				},
 				{
 					"name": "entity.multiply.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(mul)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(mul)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -704,7 +704,7 @@
 				},
 				{
 					"name": "entity.divide.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(div)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(div)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -731,7 +731,7 @@
 					"name": "entity.rotate.left.assembly.lcc",
 					"_TODOS": "add leading label support",
 					"_QUESTION": "Does rotate left support negative number inputs, or does it only take unsigned 5 bit numbers?",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(rol)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(rol)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -759,7 +759,7 @@
 				},
 				{
 					"name": "entity.rotate.right.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ror)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ror)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -788,7 +788,7 @@
 				},
 				{
 					"name": "entity.sign.extend.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(sext)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(sext)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -813,7 +813,7 @@
 				},
 				{
 					"name": "entity.move.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(mov|mvi)[\\s]+(r[0-7]|fp|sp|lr)[, ]+((-(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(mov|mvi)[ ]+(r[0-7]|fp|sp|lr)[, ]+((0x[a-zA-Z\\d]{2}|-?(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -850,7 +850,7 @@
 				},
 				{
 					"name": "entity.move.register.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(mov|mvr)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(mov|mvr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -875,7 +875,7 @@
 				{
 					"name": "entity.shift.right.assembly.lcc",
 					"_TODOS": "confirm that this is correct",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(sra)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(sra)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -903,7 +903,7 @@
 				},
 				{
 					"name": "entity.shift.right.logical.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(srl)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(srl)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -932,7 +932,7 @@
 				},	
 				{
 					"name": "entity.shift.left.logical.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(sll)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(sll)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-16|-?1[0-5]|-?[1-9]|0))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -981,7 +981,7 @@
 					"name": "entity.directive.zero.assembly.lcc",
 					"TODOS": "implement label offsets for both label arguments and label directive declarations (?) see pg 65 in textbook for more info on label offsets",
 					"_COMMENT": "directive .zero, preceded by a label, and followed by a numerical value",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(.zero)[\\s]+(\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.zero|.blkw|.space)[ ]+(\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1002,7 +1002,7 @@
 				},
 				{
 					"name": "entity.directive.org.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(.org)[\\s]+(\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.org)[ ]+(\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1022,10 +1022,51 @@
 					"binary_format": "n/a"
 				},
 				{
+					"name": "entity.directive.global.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.global|.globl)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Global Directive",
+					"description": "declare a label as global",
+					"syntax": ".global label",
+					"explaination": "The .GLOBAL directive is used to declare a label as global. Global labels can be accessed from other files in the program.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
+					"name": "entity.directive.extern.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.extern)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "meta.preprocessor"
+						}
+					},
+					"descriptive_name": "Extern Directive",
+					"description": "declare a label as external",
+					"syntax": ".extern label",
+					"explaination": "The .EXTERN directive is used to declare a label as external. External labels are defined in other files and can be accessed from the current file.",
+					"flags_set": "",
+					"binary_format": "n/a"
+				},
+				{
 					"name": "entity.directive.word.assembly.lcc",
-					"TODOS": "validate whether label args to .word directives can be followed by offsets",
-					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(.word)[\\s]+((6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)([+-]?)(\\d?))",
+					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label, followed by optional offsets",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.word|.fill)[ ]+((0x[a-fA-F\\d]{4}|6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1063,7 +1104,7 @@
 					"name": "entity.directive.string.assembly.lcc",
 					"TODOS": "split directive into separate capture patterns, because .word alone needs to be able to handle numbers, chars, and labels, .string needs to be able to handle strings, and .zero needs to be able to handle numbers, implement .start",
 					"_COMMENT": "directives, such as .word, .zero, .string, etc., preceded by a label, and followed by a value",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(.string)[\\s]+(\"[^\"]*\")",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.string|.stringz|.asciz)[ ]+(\"[^\"]*\")",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1109,7 +1150,7 @@
 				{
 					"name": "entity.out.string.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(sout)[\\s]*(r[0-7]|fp|sp|lr)?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(sout)[\\s]*(r[0-7]|fp|sp|lr)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1130,7 +1171,7 @@
 				},
 				{
 					"name": "entity.in.decimal.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(din)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(din)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1151,7 +1192,7 @@
 				},
 				{
 					"name": "entity.in.hexademical.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(hin)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(hin)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1172,7 +1213,7 @@
 				},
 				{
 					"name":"entity.in.ascii.assembly.lcc",
-					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ain)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match":"(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ain)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures":{
 						"1":{
 							"name":"meta.preprocessor"
@@ -1195,7 +1236,7 @@
 				{
 					"name": "entity.in.string.assembly.lcc",
 					"_TODOS": "add leading label support",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(sin)[\\s]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(sin)[ ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1217,7 +1258,7 @@
 				{
 					"name": "entity.load.relative.assembly.lcc",
 					"_TODOS": "modify anything that takes in a register to also be able to take in specially named registers such as sp, fp, and lr (link register), etc., inspect and fix syntax for ldr as needed",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(ldr)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(ldr)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1248,7 +1289,7 @@
 				},
 				{
 					"name": "entity.compare.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(cmp)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(cmp)[ ]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1273,7 +1314,7 @@
 				},
 				{
 					"name": "entity.compare.register.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(cmp)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(cmp)[ ]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1298,7 +1339,7 @@
 				},
 				{
 					"name": "entity.branch.and.link.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(bl|call|jsr)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(bl|call|jsr)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1321,7 +1362,7 @@
 				{
 					"name": "entity.branch.and.link.relative.assembly.lcc",
 					"_QUESTIONS": "(q1) Can blr/jsrr take in a value or label as an argument for the pcoffset6? (q2) Is the pcoffset6 optional? (a2) It appears to be optional as per textbook code ex0703.a",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(blr|jsrr)[\\s]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(blr|jsrr)[ ]+(r[0-7]|fp|sp|lr)([, ]+(-?\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1350,7 +1391,7 @@
 				},
 				{
 					"name": "entity.branch.not.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brnz|brne)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brnz|brne)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1371,7 +1412,7 @@
 				},
 				{
 					"name": "entity.branch.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brz|bre)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brz|bre)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1393,7 +1434,7 @@
 				},
 				{
 					"name": "entity.branch.negative.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brn)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brn)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1415,7 +1456,7 @@
 				},
 				{
 					"name": "entity.branch.positive.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1437,7 +1478,7 @@
 				},
 				{
 					"name": "entity.branch.less.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brlt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brlt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1459,7 +1500,7 @@
 				},
 				{
 					"name": "entity.branch.greater.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brgt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brgt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1481,7 +1522,7 @@
 				},
 				{
 					"name": "entity.branch.on.carry.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(brc|brb)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brc|brb)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1503,13 +1544,17 @@
 				},
 				{
 					"name": "entity.debugger.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)[\\s]+(m|r|s|bp)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*[:]?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]+|^[ ]+)(m|r|s|bp)(?=[ ;]|$)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
 						},
 						"2": {
 							"name": "entity.other.inherited-class"
+						},
+						"3": {
+							"name": "",
+							"_COMMENT": "this is intentionally left blank"
 						}
 					},
 					"descriptive_name": "Debugger",
@@ -1521,7 +1566,7 @@
 				},
 				{
 					"name": "entity.label.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[ ]*|^[ ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[ ]*)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
