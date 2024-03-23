@@ -4,7 +4,12 @@ The Low Cost Computer is made by Anthony J. Dos Reis for his [textbook](https://
 ![LCC Tools](images/hover_preview.png)
 # Supported Files
 - **.bin** - Binary files
+- **.a** - Assembly files
 - more to be added
+
+## Assembly Code Features
+- **Syntax Highlighting**
+- **Hover Information**
 ## Machine Code Features(At the moment)
 - **Syntax Highlighting**
 - **Hover Information**
