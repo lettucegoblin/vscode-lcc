@@ -1,4 +1,5 @@
 const vscode = require("vscode");
+const AssemblyLinter = require('./src/AssemblyLinter');
 const fs = require("fs");
 const path = require("path");
 
@@ -205,6 +206,20 @@ function activate(context) {
   const assemblyLanguageDict = {};
   loadRegexJson(binLanguageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'));
   loadRegexJson(assemblyLanguageDict, context, path.join('syntaxes', 'lcc.tmLanguage.json'), false);
+
+  const linter = new AssemblyLinter();
+
+  // Lint all open assembly documents
+  vscode.workspace.textDocuments.forEach(linter.lintDocument, linter);
+
+  // Lint assembly documents when they are opened or changed
+  context.subscriptions.push(vscode.workspace.onDidOpenTextDocument(linter.lintDocument, linter));
+  context.subscriptions.push(vscode.workspace.onDidChangeTextDocument(event => linter.lintDocument(event.document)));
+
+  // Dispose of the linter when the extension is deactivated
+  context.subscriptions.push({
+      dispose: () => linter.dispose()
+  });
 
   context.subscriptions.push(
     vscode.languages.registerHoverProvider("lcc", {

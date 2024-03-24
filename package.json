@@ -28,6 +28,13 @@
       "extensions": [".bin", ".a"],
       "configuration": "./language-configuration.json"
     }],
+    "languageserver": {
+      "assembly": {
+        "command": "node",
+        "args": ["./out/server.js"],
+        "filetypes": ["a"]
+      }
+    },
     "grammars": [{
       "language": "lcc",
       "scopeName": "source.lcc",
