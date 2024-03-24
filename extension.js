@@ -2,6 +2,7 @@ const vscode = require("vscode");
 const AssemblyLinter = require('./src/AssemblyLinter');
 const fs = require("fs");
 const path = require("path");
+const { Location, Position, Range } = require('vscode');
 
 function checkIfLineIsInLanguageRegex(languageDict, document, position) {
   const line = document.lineAt(position);
@@ -256,6 +257,33 @@ function activate(context) {
       },
     })
   );
+
+  // add the ability to go to the label definition
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'lcc' }, new LabelDefinitionProvider()));
+}
+
+// class that enables the ability to go to the label definition
+class LabelDefinitionProvider {
+    provideDefinition(document, position, token) {
+      const wordRange = document.getWordRangeAtPosition(position);
+      const word = document.getText(wordRange);
+      const text = document.getText();
+      const lines = text.split('\n');
+      const regex = /^([a-zA-Z_$@][a-zA-Z0-9_$@]*):?[\\s]*|^[\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*):[\s]*/;
+
+      for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const match = line.match(regex);
+          if (match && (match[1] === word || match[2] === word)) {
+              const start = new Position(i, 0);
+              const end = new Position(i, line.length);
+              const range = new Range(start, end);
+              return new Location(document.uri, range);
+          }
+      }
+
+      return null;
+  }
 }
 
 // This method is called when your extension is deactivated
