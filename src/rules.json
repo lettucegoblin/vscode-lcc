@@ -3,49 +3,49 @@
         {
             "name": "bad register for dout",
             "pattern": "dout[ ]*(\\w*)",
-            "validPattern": "fp|sp|lr|r[0-7]|^$",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'dout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for mov",
             "pattern": "mov[ ]+\\w+[, ]+(\\S+)",
-            "validPattern": "fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'.'",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad 3rd operand for add",
             "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+(\\S+)",
-            "validPattern": "fp|sp|lr|r[0-7]|-?\\d+",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad operand for push",
             "pattern": "push[ ]+(\\S+)",
-            "validPattern": "fp|sp|lr|r[0-7]",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad operand for pop",
             "pattern": "pop[ ]+(\\S+)",
-            "validPattern": "fp|sp|lr|r[0-7]",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'pop' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
-            "name": "bad operands for .word directive",
+            "name": "bad opernds for .word directive",
             "pattern": "\\.word[ ]+(\\S+)",
-            "validPattern": "-?\\d+|0x[a-fA-F0-9]+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad label",
-            "pattern": "(^\\S+)",
-            "validPattern": "^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?$",
+            "pattern": "(^[ ]+\\S+:|^\\S+)",
+            "validPattern": "([ ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
             "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
         }
