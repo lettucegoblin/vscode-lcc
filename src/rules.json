@@ -2,9 +2,30 @@
     "rules": [
         {
             "name": "bad register for dout",
-            "pattern": "(?<!;.* )dout[ ]*(\\w*)",
-            "validFollowers": ["r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "fp", "sp", "lr", ""],
-            "message": "'dout' must be followed by r0, r1, r2, r3, r4, r5, r6, r7, fp, sp, lr or nothing, but got '{follower}'",
+            "pattern": "dout[ ]*(\\w*)",
+            "validPattern": "fp|sp|lr|r[0-7]|^$",
+            "message": "'dout' must be followed by a valid register or nothing, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov",
+            "pattern": "mov[ ]+\\w+[, ]+(\\S+)",
+            "validPattern": "fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'.'",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 3rd operand for add",
+            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+(\\S+)",
+            "validPattern": "fp|sp|lr|r[0-7]|-?\\d+",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operands for push",
+            "pattern": "push[ ]+(\\w+)",
+            "validPattern": "fp|sp|lr|r[0-7]",
+            "message": "The operand of 'push' must be a valid register, but got '{follower}'",
             "severity": "Error"
         }
     ]
