@@ -23,16 +23,30 @@
         },
         {
             "name": "bad operand for push",
-            "pattern": "push[ ]+(\\w+)",
+            "pattern": "push[ ]+(\\S+)",
             "validPattern": "fp|sp|lr|r[0-7]",
             "message": "The operand of 'push' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad operand for pop",
-            "pattern": "pop[ ]+(\\w+)",
+            "pattern": "pop[ ]+(\\S+)",
             "validPattern": "fp|sp|lr|r[0-7]",
             "message": "The operand of 'pop' must be a valid register, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operands for .word directive",
+            "pattern": "\\.word[ ]+(\\S+)",
+            "validPattern": "-?\\d+|0x[a-fA-F0-9]+|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad label",
+            "pattern": "(^\\S+)",
+            "validPattern": "^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?$",
+            "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
         }
     ]
