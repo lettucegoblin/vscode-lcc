@@ -22,10 +22,17 @@
             "severity": "Error"
         },
         {
-            "name": "bad operands for push",
+            "name": "bad operand for push",
             "pattern": "push[ ]+(\\w+)",
             "validPattern": "fp|sp|lr|r[0-7]",
             "message": "The operand of 'push' must be a valid register, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for pop",
+            "pattern": "pop[ ]+(\\w+)",
+            "validPattern": "fp|sp|lr|r[0-7]",
+            "message": "The operand of 'pop' must be a valid register, but got '{follower}'",
             "severity": "Error"
         }
     ]
