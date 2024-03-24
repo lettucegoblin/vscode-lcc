@@ -1,8 +1,8 @@
 {
     "rules": [
         {
-            "name": "dout",
-            "pattern": "dout[ ]*(\\w*)",
+            "name": "bad register for dout",
+            "pattern": "(?<!;.* )dout[ ]*(\\w*)",
             "validFollowers": ["r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "fp", "sp", "lr", ""],
             "message": "'dout' must be followed by r0, r1, r2, r3, r4, r5, r6, r7, fp, sp, lr or nothing, but got '{follower}'",
             "severity": "Error"
