@@ -58,7 +58,8 @@
         },
         {
             "name": "bad mnemonic2",
-            "pattern": "^\\S+[ ]+([^:\\s;]+)",
+            "_COMMENT": "captures mnemonic after a colon terminating label",
+            "pattern": "^[^\\s;]+:[ ]*([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 2' '{follower}'",
             "severity": "Error"
@@ -72,7 +73,7 @@
         },
         {
             "name": "bad mnemonic4",
-            "pattern": "^\\S+:(\\S+)",
+            "pattern": "^[^\\s;:]+[ ]+([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 4' '{follower}'",
             "severity": "Error"
