@@ -44,8 +44,8 @@ class AssemblyLinter {
                     }
 
                     const follower = match[1];
-                    const start = new vscode.Position(lineNumber, match.index);
-                    const end = new vscode.Position(lineNumber, match.index + match[0].length);
+                    const start = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower));
+                    const end = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower) + follower.length);
                     const range = new vscode.Range(start, end);
     
                     // Check if the line contains a semicolon before the match
@@ -55,7 +55,8 @@ class AssemblyLinter {
                     }
     
                     if (!validPattern.test(follower)) {
-                        const message = rule.message.replace('{follower}', follower);
+                        let message = rule.message.replace('{follower}', follower);
+                        // message += ` (${match[0]})`;
                         const severity = vscode.DiagnosticSeverity[rule.severity.toLowerCase()];
                         const diagnostic = new vscode.Diagnostic(range, message, this.severityStrToEnum(severity));
                         diagnostics.push(diagnostic);
