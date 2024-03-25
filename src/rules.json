@@ -44,7 +44,7 @@
         },
         {
             "name": "bad label",
-            "pattern": "(^[ ]+\\S+:|^\\S+)",
+            "pattern": "(^[ ]+[^;\\s:]+:|^[^;\\s:]+:?)",
             "validPattern": "([ ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
             "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
