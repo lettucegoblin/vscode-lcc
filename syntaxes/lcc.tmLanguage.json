@@ -93,6 +93,32 @@
 					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
 				},
 				{
+					"name": "entity.compute.effective.address.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(cea)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Compute Effective Address",
+					"description": "dr = frame pointer + imm5",
+					"syntax": "cea dr, imm5",
+					"_QUESTIONS": "Are the description and syntax fields correct?",
+					"_TODO": "fill in unknown fields w/ the values for addi for now, then validate correct w/ expert",
+					"explaination": "Similar to lea, but to load the address of a dynamic local variable. Assembled to the add instruction, with sr1 as fp.",
+					"flags_set": "???",
+					"binary_format": "???"
+				},
+				{
 					"name": "entity.subtract.immediate.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(sub)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
@@ -282,7 +308,7 @@
 				},
 				{
 					"name": "entity.branch.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(br|bral)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(br|bral)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -291,7 +317,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch Always",
@@ -411,7 +451,7 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(jmp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(jmp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)[, ]*(-?\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -421,6 +461,9 @@
 						},
 						"3": {
 							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
 						}
 					},
 					"descriptive_name": "Jump",
@@ -813,7 +856,7 @@
 				},
 				{
 					"name": "entity.move.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(mov|mvi)[ ]+(r[0-7]|fp|sp|lr)[, ]+((0x[a-zA-Z\\d]{2}|-?(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('.'))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(mov|mvi)[ ]+(r[0-7]|fp|sp|lr)[, ]+((0x[a-zA-Z\\d]{2}|-?(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('\\\\?.'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1066,7 +1109,7 @@
 				{
 					"name": "entity.directive.word.assembly.lcc",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label, followed by optional offsets",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.word|.fill)[ ]+((0x[a-fA-F\\d]{4}|6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(.word|.fill)[ ]+((0x[a-fA-F\\d]{4}|6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|('\\\\?.')|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[ ]*([*+-]{0,2})[ ]*(\\d+)?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1125,7 +1168,7 @@
 				},
 				{
 					"name": "entity.load.effective.address.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)([ ]*([+-])[ ]*(\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1138,11 +1181,21 @@
 						},
 						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Load Effective Address",
 					"description": "dr = pc + pcoffset9",
-					"syntax": "lea dr, label",
+					"syntax": "lea dr, label (optional +/- offset)",
 					"explaination": "The LEA instruction is used to load the effective address of a label into a register. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The effective address is then loaded into the destination register.",
 					"flags_set": "",
 					"binary_format": "1110 dr(3) pcoffset9[(1) (4) (4)]"
@@ -1339,7 +1392,7 @@
 				},
 				{
 					"name": "entity.branch.and.link.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(bl|call|jsr)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(bl|call|jsr)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)([ ]*([+-])[ ]*(\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1349,6 +1402,16 @@
 						},
 						"3": {
 							"name": "meta.preprocessor"
+						},
+						"4": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"5":{
+							"name":"keyword.operator"
+						},
+						"6":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch and Link",
@@ -1391,7 +1454,7 @@
 				},
 				{
 					"name": "entity.branch.not.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brnz|brne)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brnz|brne)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1400,7 +1463,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Not Zero",
@@ -1412,7 +1489,7 @@
 				},
 				{
 					"name": "entity.branch.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brz|bre)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brz|bre)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1421,7 +1498,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Zero",
@@ -1434,7 +1525,7 @@
 				},
 				{
 					"name": "entity.branch.negative.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brn)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brn)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1443,7 +1534,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Negative",
@@ -1456,7 +1561,7 @@
 				},
 				{
 					"name": "entity.branch.positive.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brp)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brp)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1465,7 +1570,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Positive",
@@ -1478,7 +1597,7 @@
 				},
 				{
 					"name": "entity.branch.less.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brlt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brlt)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1487,7 +1606,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Less Than in Signed Comparison",
@@ -1500,7 +1633,7 @@
 				},
 				{
 					"name": "entity.branch.greater.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brgt)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brgt)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1509,7 +1642,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Greater Than in Signed Comparison",
@@ -1522,7 +1669,7 @@
 				},
 				{
 					"name": "entity.branch.on.carry.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brc|brb)[\\s]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?[\\s]*|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\s]*|^[\\s]*)(brc|brb)[\\s]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([ ]*([*\\-+]{2})[ ]*(\\d+)))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1531,7 +1678,21 @@
 							"name": "entity.name.function.assembly.lcc"
 						},
 						"3": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Branch on Carry or Branch on Below",
