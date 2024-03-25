@@ -2,7 +2,7 @@
     "rules": [
         {
             "name": "bad register for dout",
-            "pattern": "dout[ ]*(\\w*)",
+            "pattern": "dout[ ]*('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'dout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
@@ -16,7 +16,7 @@
         },
         {
             "name": "bad 3rd operand for add",
-            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+(\\S+)",
+            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+('..+'|\".*\"|[^:\\s;']+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}'",
             "severity": "Error"
@@ -30,14 +30,14 @@
         },
         {
             "name": "bad operand for push",
-            "pattern": "push[ ]+(\\S+)",
+            "pattern": "push[ ]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad operand for pop",
-            "pattern": "pop[ ]+(\\S+)",
+            "pattern": "pop[ ]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'pop' must be a valid register, but got '{follower}'",
             "severity": "Error"
@@ -83,6 +83,14 @@
             "pattern": "^[^\\s;:]+[ ]+([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 4' '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operands for cea",
+            "pattern": "cea[ ]+\\w+[, ]+(\\S+)",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got '{follower}'",
             "severity": "Error"
         }
 
