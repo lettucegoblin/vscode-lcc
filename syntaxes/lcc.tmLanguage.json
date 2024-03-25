@@ -93,6 +93,32 @@
 					"binary_format": "0001 dr(3) sr1(3) 1 imm5"
 				},
 				{
+					"name": "entity.compute.effective.address.assembly.lcc",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(cea)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(-?\\d+)",
+					"captures": {
+						"1": {
+							"name": "meta.preprocessor"
+						},
+						"2": {
+							"name": "entity.name.function.assembly.lcc"
+						},
+						"3": {
+							"name": "keyword"
+						},
+						"4": {
+							"name": "constant.numeric"
+						}
+					},
+					"descriptive_name": "Compute Effective Address",
+					"description": "dr = frame pointer + imm5",
+					"syntax": "cea dr, imm5",
+					"_QUESTIONS": "Are the description and syntax fields correct?",
+					"_TODO": "fill in unknown fields w/ the values for addi for now, then validate correct w/ expert",
+					"explaination": "Similar to lea, but to load the address of a dynamic local variable. Assembled to the add instruction, with sr1 as fp.",
+					"flags_set": "???",
+					"binary_format": "???"
+				},
+				{
 					"name": "entity.subtract.immediate.assembly.lcc",
 					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(sub)[\\s]+(r[0-7]|fp|sp|lr)[, ]+(r[0-7]|fp|sp|lr)[, ]+(-16|-?1[0-5]|-?[1-9]|0)",
 					"captures": {
