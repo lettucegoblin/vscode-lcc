@@ -9,7 +9,7 @@
         },
         {
             "name": "bad 2nd operand for mov",
-            "pattern": "mov[ ]+\\w+[, ]+(\\S+)",
+            "pattern": "mov[ ]+\\w+[, ]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}'",
             "severity": "Error"
