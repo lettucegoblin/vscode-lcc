@@ -1151,7 +1151,7 @@
 				},
 				{
 					"name": "entity.load.effective.address.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\s]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\s]*)?[\\s]+(lea)[, ]+(r[0-9])[, ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)([ ]*([+-])[ ]*(\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1164,11 +1164,21 @@
 						},
 						"4": {
 							"name": "meta.preprocessor"
+						},
+						"5": {
+							"name": "",
+							"_COMMENT": "this is to be left blank intentionally"
+						},
+						"6":{
+							"name":"keyword.operator"
+						},
+						"7":{
+							"name":"constant.numeric"
 						}
 					},
 					"descriptive_name": "Load Effective Address",
 					"description": "dr = pc + pcoffset9",
-					"syntax": "lea dr, label",
+					"syntax": "lea dr, label (optional +/- offset)",
 					"explaination": "The LEA instruction is used to load the effective address of a label into a register. The effective address is calculated by adding the Program Counter (PC) to the 9-bit offset field. The offset field is sign-extended to 16 bits and added to the PC to form the effective address. The effective address is then loaded into the destination register.",
 					"flags_set": "",
 					"binary_format": "1110 dr(3) pcoffset9[(1) (4) (4)]"
