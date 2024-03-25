@@ -51,14 +51,14 @@
         },
         {
             "name": "bad label",
-            "pattern": "(^[ ]+[^;\\s:]+:|^[^;\\s:]+:?)",
-            "validPattern": "([ ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
+            "pattern": "^[ ]+([^;\\s:]+:|^[^;\\s:]+:?)",
+            "validPattern": "([a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
             "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
         },
         {
             "name": "bad mnemonic1",
-            "pattern": "^[ ]+\\S+:[ ]*(\\S+)",
+            "pattern": "^[ ]+[^:\\s;]+:[ ]*([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 1' '{follower}'",
             "severity": "Error"
