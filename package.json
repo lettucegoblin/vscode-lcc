@@ -28,6 +28,21 @@
       "extensions": [".bin", ".a"],
       "configuration": "./language-configuration.json"
     }],
+    "configuration": {
+      "title": "LCC Assembly",
+      "properties": {
+        "lccAssembly.enableErrorUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable error underlining in LCC Assembly files"
+        },
+        "lccAssembly.enableWarningUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable warning underlining in LCC Assembly files"
+        }
+      }
+    },
     "languageserver": {
       "assembly": {
         "command": "node",
