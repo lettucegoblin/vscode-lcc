@@ -22,6 +22,13 @@
             "severity": "Error"
         },
         {
+            "name": "out of range 3rd operand for add",
+            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+(-?\\d+|'.')",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "'add' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}'",
+            "severity": "Warning"
+        },
+        {
             "name": "bad operand for push",
             "pattern": "push[ ]+(\\S+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
