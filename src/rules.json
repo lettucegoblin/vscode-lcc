@@ -48,6 +48,35 @@
             "validPattern": "([ ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
             "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
+        },
+        {
+            "name": "bad mnemonic1",
+            "pattern": "^[ ]+\\S+:[ ]*(\\S+)",
+            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
+            "message": "Invalid mnemonic '1' '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad mnemonic2",
+            "pattern": "^\\S+[ ]+([^:\\s;]+)",
+            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
+            "message": "Invalid mnemonic '2' '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad mnemonic3",
+            "pattern": "^[\\s]+((?![^:\\s;]+:)[^:\\s;]+|^)",
+            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
+            "message": "Invalid mnemonic '3' '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad mnemonic4",
+            "pattern": "^\\S+:(\\S+)",
+            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
+            "message": "Invalid mnemonic '4' '{follower}'",
+            "severity": "Error"
         }
+
     ]
 }
