@@ -56,8 +56,7 @@ class AssemblyLinter {
     
                     if (!validPattern.test(follower)) {
                         let message = rule.message.replace('{follower}', follower);
-                        // message += ` (${match[0]})`;
-                        const severity = vscode.DiagnosticSeverity[rule.severity.toLowerCase()];
+                        const severity = rule.severity.toLowerCase();
                         const diagnostic = new vscode.Diagnostic(range, message, this.severityStrToEnum(severity));
                         diagnostics.push(diagnostic);
                     }
