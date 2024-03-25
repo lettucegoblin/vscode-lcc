@@ -52,29 +52,29 @@
         {
             "name": "bad mnemonic1",
             "pattern": "^[ ]+\\S+:[ ]*(\\S+)",
-            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
-            "message": "Invalid mnemonic '1' '{follower}'",
+            "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
+            "message": "Invalid mnemonic or directive 'code 1' '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad mnemonic2",
             "pattern": "^\\S+[ ]+([^:\\s;]+)",
-            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
-            "message": "Invalid mnemonic '2' '{follower}'",
+            "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
+            "message": "Invalid mnemonic or directive 'code 2' '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad mnemonic3",
             "pattern": "^[\\s]+((?![^:\\s;]+:)[^:\\s;]+|^)",
-            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
-            "message": "Invalid mnemonic '3' '{follower}'",
+            "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
+            "message": "Invalid label, mnemonic, or directive 'code 3' '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad mnemonic4",
             "pattern": "^\\S+:(\\S+)",
-            "validPattern": "(mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp)",
-            "message": "Invalid mnemonic '4' '{follower}'",
+            "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
+            "message": "Invalid mnemonic or directive 'code 4' '{follower}'",
             "severity": "Error"
         }
 
