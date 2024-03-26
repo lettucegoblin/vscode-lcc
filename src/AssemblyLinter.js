@@ -23,12 +23,43 @@ class AssemblyLinter {
         }
     }
 
+
+    toggleErrorUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableErrorUnderlining = config.get('enableErrorUnderlining');
+        config.update('enableErrorUnderlining', !enableErrorUnderlining, true);
+    }
+
+    toggleWarningUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableWarningUnderlining = config.get('enableWarningUnderlining');
+        config.update('enableWarningUnderlining', !enableWarningUnderlining, true);
+    }
+
+    lintCurrentDocument() {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            this.clearDiagnostics();
+            this.lintDocument(editor.document);
+            
+        }
+    }
+
+    clearDiagnostics() {
+        this.diagnosticCollection.clear();
+    }
+
     lintDocument(document) {
         // Check if the document is an LCC document
         if (document.languageId !== 'lcc') {
             // This is not an LCC document, so we don't need to lint it
             return;
         }
+
+        // Check if error and warning underlining are enabled
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableErrorUnderlining = config.get('enableErrorUnderlining');
+        const enableWarningUnderlining = config.get('enableWarningUnderlining');
 
         const diagnostics = [];
         const lines = document.getText().split('\n');
@@ -62,9 +93,12 @@ class AssemblyLinter {
     
                     if (!validPattern.test(follower)) {
                         let message = rule.message.replace('{follower}', follower);
-                        const severity = rule.severity.toLowerCase();
-                        const diagnostic = new vscode.Diagnostic(range, message, this.severityStrToEnum(severity));
-                        diagnostics.push(diagnostic);
+                        const severity = this.severityStrToEnum(rule.severity.toLowerCase());
+                        const diagnostic = new vscode.Diagnostic(range, message, severity);
+                        if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
+                            (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining)) {
+                            diagnostics.push(diagnostic);
+                        }
                     }
                 }
             });

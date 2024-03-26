@@ -3,12 +3,13 @@
   "publisher": "lettucegoblin",
   "displayName": "LCC-Tools",
   "description": "LCC syntax highlighting (Dos Reis version of LCC)",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "icon": "images/golden.png",
-  "keywords":[
+  "keywords": [
     "lcc",
     "lcc-tools",
-    "syntax highlighting"],
+    "syntax highlighting"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/lettucegoblin/vscode-lcc.git"
@@ -22,24 +23,63 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "languages": [{
-      "id": "lcc",
-      "aliases": ["LCC", "lcc"],
-      "extensions": [".bin", ".a"],
-      "configuration": "./language-configuration.json"
-    }],
+    "commands": [
+      {
+        "command": "lcc.toggleErrorLinting",
+        "title": "LCC: Toggle Error Linting"
+      },
+      {
+        "command": "lcc.toggleWarningLinting",
+        "title": "LCC: Toggle Warning Linting"
+      }
+    ],
+    "languages": [
+      {
+        "id": "lcc",
+        "aliases": [
+          "LCC",
+          "lcc"
+        ],
+        "extensions": [
+          ".bin",
+          ".a"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "configuration": {
+      "title": "LCC Assembly",
+      "properties": {
+        "lccAssembly.enableErrorUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable error underlining in LCC Assembly files"
+        },
+        "lccAssembly.enableWarningUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable warning underlining in LCC Assembly files"
+        }
+      }
+    },
     "languageserver": {
       "assembly": {
         "command": "node",
-        "args": ["./out/server.js"],
-        "filetypes": ["a"]
+        "args": [
+          "./out/server.js"
+        ],
+        "filetypes": [
+          "a"
+        ]
       }
     },
-    "grammars": [{
-      "language": "lcc",
-      "scopeName": "source.lcc",
-      "path": "./syntaxes/lcc.tmLanguage.json"
-    }]
+    "grammars": [
+      {
+        "language": "lcc",
+        "scopeName": "source.lcc",
+        "path": "./syntaxes/lcc.tmLanguage.json"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
