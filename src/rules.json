@@ -99,6 +99,20 @@
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got '{follower}'",
             "severity": "Error"
+        },
+        {
+            "name": "bad .string operand",
+            "pattern": "\\.string[,\\s]+('.*'|-?\\d+|[a-zA-Z_@?][a-zA-Z0-9_@?]*)",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a string, but got '{follower}': 'code 5'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad .string operand (not a correctly formatted string)",
+            "pattern": "\\.string[,\\s]+([^\\s;]+)(?:(?:[ ;]+$)|(?:$))",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a valid string, but got '{follower}': 'code 6'",
+            "severity": "Error"
         }
 
     ]
