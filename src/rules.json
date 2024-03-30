@@ -8,6 +8,27 @@
             "severity": "Error"
         },
         {
+            "name": "bad register for aout",
+            "pattern": "aout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
+            "message": "'aout' must be followed by a valid register or nothing, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad register for hout",
+            "pattern": "hout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
+            "message": "'hout' must be followed by a valid register or nothing, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad register for sout",
+            "pattern": "sout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
+            "message": "'sout' must be followed by a valid register or nothing, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
             "name": "bad 2nd operand for mov",
             "pattern": "mov[ ]+\\w+[, ]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
