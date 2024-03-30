@@ -50,6 +50,20 @@
             "severity": "Warning"
         },
         {
+            "name": "bad 3rd operand for sub",
+            "pattern": "sub[ ]+\\w+[, ]+\\w+[, ]+('..+'|\".*\"|[^:\\s;']+)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
+            "message": "The 3rd operand of 'sub' must be a valid register or an integer, but got '{follower}'",
+            "severity": "Error"
+        },
+        {
+            "name": "out of range 3rd operand for sub",
+            "pattern": "sub[ ]+\\w+[, ]+\\w+[, ]+(-?\\d+|'\\\\?.')",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "'sub' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}'",
+            "severity": "Warning"
+        },
+        {
             "name": "bad operand for push",
             "pattern": "push[ ]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
