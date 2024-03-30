@@ -50,10 +50,17 @@
             "severity": "Error"
         },
         {
-            "name": "bad label",
-            "pattern": "^[ ]+([^;\\s:]+:|^[^;\\s:]+:?)",
-            "validPattern": "([a-zA-Z_@$][a-zA-Z0-9_@$]*:|^[a-zA-Z_@$][a-zA-Z0-9_@$]*:?)",
-            "message": "Invalid label '{follower}', labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
+            "name": "bad label at line start",
+            "pattern": "^([^;\\s:]+:?)",
+            "validPattern": "[a-zA-Z_@$][a-zA-Z0-9_@$]*:?",
+            "message": "Invalid label '{follower}' found at line start. Labels cannot begin with a number and must contain only letters, numbers, '_', '$', and '@'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad label not at line start",
+            "pattern": "^\\s+([^;\\s:]+:)",
+            "validPattern": "[a-zA-Z_@$][a-zA-Z0-9_@$]*:",
+            "message": "Invalid label '{follower}' found not at line start. Non-start labels must end with a colon, cannot begin with a number, and must contain only letters, numbers, '_', '$', and '@'",
             "severity": "Error"
         },
         {
