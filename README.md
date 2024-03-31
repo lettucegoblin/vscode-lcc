@@ -7,9 +7,15 @@ The Low Cost Computer is made by Anthony J. Dos Reis for his [textbook](https://
 - **.a** - Assembly files
 - more to be added
 
+## Toggle on Error/Warning Checking(Off by default)
+1. Open command palette(Ctrl-Shift-P)
+2. select ```LCC: Toggle Error Linting``` or
+3. select ```LCC: Toggle Warning Linting```
+
 ## Assembly Code Features
 - **Syntax Highlighting**
 - **Hover Information**
+- **Error/Warning Checking**
 ## Machine Code Features(At the moment)
 - **Syntax Highlighting**
 - **Hover Information**

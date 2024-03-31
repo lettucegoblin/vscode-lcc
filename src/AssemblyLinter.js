@@ -23,6 +23,32 @@ class AssemblyLinter {
         }
     }
 
+
+    toggleErrorUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableErrorUnderlining = config.get('enableErrorUnderlining');
+        config.update('enableErrorUnderlining', !enableErrorUnderlining, true);
+    }
+
+    toggleWarningUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableWarningUnderlining = config.get('enableWarningUnderlining');
+        config.update('enableWarningUnderlining', !enableWarningUnderlining, true);
+    }
+
+    lintCurrentDocument() {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            this.clearDiagnostics();
+            this.lintDocument(editor.document);
+            
+        }
+    }
+
+    clearDiagnostics() {
+        this.diagnosticCollection.clear();
+    }
+
     lintDocument(document) {
         // Check if the document is an LCC document
         if (document.languageId !== 'lcc') {

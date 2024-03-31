@@ -260,6 +260,24 @@ function activate(context) {
 
   // add the ability to go to the label definition
   context.subscriptions.push(vscode.languages.registerDefinitionProvider({ scheme: 'file', language: 'lcc' }, new LabelDefinitionProvider()));
+
+  // add the ability to toggle the linter warnings/errors
+  context.subscriptions.push(vscode.commands.registerCommand('lcc.toggleErrorLinting', () => {
+    linter.toggleErrorUnderlining()
+    linter.clearDiagnostics();
+    // delay the linting so that the underlining can be toggled
+    setTimeout(() => {
+      vscode.workspace.textDocuments.forEach(linter.lintDocument, linter);
+    }, 200);
+  }));
+
+  context.subscriptions.push(vscode.commands.registerCommand('lcc.toggleWarningLinting', () => {
+    linter.toggleWarningUnderlining()
+    linter.clearDiagnostics();
+    setTimeout(() => {
+      vscode.workspace.textDocuments.forEach(linter.lintDocument, linter);
+    }, 200);
+  }));
 }
 
 // class that enables the ability to go to the label definition
