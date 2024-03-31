@@ -137,16 +137,23 @@
         },
         {
             "name": "bad .string operand",
-            "pattern": "\\.string[,\\s]+('.*'|-?\\d+|[a-zA-Z_@?][a-zA-Z0-9_@?]*)",
-            "validPattern": "^(\".*\")$",
-            "message": "The operand of '.string' must be a string, but got '{follower}': 'code 5'",
+            "pattern": "\\.string[\\s]+('.*'|-?\\d+|[a-zA-Z_@?][a-zA-Z0-9_@?]*)",
+            "validPattern": "^(\\\"(?:[^\"\\\\\\n]|\\\\.)*\\\")$",
+            "message": "The operand of '.string' must be a string (encapsulated with double quotes), but got '{follower}': 'code 5'",
             "severity": "Error"
         },
         {
             "name": "bad .string operand (not a correctly formatted string)",
-            "pattern": "\\.string[,\\s]+([^\\s;]+)(?:(?:[ ;]+$)|(?:$))",
-            "validPattern": "^(\".*\")$",
-            "message": "The operand of '.string' must be a valid string, but got '{follower}': 'code 6'",
+            "pattern": "\\.string[\\s]+(\\\".*\\\")",
+            "validPattern": "^(\\\"(?:[^\"\\\\\\n]|\\\\.)*\\\")$",
+            "message": "The operand of '.string' must be a valid string, but got '{follower}'. Maybe you are missing an escape slash '\\'? 'code 6'",
+            "severity": "Error"
+        },
+        {
+            "name": "non-terminated strings",
+            "pattern": "\\.string\\s*(\"[^\"\\s]*)(?:(?:(?:[;\\s]*)*$)|(?:[^\\S]*;))",
+            "validPattern": "^(p)$",
+            "message": "The string '{follower}' is not correctly closed with a double quote.",
             "severity": "Error"
         }
 
