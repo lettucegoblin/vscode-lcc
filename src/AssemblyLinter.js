@@ -50,9 +50,9 @@ class AssemblyLinter {
     }
 
     lintDocument(document) {
-        // Check if the document is an LCC document
-        if (document.languageId !== 'lcc') {
-            // This is not an LCC document, so we don't need to lint it
+        // Check if the document is an LCC document and whether it has the correct file extension
+        if (document.languageId !== 'lcc' || path.extname(document.uri.fsPath) !== '.a') {
+            // This is not an LCC document and/or it's not an assembly file, so we don't need to lint it
             return;
         }
 
