@@ -2,84 +2,84 @@
     "rules": [
         {
             "name": "bad register for dout",
-            "pattern": "dout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "dout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'dout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for aout",
-            "pattern": "aout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "aout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'aout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for hout",
-            "pattern": "hout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "hout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'hout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for sout",
-            "pattern": "sout[ ]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "sout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'sout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for mov",
-            "pattern": "mov[ ]+\\w+[, ]+('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "mov[\\s]+\\w+[,\\s]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad 3rd operand for add",
-            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+('..+'|\".*\"|[^:\\s;']+)",
+            "pattern": "add[\\s]+\\w+[,\\s]+\\w+[,\\s]+('..+'|\".*\"|[^:\\s;']+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "out of range 3rd operand for add",
-            "pattern": "add[ ]+\\w+[, ]+\\w+[, ]+(-?\\d+|'\\\\?.')",
+            "pattern": "add[\\s]+\\w+[,\\s]+\\w+[,\\s]+(-?\\d+|'\\\\?.')",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "'add' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}'",
             "severity": "Warning"
         },
         {
             "name": "bad 3rd operand for sub",
-            "pattern": "sub[ ]+\\w+[, ]+\\w+[, ]+('..+'|\".*\"|[^:\\s;']+)",
+            "pattern": "sub[\\s]+\\w+[,\\s]+\\w+[,\\s]+('..+'|\".*\"|[^:\\s;']+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'sub' must be a valid register or an integer, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "out of range 3rd operand for sub",
-            "pattern": "sub[ ]+\\w+[, ]+\\w+[, ]+(-?\\d+|'\\\\?.')",
+            "pattern": "sub[\\s]+\\w+[,\\s]+\\w+[,\\s]+(-?\\d+|'\\\\?.')",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "'sub' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}'",
             "severity": "Warning"
         },
         {
             "name": "bad operand for push",
-            "pattern": "push[ ]+('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "push[\\s]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad operand for pop",
-            "pattern": "pop[ ]+('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "pop[\\s]+('.*'|\".*\"|[^:\\s;]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'pop' must be a valid register, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad opernds for .word directive",
-            "pattern": "\\.word[ ]+(\\S+)",
+            "pattern": "\\.word[\\s]+(\\S+)",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label, but got '{follower}'",
             "severity": "Error"
@@ -100,7 +100,7 @@
         },
         {
             "name": "bad mnemonic1",
-            "pattern": "^[ ]+[^:\\s;]+:[ ]*([^:\\s;]+)",
+            "pattern": "^[ ]+[^:\\s;]+:[\\s]*([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 1' '{follower}'",
             "severity": "Error"
@@ -108,7 +108,7 @@
         {
             "name": "bad mnemonic2",
             "_COMMENT": "captures mnemonic after a colon terminating label",
-            "pattern": "^[^\\s;]+:[ ]*([^:\\s;]+)",
+            "pattern": "^[^\\s;]+:[\\s]*([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 2' '{follower}'",
             "severity": "Error"
@@ -122,14 +122,14 @@
         },
         {
             "name": "bad mnemonic4",
-            "pattern": "^[^\\s;:]+[ ]+([^:\\s;]+)",
+            "pattern": "^[^\\s;:]+[\\s]+([^:\\s;]+)",
             "validPattern": "(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)",
             "message": "Invalid mnemonic or directive 'code 4' '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operands for cea",
-            "pattern": "cea[ ]+\\w+[, ]+(\\S+)",
+            "pattern": "cea[ ]+\\w+[,\\s]+(\\S+)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got '{follower}'",
