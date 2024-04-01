@@ -151,9 +151,9 @@
         },
         {
             "name": "non-terminated strings",
-            "pattern": "\\.string\\s*(\"[^\"\\s]*)(?:(?:(?:[;\\s]*)*$)|(?:[^\\S]*;))",
-            "validPattern": "^(p)$",
-            "message": "The string '{follower}' is not correctly closed with a double quote.",
+            "pattern": "\\.string\\s+((?:'''|\"\"\"|'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*'|\"[^\"\\n\\\\]*(?:\\\\.[^\"\\n\\\\]*)*\"|\\w+\"|\\w+'|\"\\w+|'\\w+|\\w+|-?\\d+|[^;\\n ]*?)*)",
+            "validPattern": "^(\".*\")$",
+            "message": "The string '{follower}' is not correctly closed with a double quote. 'code 7'",
             "severity": "Error"
         }
 
