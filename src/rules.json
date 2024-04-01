@@ -78,9 +78,9 @@
             "severity": "Error"
         },
         {
-            "name": "bad opernds for .word directive",
-            "pattern": "\\.word[\\s]+(\\S+)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
+            "name": "bad operand for .word directive",
+            "pattern": "\\.word[\\s]+('.*'|\\\".*\\\"|'?\\w+'?)(?:(?:[ ;\\n])|$)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label, but got '{follower}'",
             "severity": "Error"
         },
