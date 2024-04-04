@@ -138,6 +138,7 @@
         {
             "name": "bad .string operand",
             "pattern": "\\.string[\\s]+('.*'|-?\\d+|[a-zA-Z_@?][a-zA-Z0-9_@?]*)",
+            "_COMMENT": "in version 1.1.4, the above pattern grabs non-terminated strings as well, because they look the same as labels",
             "validPattern": "^(\\\"(?:[^\"\\\\\\n]|\\\\.)*\\\")$",
             "message": "The operand of '.string' must be a string (encapsulated with double quotes), but got '{follower}': 'code 5'",
             "severity": "Error"
