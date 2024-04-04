@@ -151,7 +151,8 @@
         },
         {
             "name": "non-terminated strings",
-            "pattern": "\\.string\\s+((?:'''|\"\"\"|'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*'|\"[^\"\\n\\\\]*(?:\\\\.[^\"\\n\\\\]*)*\"|\\w+\"|\\w+'|\"\\w+|'\\w+|\\w+|-?\\d+|[^;\\n ]*?)*)",
+            "pattern": "\\.string\\s+((?:\"[^\"\\n\\\\]*(?:\\\\.[^\"\\n\\\\]*)*\"|[^\\s]+\"|\"[\\S]+))",
+            "_TEST_THIS_FURTHER": "\\.string\\s+((?:'''|\"\"\"|'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*'|\"[^\"\\n\\\\]*(?:\\\\.[^\"\\n\\\\]*)*\"|\\w+\"|\\w+'|\"\\w+|'\\w+|\\w+|-?\\d+|[^;\\n ]*?)*)",
             "validPattern": "^(\".*\")$",
             "message": "The string '{follower}' is not correctly closed with a double quote. 'code 7'",
             "severity": "Error"
