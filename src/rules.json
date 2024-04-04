@@ -2,28 +2,28 @@
     "rules": [
         {
             "name": "bad register for dout",
-            "pattern": "dout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "dout[\\t ]*((?:'[^ \\t\\n;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\s;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'dout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for aout",
-            "pattern": "aout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "aout[\\t ]*((?:'[^ \\t\\n;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\s;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'aout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for hout",
-            "pattern": "hout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "hout[\\t ]*((?:'[^ \\t\\n;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\s;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'hout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
         },
         {
             "name": "bad register for sout",
-            "pattern": "sout[\\s]*('.*'|\".*\"|[^:\\s;]+)",
+            "pattern": "sout[\\t ]*((?:'[^ \\t\\n;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\s;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "'sout' must be followed by a valid register or nothing, but got '{follower}'",
             "severity": "Error"
