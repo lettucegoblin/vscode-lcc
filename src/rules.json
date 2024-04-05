@@ -29,10 +29,45 @@
             "severity": "Error"
         },
         {
-            "name": "bad 2nd operand for mov",
-            "pattern": "mov[\\s]+\\w+[,\\s]+('.*'|\".*\"|[^:\\s;]+)",
+            "name": "bad 2nd operand for mov (string)",
+            "pattern": "mov[\\t ]+\\w+[, \\t]+((?:\"[^\"\\n\\\\]*(?:\\\\.[^\"\\n\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
-            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}'",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 8'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov (char)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\\\]*(?:\\\\.[^'\\n\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|'')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 9'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov (int)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(-?\\d+\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 10'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov (hexadecimal)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 11'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov (non-number-starting catch-all)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 12'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for mov (number-starting catch-all)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got '{follower}' 'code 13'",
             "severity": "Error"
         },
         {
