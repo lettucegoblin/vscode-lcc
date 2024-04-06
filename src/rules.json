@@ -171,26 +171,47 @@
             "severity": "Error"
         },
         {
-            "name": "bad .string operand",
-            "pattern": "\\.string[\\t ]+('.*'|-?\\d+|[a-zA-Z_@?][a-zA-Z0-9_@?]*)",
+            "name": "bad operand for .string directive (string)",
+            "pattern": "\\.string[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
+            "_TODO": "validate that this is fixed in version 1.1.5",
             "_COMMENT": "in version 1.1.4, the above pattern grabs non-terminated strings as well, because they look the same as labels",
             "validPattern": "^(\\\"(?:[^\"\\\\\\n\\r]|\\\\.)*\\\")$",
-            "message": "The operand of '.string' must be a string (encapsulated with double quotes), but got '{follower}': 'code 5'",
+            "message": "The operand of '.string' must be a valid string (double-quote encapsulated), but got '{follower}'. Maybe you are missing an escape slash '\\' or a starting or closing double quote? 'code 5'",
             "severity": "Error"
         },
         {
-            "name": "bad .string operand (not a correctly formatted string)",
-            "pattern": "\\.string[\\t ]+(\\\".*\\\")",
-            "validPattern": "^(\\\"(?:[^\"\\\\\\n\\r]|\\\\.)*\\\")$",
-            "message": "The operand of '.string' must be a valid string, but got '{follower}'. Maybe you are missing an escape slash '\\'? 'code 6'",
-            "severity": "Error"
-        },
-        {
-            "name": "non-terminated strings",
-            "pattern": "\\.string\\t +((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ]+\"|\"[\\S]+))",
-            "_TEST_THIS_FURTHER": "\\.string\\t +((?:'''|\"\"\"|'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|\\w+\"|\\w+'|\"\\w+|'\\w+|\\w+|-?\\d+|[^;\\n\\r ]*?)*)",
+            "name": "bad operand for string directive (char)",
+            "pattern": "\\.string[\\t ]+((?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t\\n\\r ;]+))",
             "validPattern": "^(\".*\")$",
-            "message": "The string '{follower}' is not correctly closed with a double quote. 'code 7'",
+            "message": "The operand of '.string' must be a string, but got single-quote encapsulated '{follower}'. 'code 6'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for string directive (int)",
+            "pattern": "\\.string[\\t ]+(-?\\d+\\b)",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a string, but got integer '{follower}'. 'code 7'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .string directive (hexadecimal)",
+            "pattern": "\\.string[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a string, but got hexadecimal '{follower}'. 'code 14'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .string directive (non-number-starting catch-all)",
+            "pattern": "\\.string[\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a string, but got '{follower}' 'code 15'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .string direcive (number-starting catch-all)",
+            "pattern": "\\.string[\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(\".*\")$",
+            "message": "The operand of '.string' must be a string, but got '{follower}' 'code 16'",
             "severity": "Error"
         }
 
