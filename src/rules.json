@@ -1,21 +1,21 @@
 {
     "rules": [
         {
-            "name": "bad register for dout/aout/hout/sout (string)",
+            "name": "bad register for dout/aout/hout/sout (string, valid or invalid)",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 24)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (int)",
+            "name": "bad register for dout/aout/hout/sout (integer)",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+(-?\\d+\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 25)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (char)",
+            "name": "bad register for dout/aout/hout/sout (char, valid or invalid)",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 26)",
