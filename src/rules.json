@@ -1,45 +1,51 @@
 {
     "rules": [
         {
-            "name": "bad register for dout/aout/hout/sout (string, valid or invalid)",
+            "name": "bad register for out mnemonics (string, valid or invalid)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 24)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 24)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (integer)",
+            "name": "bad register for out mnemonics (integer)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+(-?\\d+\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 25)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 25)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (char, valid or invalid)",
+            "name": "bad register for out mnemonics (char, valid or invalid)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 26)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 26)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (hexadecimal)",
+            "name": "bad register for out mnemonics (hexadecimal)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]+\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 27)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 27)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (non-number-starting catch-all)",
+            "name": "bad register for out mnemonics (non-number-starting catch-all)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 28)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 28)",
             "severity": "Error"
         },
         {
-            "name": "bad register for dout/aout/hout/sout (number-starting catch-all)",
+            "name": "bad register for out mnemonics (number-starting catch-all)",
+            "_COMMENT": "note that this pattern also captures errors for udout",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 29)",
+            "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 29)",
             "severity": "Error"
         },
         {
