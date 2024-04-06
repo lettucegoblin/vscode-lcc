@@ -230,12 +230,51 @@
             "severity": "Error"
         },
         {
-            "name": "bad 2nd operand for cea",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(\\S+)",
-            "_TODO": "add different arg type rules for cea (string, int, hexadecimal, char, number-starting catch-all, non-number-starting catch-all)",
+            "name": "bad 2nd operand for cea (string, valid or invalid)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
-            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower}",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 39)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for cea (char, valid or invalid)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 40)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for cea (integer)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(-?\\d+)\\b",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 41)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for cea (hexadecimal)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 42)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for cea (non-number-starting catch-all)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 43)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 2nd operand for cea (number-starting catch-all)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
+            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 44)",
             "severity": "Error"
         },
         {
