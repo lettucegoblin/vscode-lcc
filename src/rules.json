@@ -1,31 +1,45 @@
 {
     "rules": [
         {
-            "name": "bad register for dout",
-            "pattern": "dout[\\t ]*((?:'[^ \\t\\n\\r;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n\\r]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\t ;]+))\\b",
+            "name": "bad register for dout/aout/hout/sout (string)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "'dout' must be followed by a valid register or nothing, but got {follower}",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 24)",
             "severity": "Error"
         },
         {
-            "name": "bad register for aout",
-            "pattern": "aout[\\t ]*((?:'[^ \\t\\n\\r;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n\\r]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\t ;]+))\\b",
+            "name": "bad register for dout/aout/hout/sout (int)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(-?\\d+\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "'aout' must be followed by a valid register or nothing, but got {follower}",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 25)",
             "severity": "Error"
         },
         {
-            "name": "bad register for hout",
-            "pattern": "hout[\\t ]*((?:'[^ \\t\\n\\r;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n\\r]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\t ;]+))\\b",
+            "name": "bad register for dout/aout/hout/sout (char)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "'hout' must be followed by a valid register or nothing, but got {follower}",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 26)",
             "severity": "Error"
         },
         {
-            "name": "bad register for sout",
-            "pattern": "sout[\\t ]*((?:'[^ \\t\\n\\r;]+)|(?:'(?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*)'|\\\"(?:[^\\\"\\\\\\n\\r]*(?:\\\\.[^\\\"\\\\]*)*)\\\"|[^\\t ;]+))\\b",
+            "name": "bad register for dout/aout/hout/sout (hexadecimal)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]+\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
-            "message": "'sout' must be followed by a valid register or nothing, but got {follower}",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 27)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad register for dout/aout/hout/sout (non-number-starting catch-all)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 28)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad register for dout/aout/hout/sout (number-starting catch-all)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
+            "message": "dout/aout/hout/sout must be followed by a valid register or nothing, but got {follower} (code 29)",
             "severity": "Error"
         },
         {
