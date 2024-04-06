@@ -135,17 +135,45 @@
             "severity": "Error"
         },
         {
-            "name": "bad operand for push",
-            "pattern": "push[\\t ]+('.*'|\".*\"|[^:\\t ;]+\\b)",
+            "name": "bad operand for push/pop (string, valid or invalid)",
+            "pattern": "(?:push|pop)[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
-            "message": "The operand of 'push' must be a valid register, but got {follower}",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 30)",
             "severity": "Error"
         },
         {
-            "name": "bad operand for pop",
-            "pattern": "pop[\\t ]+('.*'|\".*\"|[^:\\t ;]+\\b)",
+            "name": "bad operand for push/pop (char, valid or invalid)",
+            "pattern": "(?:push|pop)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
-            "message": "The operand of 'pop' must be a valid register, but got {follower}",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 31)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for push/pop (integer)",
+            "pattern": "(?:push|pop)[\\t ]+(-?\\d+)\\b",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 32)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for push/pop (hexadecimal)",
+            "pattern": "(?:push|pop)[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 33)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for push/pop (non-number-starting catch-all)",
+            "pattern": "(?:push|pop)[\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 34)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for push/pop (number-starting catch-all)",
+            "pattern": "(?:push|pop)[\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7])$",
+            "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 35)",
             "severity": "Error"
         },
         {
