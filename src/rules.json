@@ -71,21 +71,57 @@
             "severity": "Error"
         },
         {
-            "name": "bad 3rd operand for add",
-            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('..+'|\".*\"|[^:\\t ;']+)\\b",
+            "name": "bad 3rd operand for add (string)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
-            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}'",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}' 'code 23'",
             "severity": "Error"
         },
         {
-            "name": "out of range 3rd operand for add",
-            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(-?\\d+|'\\\\?.')",
+            "name": "out of range 3rd operand for add (int)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(-?\\d+)\\b",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
-            "message": "'add' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}'",
+            "message": "'add' expects for its 3rd operand an 'immediate5' number between -16 and 15 (inclusive), but got '{follower}' 'code 17'",
             "severity": "Warning"
         },
         {
+            "name": "out of range 3rd operand for add (valid char)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'))",
+            "validPattern": "^((?:''')|(?:\\'(?:[^'\\\\\\n\\r]|\\\\.){0,2}\\')(?!'))$",
+            "message": "'add' expects for its 3rd operand an 'immediate5' number, but got {follower}, which looks like a char. 'code 18'",
+            "severity": "Warning"
+        },
+        {
+            "name": "bad 3rd operand for add (non-terminated char)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+([^\\t ';]+'|'[^\\t\\n\\r' ;]+(?![']))",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}' 'code 19'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 3rd operand for add (hexadecimal)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}' 'code 20'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 3rd operand for add (non-number-starting catch-all)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+((?:(?!(0x[;]+|[-?\\d]+)))(?!.*['\"])[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}' 'code 21'",
+            "severity": "Error"
+        },
+        {
+            "name": "bad 3rd operand for add (number-starting catch-all)",
+            "pattern": "add[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+((?!0x)[\\d]+[\\w]+[^'\" \\t]*[^\\n\\r\"'; \\t])",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
+            "message": "The 3rd operand of 'add' must be a valid register or an integer, but got '{follower}' 'code 22'",
+            "severity": "Error"
+        },
+        {
             "name": "bad 3rd operand for sub",
+            "_TODO": "implement the variations of this rule for different types (string, int, hex, char, & 2 catch-alls)",
             "pattern": "sub[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('..+'|\".*\"|[^:\\t ;']+)\\b",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'sub' must be a valid register or an integer, but got '{follower}'",
