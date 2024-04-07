@@ -63,6 +63,7 @@ class AssemblyLinter {
 
         const diagnostics = [];
         const lines = document.getText().split('\n');
+        const text = document.getText(); // for multi-line rules
     
         // Load the linting rules from the JSON file
         const rulesPath = path.join(__dirname, 'rules.json');
@@ -72,6 +73,7 @@ class AssemblyLinter {
             const regex = new RegExp(rule.pattern, 'g');
             const validPattern =  new RegExp(`^${rule.validPattern}$`);
     
+            // validate the current rule for each line
             lines.forEach((lineText, lineNumber) => {
                 let match;
     
@@ -102,6 +104,32 @@ class AssemblyLinter {
                     }
                 }
             });
+
+            // validate multi-line rules for the current file
+            let match;
+            while (match = regex.exec(text)) {
+            if (match[0] === '') {
+                break;
+            }
+
+            const follower = match[1];
+            const startOffset = match.index + match[0].lastIndexOf(follower);
+            const endOffset = startOffset + follower.length;
+            const start = document.positionAt(startOffset);
+            const end = document.positionAt(endOffset);
+            const range = new vscode.Range(start, end);
+
+            if (!validPattern.test(follower)) {
+                let message = rule.message.replace('{follower}', follower);
+                const severity = this.severityStrToEnum(rule.severity.toLowerCase());
+                const diagnostic = new vscode.Diagnostic(range, message, severity);
+                if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
+                    (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining)) {
+                    diagnostics.push(diagnostic);
+                }
+            }
+        }
+
         }
     
         this.diagnosticCollection.set(document.uri, diagnostics);
