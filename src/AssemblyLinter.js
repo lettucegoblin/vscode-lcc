@@ -81,8 +81,8 @@ class AssemblyLinter {
                     }
 
                     const follower = match[1];
-                    const start = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower));
-                    const end = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower) + follower.length);
+                    const start = new vscode.Position(lineNumber, match.index + match[0].lastIndexOf(follower));
+                    const end = new vscode.Position(lineNumber, match.index + match[0].lastIndexOf(follower) + follower.length);
                     const range = new vscode.Range(start, end);
     
                     // Check if the line contains a semicolon before the match
