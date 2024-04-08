@@ -74,7 +74,7 @@ class AssemblyLinter {
             const validPattern =  new RegExp(`^${rule.validPattern}$`);
 
 
-            if(rule.multiLine === "true") {
+            if (rule.multiline === 'true') {
                 // validate multi-line rules for the current file
                 let match;
                 while (match = regex.exec(text)) {
