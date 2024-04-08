@@ -330,7 +330,7 @@
             "pattern": "(?:(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
             "message": "The 'push lr' instruction must be used to save the link register before a function call, but got {follower} (code 45)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -338,7 +338,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'push fp' instruction must be used to save the frame pointer before a function call, but got {follower} (code 46)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -346,7 +346,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+(\\w+)[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'mov fp, sp' instruction must be used to set the frame pointer before a function call, but got {follower} (code 47)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -354,7 +354,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+(\\w+))[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
             "message": "The 'mov fp, sp' instruction must be used to set the frame pointer before a function call, but got {follower} (code 48)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -362,7 +362,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+(\\w+)[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
             "message": "The 'mov sp, fp' instruction must be used to restore the stack pointer after a function call, but got {follower} (code 49)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -370,7 +370,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'mov sp, fp' instruction must be used to restore the stack pointer after a function call, but got {follower} (code 50)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -378,7 +378,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'pop fp' instruction must be used to restore the frame pointer after a function call, but got {follower} (code 51)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         },
         {
@@ -386,7 +386,7 @@
             "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
             "message": "The 'pop lr' instruction must be used to restore the link register after a function call, but got {follower} (code 52)",
-            "severity": "Warning",
+            "severity": "Information",
             "multiline": "true"
         }
     ]

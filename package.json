@@ -59,6 +59,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable warning underlining in LCC Assembly files"
+        },
+        "lccAssembly.enableInformationUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable information underlining in LCC Assembly files"
         }
       }
     },

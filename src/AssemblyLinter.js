@@ -14,7 +14,7 @@ class AssemblyLinter {
                 return vscode.DiagnosticSeverity.Error;
             case 'warning':
                 return vscode.DiagnosticSeverity.Warning;
-            case 'info':
+            case 'information':
                 return vscode.DiagnosticSeverity.Information;
             case 'hint':
                 return vscode.DiagnosticSeverity.Hint;
@@ -34,6 +34,12 @@ class AssemblyLinter {
         const config = vscode.workspace.getConfiguration('lccAssembly');
         const enableWarningUnderlining = config.get('enableWarningUnderlining');
         config.update('enableWarningUnderlining', !enableWarningUnderlining, true);
+    }
+
+    toggleInformationUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableInformationUnderlining = config.get('enableInformationUnderlining');
+        config.update('enableInformationUnderlining', !enableInformationUnderlining, true);
     }
 
     lintCurrentDocument() {
@@ -56,10 +62,11 @@ class AssemblyLinter {
             return;
         }
 
-        // Check if error and warning underlining are enabled
+        // Check if error, warning, and/or information underlining are enabled
         const config = vscode.workspace.getConfiguration('lccAssembly');
         const enableErrorUnderlining = config.get('enableErrorUnderlining');
         const enableWarningUnderlining = config.get('enableWarningUnderlining');
+        const enableInformationUnderlining = config.get('enableInformationUnderlining');
 
         const diagnostics = [];
         const lines = document.getText().split('\n');
@@ -94,7 +101,9 @@ class AssemblyLinter {
                         const severity = this.severityStrToEnum(rule.severity.toLowerCase());
                         const diagnostic = new vscode.Diagnostic(range, message, severity);
                         if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
-                            (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining)) {
+                            (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining) 
+                            || (severity === vscode.DiagnosticSeverity.Information && enableInformationUnderlining)
+                            ) {
                             diagnostics.push(diagnostic);
                         }
                     }
@@ -125,7 +134,9 @@ class AssemblyLinter {
                             const severity = this.severityStrToEnum(rule.severity.toLowerCase());
                             const diagnostic = new vscode.Diagnostic(range, message, severity);
                             if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
-                                (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining)) {
+                                (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining) 
+                                || (severity === vscode.DiagnosticSeverity.Information && enableInformationUnderlining)
+                                ) {
                                 diagnostics.push(diagnostic);
                             }
                         }
