@@ -278,6 +278,14 @@ function activate(context) {
       vscode.workspace.textDocuments.forEach(linter.lintDocument, linter);
     }, 200);
   }));
+
+  context.subscriptions.push(vscode.commands.registerCommand('lcc.toggleInformationLinting', () => {
+    linter.toggleInformationUnderlining()
+    linter.clearDiagnostics();
+    setTimeout(() => {
+      vscode.workspace.textDocuments.forEach(linter.lintDocument, linter);
+    }, 200);
+  }));
 }
 
 // class that enables the ability to go to the label definition

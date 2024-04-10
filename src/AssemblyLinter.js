@@ -14,7 +14,7 @@ class AssemblyLinter {
                 return vscode.DiagnosticSeverity.Error;
             case 'warning':
                 return vscode.DiagnosticSeverity.Warning;
-            case 'info':
+            case 'information':
                 return vscode.DiagnosticSeverity.Information;
             case 'hint':
                 return vscode.DiagnosticSeverity.Hint;
@@ -34,6 +34,12 @@ class AssemblyLinter {
         const config = vscode.workspace.getConfiguration('lccAssembly');
         const enableWarningUnderlining = config.get('enableWarningUnderlining');
         config.update('enableWarningUnderlining', !enableWarningUnderlining, true);
+    }
+
+    toggleInformationUnderlining() {
+        const config = vscode.workspace.getConfiguration('lccAssembly');
+        const enableInformationUnderlining = config.get('enableInformationUnderlining');
+        config.update('enableInformationUnderlining', !enableInformationUnderlining, true);
     }
 
     lintCurrentDocument() {
@@ -56,52 +62,87 @@ class AssemblyLinter {
             return;
         }
 
-        // Check if error and warning underlining are enabled
+        // Check if error, warning, and/or information underlining are enabled
         const config = vscode.workspace.getConfiguration('lccAssembly');
         const enableErrorUnderlining = config.get('enableErrorUnderlining');
         const enableWarningUnderlining = config.get('enableWarningUnderlining');
+        const enableInformationUnderlining = config.get('enableInformationUnderlining');
 
         const diagnostics = [];
         const lines = document.getText().split('\n');
+        const text = document.getText(); // for multi-line rules
     
         // Load the linting rules from the JSON file
         const rulesPath = path.join(__dirname, 'rules.json');
         const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8')).rules;
     
         for (const rule of rules) {
-            const regex = new RegExp(rule.pattern, 'g');
+            const regex = new RegExp(rule.pattern, 'gd');
             const validPattern =  new RegExp(`^${rule.validPattern}$`);
-    
-            lines.forEach((lineText, lineNumber) => {
+
+
+            if (rule.multiline === 'true') {
+                // validate multi-line rules for the current file
                 let match;
-    
-                while (match = regex.exec(lineText)) {
+                while (match = regex.exec(text)) {
                     if (match[0] === '') {
                         break;
                     }
 
                     const follower = match[1];
-                    const start = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower));
-                    const end = new vscode.Position(lineNumber, match.index + match[0].indexOf(follower) + follower.length);
+                    const startOffset = match.indices[1][0];
+                    const endOffset = match.indices[1][1];
+                    const start = document.positionAt(startOffset);
+                    const end = document.positionAt(endOffset);
                     const range = new vscode.Range(start, end);
-    
-                    // Check if the line contains a semicolon before the match
-                    const commentIndex = lineText.indexOf(';');
-                    if (commentIndex !== -1 && commentIndex < start.character) {
-                        continue;
-                    }
-    
+
                     if (!validPattern.test(follower)) {
                         let message = rule.message.replace('{follower}', follower);
                         const severity = this.severityStrToEnum(rule.severity.toLowerCase());
                         const diagnostic = new vscode.Diagnostic(range, message, severity);
                         if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
-                            (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining)) {
+                            (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining) 
+                            || (severity === vscode.DiagnosticSeverity.Information && enableInformationUnderlining)
+                            ) {
                             diagnostics.push(diagnostic);
                         }
                     }
                 }
-            });
+            } else {
+                // validate the current rule for each line
+                lines.forEach((lineText, lineNumber) => {
+                    let match;
+        
+                    while (match = regex.exec(lineText)) {
+                        if (match[0] === '') {
+                            break;
+                        }
+
+                        const follower = match[1];
+                        const start = new vscode.Position(lineNumber, match.index + match[0].lastIndexOf(follower));
+                        const end = new vscode.Position(lineNumber, match.index + match[0].lastIndexOf(follower) + follower.length);
+                        const range = new vscode.Range(start, end);
+        
+                        // Check if the line contains a semicolon before the match
+                        const commentIndex = lineText.indexOf(';');
+                        if (commentIndex !== -1 && commentIndex < start.character) {
+                            continue;
+                        }
+        
+                        if (!validPattern.test(follower)) {
+                            let message = rule.message.replace('{follower}', follower);
+                            const severity = this.severityStrToEnum(rule.severity.toLowerCase());
+                            const diagnostic = new vscode.Diagnostic(range, message, severity);
+                            if ((severity === vscode.DiagnosticSeverity.Error && enableErrorUnderlining) ||
+                                (severity === vscode.DiagnosticSeverity.Warning && enableWarningUnderlining) 
+                                || (severity === vscode.DiagnosticSeverity.Information && enableInformationUnderlining)
+                                ) {
+                                diagnostics.push(diagnostic);
+                            }
+                        }
+                    }
+                });
+            }
         }
     
         this.diagnosticCollection.set(document.uri, diagnostics);

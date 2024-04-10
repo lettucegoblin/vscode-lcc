@@ -3,7 +3,7 @@
   "publisher": "lettucegoblin",
   "displayName": "LCC-Tools",
   "description": "LCC syntax highlighting (Dos Reis version of LCC)",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "icon": "images/golden.png",
   "keywords": [
     "lcc",
@@ -59,6 +59,11 @@
           "type": "boolean",
           "default": false,
           "description": "Enable warning underlining in LCC Assembly files"
+        },
+        "lccAssembly.enableInformationUnderlining": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable information underlining in LCC Assembly files"
         }
       }
     },
