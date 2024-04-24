@@ -451,7 +451,7 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(jmp)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)[,\\t ]*(-?\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(jmp)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)[,\\t ]*(-?\\d+)?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
