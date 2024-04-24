@@ -19,7 +19,7 @@
         {
             "name": "bad register for out mnemonics (char, valid or invalid)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 26)",
             "severity": "Error"
@@ -57,7 +57,7 @@
         },
         {
             "name": "bad 2nd operand for mov (char, valid or invalid)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|'')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 9)",
             "severity": "Error"
@@ -149,7 +149,7 @@
         },
         {
             "name": "bad operand for push/pop (char, valid or invalid)",
-            "pattern": "(?:push|pop)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "(?:push|pop)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 31)",
             "severity": "Error"
@@ -183,7 +183,7 @@
             "severity": "Error"
         },
         {
-            "name": "bad operand for .word directive (valid string or invalid string)", ////
+            "name": "bad operand for .word directive (valid string or invalid string)",
             "pattern": "\\.word[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 36)",
@@ -245,7 +245,7 @@
         },
         {
             "name": "bad 2nd operand for cea (char, valid or invalid)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "cea[ ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 40)",
@@ -292,7 +292,7 @@
         },
         {
             "name": "bad operand for string directive (char)",
-            "pattern": "\\.string[\\t ]+((?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t\\n\\r ;]+))",
+            "pattern": "\\.string[\\t ]+((?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t\\n\\r ;]+))",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got {follower}. Perhaps you are using single quotes instead of double quotes? (code 6)",
             "severity": "Error"
@@ -398,7 +398,7 @@
         },
         {
             "name": "bad operand for .word directive (valid char or invalid char)",
-            "pattern": "\\.word[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "\\.word[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 54)",
             "severity": "Error"
