@@ -43,7 +43,7 @@
         {
             "name": "bad register for out mnemonics (number-starting catch-all)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 29)",
             "severity": "Error"
@@ -85,7 +85,7 @@
         },
         {
             "name": "bad 2nd operand for mov (number-starting catch-all)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 13)",
             "severity": "Error"
@@ -135,7 +135,7 @@
         },
         {
             "name": "bad 3rd operand for add/sub (number-starting catch-all)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 22)",
             "severity": "Error"
@@ -177,7 +177,7 @@
         },
         {
             "name": "bad operand for push/pop (number-starting catch-all)",
-            "pattern": "(?:push|pop)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:push|pop)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 35)",
             "severity": "Error"
@@ -277,7 +277,7 @@
         },
         {
             "name": "bad 2nd operand for cea (number-starting catch-all)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 44)",
@@ -320,7 +320,7 @@
         },
         {
             "name": "bad operand for .string direcive (number-starting catch-all)",
-            "pattern": "\\.string[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "\\.string[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got {follower} (code 16)",
             "severity": "Error"
@@ -426,7 +426,7 @@
         },
         {
             "name": "bad operand for .word directive (number-starting catch-all)",
-            "pattern": "\\.word[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "\\.word[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 58)",
             "severity": "Error"
