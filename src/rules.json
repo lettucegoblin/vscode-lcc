@@ -109,7 +109,7 @@
             "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'))",
             "_COMMENT": "There is no valid pattern for this rule, so the next line is intentionally blank",
             "validPattern": "^()$",
-            "message": "'add'/'sub' expect for their 3rd operand an 'immediate5' number, but got {follower}, which looks like a char. (code 18)",
+            "message": "'add'/'sub' expect for their 3rd operand a register or an 'immediate5' number, but got {follower}, which looks like a char. (code 18)",
             "severity": "Warning"
         },
         {
