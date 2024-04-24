@@ -27,7 +27,7 @@
         {
             "name": "bad register for out mnemonics (hexadecimal)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 27)",
             "severity": "Error"
@@ -71,8 +71,8 @@
         },
         {
             "name": "bad 2nd operand for mov (hexadecimal)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 11)",
             "severity": "Error"
         },
@@ -121,7 +121,7 @@
         },
         {
             "name": "bad 3rd operand for add/sub (hexadecimal)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[0]{0,3}[a-fA-F0-9]\\b)$",
             "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 20)",
             "severity": "Error"
@@ -163,7 +163,7 @@
         },
         {
             "name": "bad operand for push/pop (hexadecimal)",
-            "pattern": "(?:push|pop)[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "(?:push|pop)[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 33)",
             "severity": "Error"
@@ -261,7 +261,7 @@
         },
         {
             "name": "bad 2nd operand for cea (hexadecimal)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 42)",
@@ -306,7 +306,7 @@
         },
         {
             "name": "bad operand for .string directive (hexadecimal)",
-            "pattern": "\\.string[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "\\.string[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got hexadecimal {follower}. (code 14)",
             "severity": "Error"
@@ -412,8 +412,8 @@
         },
         {
             "name": "bad operand for .word directive (hexadecimal)",
-            "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]+\\b)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]*\\b)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 56)",
             "severity": "Error"
         },
