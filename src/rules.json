@@ -183,8 +183,8 @@
             "severity": "Error"
         },
         {
-            "name": "bad operand for .word directive",
-            "pattern": "\\.word[\\t ]+('.*'|\\\".*\\\"|'?\\w+'?)(?:(?:[ ;\\n\\r])|$)",
+            "name": "bad operand for .word directive (valid string or invalid string)", ////
+            "pattern": "\\.word[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 36)",
             "severity": "Error"
@@ -395,6 +395,41 @@
             "validPattern": "^()$",
             "message": "Line is too long (over 300 characters) (code 53)",
             "severity": "Warning"
+        },
+        {
+            "name": "bad operand for .word directive (valid char or invalid char)",
+            "pattern": "\\.word[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 54)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (integer)",
+            "pattern": "\\.word[\\t ]+(-?\\d+)\\b",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 55)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (hexadecimal)",
+            "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 56)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (non-number-starting catch-all)",
+            "pattern": "\\.word[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 57)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (number-starting catch-all)",
+            "pattern": "\\.word[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 58)",
+            "severity": "Error"
         }
     ]
 }
