@@ -185,7 +185,7 @@
         {
             "name": "bad operand for .word directive",
             "pattern": "\\.word[\\t ]+('.*'|\\\".*\\\"|'?\\w+'?)(?:(?:[ ;\\n\\r])|$)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 36)",
             "severity": "Error"
         },
