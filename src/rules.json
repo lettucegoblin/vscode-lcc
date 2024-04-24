@@ -388,6 +388,13 @@
             "message": "The 'pop lr' instruction must be used to restore the link register after a function call, but got {follower} (code 52)",
             "severity": "Information",
             "multiline": "true"
+        },
+        {
+            "name": "line too long",
+            "pattern": "^([^\\n\\r]{300,})$",
+            "validPattern": "^()$",
+            "message": "Line is too long (over 300 characters) (code 53)",
+            "severity": "Warning"
         }
     ]
 }
