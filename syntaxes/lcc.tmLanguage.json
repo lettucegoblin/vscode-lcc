@@ -64,9 +64,9 @@
 					"binary_format": "1100 111 111 offset6(6)"
 				},
 				{
-					"name": "add.immediate.assembly.lcc",
+					"name": "entity.add.immediate.assembly.lcc",
 					"_TODOS": "",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(add)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(add)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((?:0x[0]{0,3}[a-fA-F0-9])\\b|(?:-16|-?1[0-5]|-?[1-9]|0)\\b)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -120,7 +120,7 @@
 				},
 				{
 					"name": "entity.subtract.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(sub)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(-16|-?1[0-5]|-?[1-9]|0)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(sub)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((?:0x[0]{0,3}[a-fA-F0-9])\b|(?:-16|-?1[0-5]|-?[1-9]|0)\b)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -856,7 +856,7 @@
 				},
 				{
 					"name": "entity.move.immediate.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(mov|mvi)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((0x[a-zA-Z\\d]{2}|-?(1[0-9]{2}|2[0-4][0-9]|25[0-6]|[1-9][0-9]?|[1-9])|(2[0-4][0-9]|25[0-5]|1[0-9]{2}|[1-9][0-9]?|0|256))|('\\\\?.?'))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(mov|mvi)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((0x[a-zA-Z\\d]{1,4}|-256|-?(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?|0))\\b|('\\\\?.?'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -875,12 +875,6 @@
 							"name": "constant.numeric"
 						},
 						"6": {
-							"name": ""
-						},
-						"7": {
-							"name": ""
-						},
-						"8": {
 							"name": "constant.character"
 						}
 					},
