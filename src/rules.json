@@ -65,9 +65,9 @@
         {
             "name": "bad 2nd operand for mov (int)",
             "pattern": "mov[\\t ]+\\w+[,\\t ]+(-?\\d+\\b)",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
-            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 10)",
-            "severity": "Error"
+            "validPattern": "^(fp|sp|lr|r[0-7]|-256|-?(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?|0)|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 10). Watch out for unexpected number overflow.",
+            "severity": "Information"
         },
         {
             "name": "bad 2nd operand for mov (hexadecimal)",
