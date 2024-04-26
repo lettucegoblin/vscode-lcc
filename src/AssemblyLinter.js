@@ -77,12 +77,13 @@ class AssemblyLinter {
         const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8')).rules;
     
         for (const rule of rules) {
-            const regex = new RegExp(rule.pattern, 'gd');
+            let regex = new RegExp(rule.pattern, 'gd');
             const validPattern =  new RegExp(`^${rule.validPattern}$`);
 
 
             if (rule.multiline === 'true') {
                 // validate multi-line rules for the current file
+                regex = new RegExp(rule.pattern, 'gdm');
                 let match;
                 while (match = regex.exec(text)) {
                     if (match[0] === '') {
@@ -117,6 +118,7 @@ class AssemblyLinter {
                 }
             } else {
                 // validate the current rule for each line
+                regex = new RegExp(rule.pattern, 'gd');
                 lines.forEach((lineText, lineNumber) => {
                     let match;
         
