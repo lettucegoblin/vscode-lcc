@@ -96,6 +96,13 @@ class AssemblyLinter {
                     const end = document.positionAt(endOffset);
                     const range = new vscode.Range(start, end);
 
+                    // Check if the match is within a comment line
+                    const lineText = document.lineAt(start.line).text;
+                    const commentIndex = lineText.indexOf(';');
+                    if (commentIndex !== -1 && commentIndex < start.character) {
+                        continue;
+                    }
+
                     if (!validPattern.test(follower)) {
                         let message = rule.message.replace('{follower}', follower);
                         const severity = this.severityStrToEnum(rule.severity.toLowerCase());
