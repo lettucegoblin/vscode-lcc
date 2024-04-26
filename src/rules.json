@@ -263,8 +263,8 @@
             "name": "bad 2nd operand for cea (hexadecimal)",
             "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
-            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
-            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 42)",
+            "validPattern": "(0x[0]{0,3}[a-fA-F0-9]\\b)",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15 or hex 0-15, but got {follower} (code 42)",
             "severity": "Error"
         },
         {
