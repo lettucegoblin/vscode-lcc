@@ -327,7 +327,7 @@
         },
         {
             "name": "bad lr of push lr for function call",
-            "pattern": "(?:(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
             "message": "The 'push lr' instruction must be used to save the return point, but got {follower} (code 45)",
             "severity": "Information",
@@ -335,7 +335,7 @@
         },
         {
             "name": "bad fp of push fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'push fp' instruction must be used to save the previous frame of reference, but got {follower} (code 46)",
             "severity": "Information",
@@ -343,7 +343,7 @@
         },
         {
             "name": "bad fp of mov fp, sp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+(\\w+)[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+(\\w+)[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'mov fp, sp' instruction must be used to create a new frame of reference, but got {follower} (code 47)",
             "severity": "Information",
@@ -351,7 +351,7 @@
         },
         {
             "name": "bad sp of mov fp, sp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+(\\w+))[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+(\\w+))[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
             "message": "The 'mov fp, sp' instruction must be used to create a new frame of reference, but got {follower} (code 48)",
             "severity": "Information",
@@ -359,7 +359,7 @@
         },
         {
             "name": "bad sp of mov sp, fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+(\\w+)[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+(\\w+)[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
             "message": "The 'mov sp, fp' instruction must be used to deallocate memory and prime the return sequence, but got {follower} (code 49)",
             "severity": "Information",
@@ -367,7 +367,7 @@
         },
         {
             "name": "bad fp of mov sp, fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'mov sp, fp' instruction must be used to deallocate memory and prime the return sequence, but got {follower} (code 50)",
             "severity": "Information",
@@ -375,7 +375,7 @@
         },
         {
             "name": "bad fp of pop fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
             "message": "The 'pop fp' instruction must be used to restore the previous frame of reference, but got {follower} (code 51)",
             "severity": "Information",
@@ -383,7 +383,7 @@
         },
         {
             "name": "bad lr of pop lr for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "(?:(?:(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
             "message": "The 'pop lr' instruction must be used to restore the return point, but got {follower} (code 52)",
             "severity": "Information",
