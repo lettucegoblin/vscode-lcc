@@ -94,7 +94,7 @@
 				},
 				{
 					"name": "entity.compute.effective.address.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(cea)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(-?\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(cea)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((?:-?\\d+\\b)|(?:0x[0]{0,3}[a-fA-F0-9]\\b))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -106,6 +106,9 @@
 							"name": "keyword"
 						},
 						"4": {
+							"name": "constant.numeric"
+						},
+						"5": {
 							"name": "constant.numeric"
 						}
 					},
