@@ -57,8 +57,8 @@
         },
         {
             "name": "bad 2nd operand for mov (char, valid or invalid)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|'')$",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "^('(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 9)",
             "severity": "Error"
         },
