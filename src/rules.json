@@ -285,8 +285,8 @@
         },
         {
             "name": "bad operand for .string directive (string)",
-            "pattern": "\\.string[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
-            "validPattern": "^(\\\"(?:[^\"\\\\\\n\\r]|\\\\.)*\\\")$",
+            "pattern": "\\.string[\\t ]+(?:((?:\"(?:[^\"\\\\\\n\\r]|\\\\.)*\")|(?:\".*?[^\\\\\\t\\n\\r]\")|(?:\".*?[^\\t\\n\\r]\")|(?:\"[^\\t \"]+?)|(?:[^\\t \"]+?[^\\\\\\t\\n\\r]\")|(?:\")|(?:\"[^\\t \"]+?\"))(?:[\\n\\r\\t ;]|$))",
+            "validPattern": "^(\"(?:[^\"\\\\\\n\\r]|\\\\.)*\")$",
             "message": "The operand of '.string' must be a valid string (double-quote encapsulated), but got {follower}. Maybe you are missing an escape slash '\\' or a starting or closing double quote? (code 5)",
             "severity": "Error"
         },
@@ -414,7 +414,7 @@
             "name": "bad operand for .word directive (hexadecimal)",
             "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
-            "message": "The operand of '.word' must be an integer, hexadecimal (max of 4 digits), char, or label (w/ optional offset), but got {follower} (code 56)",
+            "message": "The operand of '.word' must be an integer, hexadecimal (max of 4 digits), char, or label (w/ optional offset), but got {follower} (code 56 \"bad hex\")",
             "severity": "Error"
         },
         {
