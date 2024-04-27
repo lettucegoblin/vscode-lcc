@@ -66,7 +66,7 @@
 				{
 					"name": "entity.add.immediate.assembly.lcc",
 					"_TODOS": "",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(add)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((?:0x[0]{0,3}[a-fA-F0-9])\\b|(?:-16|-?1[0-5]|-?[1-9]|0)\\b)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:?|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:|^[\\t ]*)?[\\t ]+(add)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((?:0x[0]{0,3}[a-fA-F0-9])\\b|(?:-16|-?1[0-5]|-?[1-9]|0)\\b|('\\\\?.'))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -82,6 +82,9 @@
 						},
 						"5": {
 							"name": "constant.numeric"
+						},
+						"6": {
+							"name": "constant.character"
 						}
 					},
 					"_match_comment": "start w/ 1 or more spaces, followed by add, followed by 1 or more spaces, followed by r0-r7, followed by 1 or more spaces or commas, followed by r0-r7, followed by 1 or more spaces or commas, followed by a number ranging from -16 to 15",
