@@ -105,11 +105,10 @@
             "severity": "Warning"
         },
         {
-            "name": "out of range 3rd operand for add/sub (valid char)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'))",
-            "_COMMENT": "There is no valid pattern for this rule, so the next line is intentionally blank",
-            "validPattern": "^()$",
-            "message": "'add'/'sub' expect for their 3rd operand a register or an 'immediate5' number, but got {follower}, which looks like a char. (code 18)",
+            "name": "out of range 3rd operand for add/sub (valid/invalid char)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "^('\\\\r'|'\\\\0')$",
+            "message": "'add'/'sub' expect for their 3rd operand a register or an 'immediate5' number, but got {follower}, which looks like a char that doesn't have a valid immediate5 value. (code 18)",
             "severity": "Warning"
         },
         {
@@ -391,8 +390,8 @@
         },
         {
             "name": "bad operand for .word directive (valid char or invalid char)",
-            "pattern": "\\.word[\\t ]+((?:'(?:\\\\\\\\|\\\\'|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
-            "validPattern": "('(?:\\\\\\\\|\\\\'|[^\\n\\r\\\\'])')",
+            "pattern": "\\.word[\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "('(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 54 \"bad char\")",
             "severity": "Error"
         },
