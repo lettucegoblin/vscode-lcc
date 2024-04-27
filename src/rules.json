@@ -2,7 +2,7 @@
     "rules": [
         {
             "name": "bad register for out mnemonics (string, valid or invalid)",
-            "_COMMENT": "note that this pattern also captures errors for udout",
+            "_COMMENT": "note that this pattern also captures errors for udout, available codes: code 19",
             "pattern": "(?:dout|aout|hout|sout)[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 24)",
