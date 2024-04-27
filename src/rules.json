@@ -422,6 +422,13 @@
             "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 58)",
             "severity": "Error"
+        },
+        {
+            "name": "out of range number for jmp mnemonic offset (int)",
+            "pattern": "jmp[\\t ]+(?:fp|sp|lr|r[0-7])[,\\t ]+(-?\\d+)\\b",
+            "validPattern": "(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b)",
+            "message": "The 2nd operand of 'jmp' must be an integer from -32 to 31, but got {follower} (code 19)",
+            "severity": "Warning"
         }
     ]
 }
