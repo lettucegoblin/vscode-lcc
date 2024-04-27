@@ -23,9 +23,9 @@ function checkForInLanguageRegexJson(binLanguageDict, assemblyLanguageDict, docu
   if(simpleCheck)
    console.log(text, position.e)
   if(!simpleCheck) {
-    const firstSemiColon = text.indexOf(";") - 1;
-    if (firstSemiColon > -1 && firstSemiColon < position.e) {
-      return null;
+    const firstSemiColon = text.indexOf(";");
+    if (firstSemiColon !== -1 && firstSemiColon <= position.character) {
+      return undefined;
     }
     if (text[position.e] == " ") return null;
   }
@@ -136,7 +136,7 @@ function checkForInLanguageRegexJson(binLanguageDict, assemblyLanguageDict, docu
     }
   }
 
-  return false;
+  return undefined;
 }
 
 function binaryStringToDecimal(binaryString) {

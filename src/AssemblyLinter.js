@@ -77,12 +77,13 @@ class AssemblyLinter {
         const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf8')).rules;
     
         for (const rule of rules) {
-            const regex = new RegExp(rule.pattern, 'gd');
+            let regex = new RegExp(rule.pattern, 'gd');
             const validPattern =  new RegExp(`^${rule.validPattern}$`);
 
 
             if (rule.multiline === 'true') {
                 // validate multi-line rules for the current file
+                regex = new RegExp(rule.pattern, 'gdm');
                 let match;
                 while (match = regex.exec(text)) {
                     if (match[0] === '') {
@@ -95,6 +96,13 @@ class AssemblyLinter {
                     const start = document.positionAt(startOffset);
                     const end = document.positionAt(endOffset);
                     const range = new vscode.Range(start, end);
+
+                    // Check if the match is within a comment line
+                    const lineText = document.lineAt(start.line).text;
+                    const commentIndex = lineText.indexOf(';');
+                    if (commentIndex !== -1 && commentIndex < start.character) {
+                        continue;
+                    }
 
                     if (!validPattern.test(follower)) {
                         let message = rule.message.replace('{follower}', follower);
@@ -110,6 +118,7 @@ class AssemblyLinter {
                 }
             } else {
                 // validate the current rule for each line
+                regex = new RegExp(rule.pattern, 'gd');
                 lines.forEach((lineText, lineNumber) => {
                     let match;
         

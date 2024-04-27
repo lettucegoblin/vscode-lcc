@@ -19,7 +19,7 @@
         {
             "name": "bad register for out mnemonics (char, valid or invalid)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 26)",
             "severity": "Error"
@@ -27,7 +27,7 @@
         {
             "name": "bad register for out mnemonics (hexadecimal)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 27)",
             "severity": "Error"
@@ -35,7 +35,7 @@
         {
             "name": "bad register for out mnemonics (non-number-starting catch-all)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 28)",
             "severity": "Error"
@@ -43,7 +43,7 @@
         {
             "name": "bad register for out mnemonics (number-starting catch-all)",
             "_COMMENT": "note that this pattern also captures errors for udout",
-            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:dout|aout|hout|sout)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|^$)$",
             "message": "out mnemonics must be followed by a valid register or nothing, but got {follower} (code 29)",
             "severity": "Error"
@@ -57,35 +57,35 @@
         },
         {
             "name": "bad 2nd operand for mov (char, valid or invalid)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.'|'')$",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "^('(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 9)",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for mov (int)",
             "pattern": "mov[\\t ]+\\w+[,\\t ]+(-?\\d+\\b)",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
-            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 10)",
-            "severity": "Error"
+            "validPattern": "^(fp|sp|lr|r[0-7]|-256|-?(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?|0)|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 10). Watch out for unexpected number overflow.",
+            "severity": "Information"
         },
         {
             "name": "bad 2nd operand for mov (hexadecimal)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 11)",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for mov (non-number-starting catch-all)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 12)",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for mov (number-starting catch-all)",
-            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "mov[\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[a-fA-F0-9]+|'\\\\?.')$",
             "message": "The 2nd operand of 'mov' must be a valid register, an integer, a hexadecimal number, or a single quote encapsulated char, but got {follower} (code 13)",
             "severity": "Error"
@@ -105,37 +105,29 @@
             "severity": "Warning"
         },
         {
-            "name": "out of range 3rd operand for add/sub (valid char)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'))",
-            "_COMMENT": "There is no valid pattern for this rule, so the next line is intentionally blank",
-            "validPattern": "^()$",
-            "message": "'add'/'sub' expect for their 3rd operand an 'immediate5' number, but got {follower}, which looks like a char. (code 18)",
+            "name": "out of range 3rd operand for add/sub (valid/invalid char)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "^('\\\\r'|'\\\\0')$",
+            "message": "'add'/'sub' expect for their 3rd operand a register or an 'immediate5' number, but got {follower}, which looks like a char that doesn't have a valid immediate5 value. (code 18)",
             "severity": "Warning"
         },
         {
-            "name": "bad 3rd operand for add/sub (non-terminated char)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+([^\\t ';]+'|'[^\\t\\n\\r' ;]+(?![']))",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
-            "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 19)",
-            "severity": "Error"
-        },
-        {
             "name": "bad 3rd operand for add/sub (hexadecimal)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
-            "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 20)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
+            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[0]{0,3}[a-fA-F0-9]\\b)$",
+            "message": "The 3rd operand of 'add'/'sub' must be a valid register, integer (-16 to 15), or hexadecimal (0 to f) but got {follower} (code 20 \"out of range or malformed hex\")",
             "severity": "Error"
         },
         {
             "name": "bad 3rd operand for add/sub (non-number-starting catch-all)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 21)",
             "severity": "Error"
         },
         {
             "name": "bad 3rd operand for add/sub (number-starting catch-all)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
             "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 22)",
             "severity": "Error"
@@ -149,7 +141,7 @@
         },
         {
             "name": "bad operand for push/pop (char, valid or invalid)",
-            "pattern": "(?:push|pop)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "(?:push|pop)[\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 31)",
             "severity": "Error"
@@ -163,30 +155,30 @@
         },
         {
             "name": "bad operand for push/pop (hexadecimal)",
-            "pattern": "(?:push|pop)[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "(?:push|pop)[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 33)",
             "severity": "Error"
         },
         {
             "name": "bad operand for push/pop (non-number-starting catch-all)",
-            "pattern": "(?:push|pop)[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "(?:push|pop)[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 34)",
             "severity": "Error"
         },
         {
             "name": "bad operand for push/pop (number-starting catch-all)",
-            "pattern": "(?:push|pop)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "(?:push|pop)[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(fp|sp|lr|r[0-7])$",
             "message": "The operand of 'push/pop' must be a valid register, but got {follower} (code 35)",
             "severity": "Error"
         },
         {
-            "name": "bad operand for .word directive",
-            "pattern": "\\.word[\\t ]+('.*'|\\\".*\\\"|'?\\w+'?)(?:(?:[ ;\\n\\r])|$)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[+-]?[-?\\d+]?)$",
-            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 36)",
+            "name": "bad operand for .word directive (valid string or invalid string)",
+            "pattern": "\\.word[\\t ]+(?:((?:\"(?:[^\"\\\\\\n\\r]|\\\\.)*\")|(?:\".*?[^\\\\\\t\\n\\r]\")|(?:\".*?[^\\t\\n\\r]\")|(?:\"[^\\t \"]+?)|(?:[^\\t \"]+?[^\\\\\\t\\n\\r]\")|(?:\")|(?:\"[^\\t \"]+?\"))(?:[\\n\\r\\t ;]|$))",
+            "validPattern": "^()$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower}, which looks like a string (code 36)",
             "severity": "Error"
         },
         {
@@ -245,7 +237,7 @@
         },
         {
             "name": "bad 2nd operand for cea (char, valid or invalid)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t ;]+))",
+            "pattern": "cea[ ]+\\w+[,\\t ]+('['\\\\]{1,2}'|(?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t ;]+))",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 40)",
@@ -261,15 +253,15 @@
         },
         {
             "name": "bad 2nd operand for cea (hexadecimal)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
-            "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
-            "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 42)",
+            "validPattern": "(0x[0]{0,3}[a-fA-F0-9]\\b)",
+            "message": "The 2nd operand of 'cea' must be a number from -16 to 15 or hex 0-15, but got {follower} (code 42)",
             "severity": "Error"
         },
         {
             "name": "bad 2nd operand for cea (non-number-starting catch-all)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 43)",
@@ -277,7 +269,7 @@
         },
         {
             "name": "bad 2nd operand for cea (number-starting catch-all)",
-            "pattern": "cea[ ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "cea[ ]+\\w+[,\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "_COMMENT": "cea takes as its 2nd operand a number from -16 up to 15",
             "validPattern": "(-1[0-6]|-[1-9]|0|1[0-5]|[1-9])",
             "message": "The 2nd operand of 'cea' must be a number from -16 to 15, but got {follower} (code 44)",
@@ -285,14 +277,14 @@
         },
         {
             "name": "bad operand for .string directive (string)",
-            "pattern": "\\.string[\\t ]+((?:\"[^\"\\n\\r\\\\]*(?:\\\\.[^\"\\n\\r\\\\]*)*\"|[^\\t ;]+\"|\"[^\\t\\n\\r ;]+))",
-            "validPattern": "^(\\\"(?:[^\"\\\\\\n\\r]|\\\\.)*\\\")$",
+            "pattern": "\\.string[\\t ]+(?:((?:\"(?:[^\"\\\\\\n\\r]|\\\\.)*\")|(?:\".*?[^\\\\\\t\\n\\r]\")|(?:\".*?[^\\t\\n\\r]\")|(?:\"[^\\t \"]+?)|(?:[^\\t \"]+?[^\\\\\\t\\n\\r]\")|(?:\")|(?:\"[^\\t \"]+?\"))(?:[\\n\\r\\t ;]|$))",
+            "validPattern": "^(\"(?:[^\"\\\\\\n\\r]|\\\\.)*\")$",
             "message": "The operand of '.string' must be a valid string (double-quote encapsulated), but got {follower}. Maybe you are missing an escape slash '\\' or a starting or closing double quote? (code 5)",
             "severity": "Error"
         },
         {
             "name": "bad operand for string directive (char)",
-            "pattern": "\\.string[\\t ]+((?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\\t ;]+'|'[^\\t\\n\\r ;]+))",
+            "pattern": "\\.string[\\t ]+((?:'[^'\\n\\r\\\\]*(?:\\\\.[^'\\n\\r\\\\]*)*'|[^\"\\t ;]+'|'[^\\t\\n\\r ;]+))",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got {follower}. Perhaps you are using single quotes instead of double quotes? (code 6)",
             "severity": "Error"
@@ -306,88 +298,137 @@
         },
         {
             "name": "bad operand for .string directive (hexadecimal)",
-            "pattern": "\\.string[\\t ]+(0x[a-fA-F0-9]+\\b)",
+            "pattern": "\\.string[\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got hexadecimal {follower}. (code 14)",
             "severity": "Error"
         },
         {
             "name": "bad operand for .string directive (non-number-starting catch-all)",
-            "pattern": "\\.string[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';\"\\t\\n\\r ]+)",
+            "pattern": "\\.string[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got {follower} (code 15)",
             "severity": "Error"
         },
         {
             "name": "bad operand for .string direcive (number-starting catch-all)",
-            "pattern": "\\.string[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';\"\\t\\n\\r ]+[^';\"\\t\\n\\r ]*)",
+            "pattern": "\\.string[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
             "validPattern": "^(\".*\")$",
             "message": "The operand of '.string' must be a string, but got {follower} (code 16)",
             "severity": "Error"
         },
         {
             "name": "bad lr of push lr for function call",
-            "pattern": "(?:(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
-            "message": "The 'push lr' instruction must be used to save the link register before a function call, but got {follower} (code 45)",
+            "message": "The 'push lr' instruction must be used to save the return point, but got {follower} (code 45)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad fp of push fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
-            "message": "The 'push fp' instruction must be used to save the frame pointer before a function call, but got {follower} (code 46)",
+            "message": "The 'push fp' instruction must be used to save the previous frame of reference, but got {follower} (code 46)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad fp of mov fp, sp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+(\\w+)[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+(\\w+)[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
-            "message": "The 'mov fp, sp' instruction must be used to set the frame pointer before a function call, but got {follower} (code 47)",
+            "message": "The 'mov fp, sp' instruction must be used to create a new frame of reference, but got {follower} (code 47)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad sp of mov fp, sp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+(\\w+))[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+(\\w+))[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
-            "message": "The 'mov fp, sp' instruction must be used to set the frame pointer before a function call, but got {follower} (code 48)",
+            "message": "The 'mov fp, sp' instruction must be used to create a new frame of reference, but got {follower} (code 48)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad sp of mov sp, fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+(\\w+)[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+(\\w+)[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(sp)$",
-            "message": "The 'mov sp, fp' instruction must be used to restore the stack pointer after a function call, but got {follower} (code 49)",
+            "message": "The 'mov sp, fp' instruction must be used to deallocate memory and prime the return sequence, but got {follower} (code 49)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad fp of mov sp, fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
-            "message": "The 'mov sp, fp' instruction must be used to restore the stack pointer after a function call, but got {follower} (code 50)",
+            "message": "The 'mov sp, fp' instruction must be used to deallocate memory and prime the return sequence, but got {follower} (code 50)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad fp of pop fp for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(fp)$",
-            "message": "The 'pop fp' instruction must be used to restore the frame pointer after a function call, but got {follower} (code 51)",
+            "message": "The 'pop fp' instruction must be used to restore the previous frame of reference, but got {follower} (code 51)",
             "severity": "Information",
             "multiline": "true"
         },
         {
             "name": "bad lr of pop lr for function call",
-            "pattern": "(?:(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:ret))",
+            "pattern": "^(?:(?:(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*[\\t ]+)|(?:[\\t ]+[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*)|(?:[a-zA-Z_@$][a-zA-Z0-9_@$]*:[\\t ]*))(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:push[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:mov[\\t ]+\\w+[\\t ,]+\\w+)[\\t\\n\\r\\S ]+(?:mov[\\t ]+\\w+[ ,]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+\\w+)[\\t\\n\\r\\S ]+?(?:pop[\\t ]+(\\w+))[\\t\\n\\r\\S ]+?(?:ret))",
             "validPattern": "^(lr)$",
-            "message": "The 'pop lr' instruction must be used to restore the link register after a function call, but got {follower} (code 52)",
+            "message": "The 'pop lr' instruction must be used to restore the return point, but got {follower} (code 52)",
             "severity": "Information",
             "multiline": "true"
+        },
+        {
+            "name": "line too long",
+            "pattern": "^([^\\n\\r]{300,})$",
+            "validPattern": "^()$",
+            "message": "Line is too long (over 300 characters) (code 53)",
+            "severity": "Warning"
+        },
+        {
+            "name": "bad operand for .word directive (valid char or invalid char)",
+            "pattern": "\\.word[\\t ]+((?:'(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')|(?:'[^\\n\\r']+')|(?:'[^\\n\\r; ']+)|(?:[^\\n\\r;']')|(?:'[^\\n\\r;]+')|(?:'')|(?:'))",
+            "validPattern": "('(?:\\\\\\\\|\\\\'|\\\\.|[^\\n\\r\\\\'])')",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 54 \"bad char\")",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (integer)",
+            "pattern": "\\.word[\\t ]+(-?\\d+)\\b",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 55)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (hexadecimal)",
+            "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]*\\b)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal (max of 4 digits), char, or label (w/ optional offset), but got {follower} (code 56 \"bad hex\")",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (non-number-starting catch-all)",
+            "pattern": "\\.word[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 57)",
+            "severity": "Error"
+        },
+        {
+            "name": "bad operand for .word directive (number-starting catch-all)",
+            "pattern": "\\.word[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 58)",
+            "severity": "Error"
+        },
+        {
+            "name": "out of range number for jmp mnemonic offset (int)",
+            "pattern": "jmp[\\t ]+(?:fp|sp|lr|r[0-7])[,\\t ]+(-?\\d+)\\b",
+            "validPattern": "(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b)",
+            "message": "The 2nd operand of 'jmp' must be an integer from -32 to 31, but got {follower} (code 19)",
+            "severity": "Warning"
         }
     ]
 }
