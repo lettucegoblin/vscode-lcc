@@ -113,13 +113,6 @@
             "severity": "Warning"
         },
         {
-            "name": "bad 3rd operand for add/sub (non-terminated char)",
-            "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+([^\\t ';]+'|'[^\\t\\n\\r' ;]+(?![']))",
-            "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+)$",
-            "message": "The 3rd operand of 'add'/'sub' must be a valid register or an integer, but got {follower} (code 19)",
-            "severity": "Error"
-        },
-        {
             "name": "bad 3rd operand for add/sub (hexadecimal)",
             "pattern": "(?:add|sub)[\\t ]+\\w+[,\\t ]+\\w+[,\\t ]+(0x[a-fA-F0-9]*\\b)",
             "validPattern": "^(fp|sp|lr|r[0-7]|-?\\d+|0x[0]{0,3}[a-fA-F0-9]\\b)$",
