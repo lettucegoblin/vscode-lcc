@@ -1,0 +1,26 @@
+# Contributing to LCC-Tools for VSCode
+
+Requirements: VS Code is required to debug and test this extension.
+
+## How to download extension locally from GitHub
+
+```bash
+git clone https://github.com/lettucegoblin/vscode-lcc.git
+```
+
+## How to start testing extension locally
+
+1. Disable LCC-Tools extension if you have it installed already
+    a. Click on the Extensions icon on the left sidebar (shortcut Ctrl+Shift+X)
+    b. Type LCC in the search bar
+    c. Under LCC-Tools by Lettuce, first click on the gear icon, then select "Disable", and then lastly click on the "Restart Extensions" button that appears to the left of the gear icon
+
+2. Open the extension code locally
+    a. Navigate to where you have cloned the "vscode-lcc" repo
+    b. Open with VSCode either via the command line with `code .` or from VSCode itself with "Open Folder"
+
+3. Run and debug locally via VS Code
+    a. Click on the "Run and Debug" icon on the left sidebar (shotcut Ctrl+Shift+D)
+    b. Click on the green triangle icon "Start Debugging" button at the top of the sidebar. A new VSCode window will open up.
+    c. In the newly opened VSCode window, navigate to a file with Machine Code or Assembly code to inspect how the extension is behaving.
+    d. After making any changes to the extension code (ideally on a new test branch), either press the green circular arrow "Restart" icon (Ctrl+Shift+F5) or, if this icon is not showing as it sometimes does, simply press the red "Stop" icon and press the green "Start" button again
