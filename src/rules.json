@@ -427,7 +427,7 @@
             "name": "out of range number for jmp mnemonic offset (int)",
             "pattern": "jmp[\\t ]+(?:fp|sp|lr|r[0-7])[,\\t ]+(-?\\d+)\\b",
             "validPattern": "(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b)",
-            "message": "The 2nd operand of 'jmp' must be an integer from -32 to 31, but got {follower} (code 19)",
+            "message": "The 2nd operand of 'jmp' must either be an integer from -32 to 31 or left out entirely, but got {follower} (code 19)",
             "severity": "Warning"
         }
     ]
