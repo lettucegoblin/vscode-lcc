@@ -4,9 +4,21 @@ Requirements: VS Code is required to debug and test this extension.
 
 ## How to download extension locally from GitHub
 
+You *could* simply clone the official repo...
+
 ```bash
 git clone https://github.com/lettucegoblin/vscode-lcc.git
 ```
+
+However, we recommend instead that you first fork this repo and clone your own fork. This will look something like:
+
+```bash
+git clone https://github.com/YOUR_GITHUB_USERNAME/vscode-lcc.git
+```
+
+## Major Areas of Interest
+
+So far, we have focused work on this extension to enable syntax highlighting, error detection, and surfacing of useful/relevant information (e.g. mouse hovers). Syntax highlighting is handled mainly in `lcc.tmLanguage.json`. Error detection is handled mainly in `rules.json` (the specific errors themselves) and `AssemblyLinter.js` (the logic to search for and display errors). Hovers are handled mainly in `extension.js`. Check out our issues to see where there might be interest in developing new features. We are also open to suggestions!
 
 ## How to start testing extension locally
 
