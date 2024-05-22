@@ -317,7 +317,7 @@
 				},
 				{
 					"name": "entity.branch.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(br|bral)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(br|bral)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1456,7 +1456,7 @@
 				},
 				{
 					"name": "entity.branch.not.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brnz|brne)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brnz|brne)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1490,7 +1490,7 @@
 				},
 				{
 					"name": "entity.branch.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brz|bre)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brz|bre)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1525,7 +1525,7 @@
 				},
 				{
 					"name": "entity.branch.negative.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brn)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brn)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1560,7 +1560,7 @@
 				},
 				{
 					"name": "entity.branch.positive.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brp)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brp)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1595,7 +1595,7 @@
 				},
 				{
 					"name": "entity.branch.less.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brlt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brlt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1630,7 +1630,7 @@
 				},
 				{
 					"name": "entity.branch.greater.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brgt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brgt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1665,7 +1665,7 @@
 				},
 				{
 					"name": "entity.branch.on.carry.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brc|brb)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(\\d+))?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brc|brb)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
