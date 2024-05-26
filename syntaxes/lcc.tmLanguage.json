@@ -317,7 +317,7 @@
 				},
 				{
 					"name": "entity.branch.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(br|bral)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(br|bral)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -333,8 +333,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -460,7 +459,7 @@
 				},
 				{
 					"name": "entity.jump.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(jmp)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)[,\\t ]*(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b)?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(jmp)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)(?:[,\\t ]+(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -484,7 +483,7 @@
 				},
 				{
 					"name": "entity.load.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(ld)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)[\\t ]*([+-]?)[\\t ]*(\\d?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(ld)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)[\\t ]*([+-]?)[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+)?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -521,7 +520,7 @@
 				},
 				{
 					"name": "entity.store.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(st)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)[\\t ]*([+-]?)[\\t ]*(\\d?))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(st)[\\t ]+(r[0-7]|fp|sp|lr)[,\\t ]+((-16|-?1[0-5]|-?[1-9]|0)|([a-zA-Z_$@][a-zA-Z0-9_$@]*)[\\t ]*([+-]?)[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+)?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1048,7 +1047,7 @@
 				},
 				{
 					"name": "entity.directive.org.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(.org)[\\t ]+(\\d+)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(.org|.orig)[\\t ]+(0x[a-zA-Z\\d]{1,4}|\\d+)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1112,7 +1111,7 @@
 				{
 					"name": "entity.directive.word.assembly.lcc",
 					"_COMMENT": "the .word directive, preceded by a label, and followed by a value which could be a number, an ascii character, or another label, followed by optional offsets",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(.word|.fill)[\\t ]+((0x[a-fA-F\\d]{1,4}|6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|((?:'\\\\?.')|(?:''))|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[\\t ]*([*+-]{0,2})[\\t ]*(\\d+)?)",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(.word|.fill)[\\t ]+((0x[a-fA-F\\d]{1,4}|6553[0-5]|655[0-2]\\d|65[0-4]\\d{2}|6[0-4]\\d{3}|[1-5]\\d{4}|\\d{1,4}|[-]3276[0-8]|[-]327[0-5]\\d|[-]32[0-6]\\d{2}|[-]3[0-1]\\d{3}|[-][1-2]\\d{4}|[-]\\d{1,4})|((?:'\\\\?.')|(?:''))|([a-zA-Z_$@][a-zA-Z0-9_$@]*)?[\\t ]*(\\*?[ ]*[+-]?)[\\t ]*((?:0x[a-fA-F0-9]{1,4})|(?:\\d+))?)",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1395,7 +1394,7 @@
 				},
 				{
 					"name": "entity.branch.and.link.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(bl|call|jsr)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)([\\t ]*([+-])[\\t ]*(\\d+))?",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(bl|call|jsr)[\\t ]+([a-zA-Z_$@][a-zA-Z0-9_$@]*)(([\\t ]*[-+])[\\t ]*(\\d+))?",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1457,7 +1456,7 @@
 				},
 				{
 					"name": "entity.branch.not.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brnz|brne)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brnz|brne)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1473,8 +1472,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1492,7 +1490,7 @@
 				},
 				{
 					"name": "entity.branch.zero.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brz|bre)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brz|bre)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1508,8 +1506,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1528,7 +1525,7 @@
 				},
 				{
 					"name": "entity.branch.negative.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brn)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brn)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1544,8 +1541,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1564,7 +1560,7 @@
 				},
 				{
 					"name": "entity.branch.positive.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brp)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brp)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1580,8 +1576,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1600,7 +1595,7 @@
 				},
 				{
 					"name": "entity.branch.less.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brlt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brlt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1616,8 +1611,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1636,7 +1630,7 @@
 				},
 				{
 					"name": "entity.branch.greater.than.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brgt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brgt)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1652,8 +1646,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"
@@ -1672,7 +1665,7 @@
 				},
 				{
 					"name": "entity.branch.on.carry.assembly.lcc",
-					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brc|brb)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)|([\\t ]*([*\\-+]{2})[\\t ]*(\\d+)))",
+					"match": "(^[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[a-zA-Z_$@][a-zA-Z0-9_$@]*[\\t ]+|^[\\t ]+[a-zA-Z_$@][a-zA-Z0-9_$@]*:[\\t ]*|^[\\t ]+)(brc|brb)[\\t ]+(([a-zA-Z_$@][a-zA-Z0-9_$@]*)?([\\*]?(?:([\\t ]*[-+])[\\t ]*(0x[a-fA-F0-9]{1,4}|\\d+))?))",
 					"captures": {
 						"1": {
 							"name": "meta.preprocessor"
@@ -1688,8 +1681,7 @@
 							"name": "meta.preprocessor"
 						},
 						"5": {
-							"name": "",
-							"_COMMENT": "this is to be left blank intentionally"
+							"name":"keyword.operator"
 						},
 						"6":{
 							"name":"keyword.operator"

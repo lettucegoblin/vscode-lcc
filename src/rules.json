@@ -199,7 +199,7 @@
             "name": "bad mnemonic1",
             "_COMMENT": "captures mnemonic after a colon terminated label after a leading space",
             "pattern": "^[ ]+(?:[^:\\t\\n\\r ;]+:)[\\t ]*(\\w+)",
-            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)$",
+            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org|.orig)$",
             "message": "Invalid mnemonic or directive: {follower} (code 1)",
             "severity": "Error"
         },
@@ -207,7 +207,7 @@
             "name": "bad mnemonic2",
             "_COMMENT": "captures mnemonic after a colon terminating label that starts at the beginning of the line",
             "pattern": "^[^\\t ;]+:[\\t ]*([^:\\t\\n\\r ;]+)",
-            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)$",
+            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org|.orig)$",
             "message": "Invalid mnemonic or directive: {follower} (code 2)",
             "severity": "Error"
         },
@@ -215,7 +215,7 @@
             "name": "bad mnemonic3",
             "_COMMENT": "captures mnemonic/mnemonic/directive that is not preceded by a label or a leading space",
             "pattern": "^[\\t ]+((?!\\S*[:])[^:\\t\\n\\r ;]+)",
-            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)$",
+            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org|.orig)$",
             "message": "Invalid label, mnemonic, or directive: {follower} (code 3)",
             "severity": "Error"
         },
@@ -223,7 +223,7 @@
             "name": "bad mnemonic4",
             "_COMMENT": "captures mnemonic preceded by non-colon terminated label",
             "pattern": "^[^\\t ;:]+[\\t ]+([^:\\t\\n\\r ;]+)",
-            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org)$",
+            "validPattern": "^(cea|brn|mov|add|ld|st|bl|call|jsr|blr|jsrr|and|ldr|str|cmp|not|push|pop|srl|sra|sll|rol|ror|mul|div|rem|or|xor|mvr|sext|sub|jmp|ret|mvi|lea|halt|nl|dout|udout|hout|aout|sout|din|hin|ain|sin|brz|bre|brnz|brne|brne|brne|brp|brlt|brgt|brc|brb|br|bral|m|r|s|bp|.word|.zero|.blkw|.fill|.string|.asciz|.stringz|.space|.start|.global|.globl|.extern|.org|.orig)$",
             "message": "Invalid mnemonic or directive: {follower} (code 4)",
             "severity": "Error"
         },
@@ -397,29 +397,32 @@
         },
         {
             "name": "bad operand for .word directive (integer)",
-            "pattern": "\\.word[\\t ]+(-?\\d+)\\b",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "pattern": "\\.word[\\t ]+([-+]?\\d+)\\b",
+            "validPattern": "^([-+]?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*(?:[\\t ]*[+-][\\t ]*(?:\\d+))?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 55)",
             "severity": "Error"
         },
         {
             "name": "bad operand for .word directive (hexadecimal)",
-            "pattern": "\\.word[\\t ]+(0x[a-fA-F0-9]*\\b)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "pattern": "\\.word[\\t ]+(0x[^\\s;]*)",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]{1,4}|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*(?:[\\t ]*[+-][\\t ]*(?:\\d+))?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal (max of 4 digits), char, or label (w/ optional offset), but got {follower} (code 56 \"bad hex\")",
             "severity": "Error"
         },
         {
             "name": "bad operand for .word directive (non-number-starting catch-all)",
-            "pattern": "\\.word[\\t ]+(?!-?\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r ]+)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "_COMMENT": "this rule checks for valid and invalid non-numeric starting operands, such as labels and absolute address asterisks",
+            "pattern": "\\.word[\\t ]+(?![-+]?[ ]*\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r\\-+ ]+(?:[\\t ]*[-+]?[\\t ]*[^';,\"\\t\\n\\r ]+))",
+            "_COMMENT_pattern": "this pattern looks for a .word directive followed by a non-numeric starting operand (i.e. label or asterisk), which can optionally be followed by an offset which is either positive or negative and either integer or hexadecimal. Whitespace can interleave argument, operator, and offset amount",
+            "validPattern": "^([\\*](?:[\\t ]*[+-][\\t ]*(?:(?:0x[a-fA-F0-9]{1,4})|(?:\\d+)))?|[a-zA-Z_$@][a-zA-Z0-9_$@]*(?:[\\t ]*[+-][\\t ]*(?:(?:0x[a-fA-F0-9]{1,4})|(?:\\d+)))?)$",
+            "_COMMENT_validPattern": "The valid pattern here focuses exclusively on the operand of the .word directive, which can be a label or a PC address asterisk, optionally followed by an offset which is either positive or negative and either integer or hexadecimal. Whitespace can interleave argument, operator, and offset amount",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 57)",
             "severity": "Error"
         },
         {
             "name": "bad operand for .word directive (number-starting catch-all)",
             "pattern": "\\.word[\\t ]+(?![^\\d])(?!0x)(?![^'\";\\t\\n\\r ]+['\"])(\\d+[^\\d';,\"\\t\\n\\r ]+[^';,\"\\t\\n\\r ]*)",
-            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*[ ]?[+-]?[ ]?[-?\\d+]?)$",
+            "validPattern": "^(-?\\d+|0x[a-fA-F0-9]+|'\\\\.'|''|'.'|[a-zA-Z_$@][a-zA-Z0-9_$@]*(?:[\\t ]*[+-][\\t ]*(?:(?:0x[a-fA-F0-9]{1,4})|(?:\\d+)))?)$",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 58)",
             "severity": "Error"
         },
@@ -427,7 +430,7 @@
             "name": "out of range number for jmp mnemonic offset (int)",
             "pattern": "jmp[\\t ]+(?:fp|sp|lr|r[0-7])[,\\t ]+(-?\\d+)\\b",
             "validPattern": "(-32\\b|-?(?:3[01]|2[0-9]|1?[0-9])\\b)",
-            "message": "The 2nd operand of 'jmp' must be an integer from -32 to 31, but got {follower} (code 19)",
+            "message": "The 2nd operand of 'jmp' must either be an integer from -32 to 31 or left out entirely, but got {follower} (code 19)",
             "severity": "Warning"
         }
     ]

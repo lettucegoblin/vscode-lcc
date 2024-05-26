@@ -31,4 +31,4 @@ The Low Cost Computer is made by Anthony J. Dos Reis for his [textbook](https://
 - **Calculate binary value to decimal & hex**
 
 # Contributing
-Feel free to contribute to this project here [on Github](https://github.com/lettucegoblin/vscode-lcc). Also feel free to fork and make your own version of this extension. Have a good day. 
+Feel free to contribute to this project here [on Github](https://github.com/lettucegoblin/vscode-lcc). Also feel free to fork and make your own version of this extension. See our [CONTRIBUTING](./CONTRIBUTING.md) doc for more info. Have a good day. 
