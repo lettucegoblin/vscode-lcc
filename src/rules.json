@@ -411,8 +411,11 @@
         },
         {
             "name": "bad operand for .word directive (non-number-starting catch-all)",
+            "_COMMENT": "this rule checks for valid and invalid non-numeric starting operands, such as labels and absolute address asterisks",
             "pattern": "\\.word[\\t ]+(?![-+]?[ ]*\\d)(?![^'\";\\t\\n\\r ]+['\"])([^';,\"\\t\\n\\r\\-+ ]+(?:[\\t ]*[-+]?[\\t ]*[^';,\"\\t\\n\\r ]+))",
+            "_COMMENT_pattern": "this pattern looks for a .word directive followed by a non-numeric starting operand (i.e. label or asterisk), which can optionally be followed by an offset which is either positive or negative and either integer or hexadecimal. Whitespace can interleave argument, operator, and offset amount",
             "validPattern": "^([\\*](?:[\\t ]*[+-][\\t ]*(?:(?:0x[a-fA-F0-9]{1,4})|(?:\\d+)))?|[a-zA-Z_$@][a-zA-Z0-9_$@]*(?:[\\t ]*[+-][\\t ]*(?:(?:0x[a-fA-F0-9]{1,4})|(?:\\d+)))?)$",
+            "_COMMENT_validPattern": "The valid pattern here focuses exclusively on the operand of the .word directive, which can be a label or a PC address asterisk, optionally followed by an offset which is either positive or negative and either integer or hexadecimal. Whitespace can interleave argument, operator, and offset amount",
             "message": "The operand of '.word' must be an integer, hexadecimal, char, or label (w/ optional offset), but got {follower} (code 57)",
             "severity": "Error"
         },
