@@ -84,6 +84,12 @@
         "scopeName": "source.lcc",
         "path": "./syntaxes/lcc.tmLanguage.json"
       }
+    ],
+    "snippets": [
+      {
+        "language": "lcc",
+        "path": "./snippets/lcc.json"
+      }
     ]
   },
   "scripts": {
